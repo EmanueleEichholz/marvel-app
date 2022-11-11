@@ -21,9 +21,9 @@ final class CharacterListWorker: CharacterListWorkerProtocol {
         
         let ts = Int(Date().timeIntervalSince1970)
         
-        let privateKey = "cc00ffabd66b70ee55f8caf7964659dbe86860e1"
+        let privateKey = ""
         
-        let publicKey = "ca595a48ac4cf62e3b27f0460753803f"
+        let publicKey = ""
         
         let content = String(ts) + privateKey + publicKey
         
