@@ -9,11 +9,11 @@ import Foundation
 
 typealias CharactersCompletion = (Result<Response, Error>) -> ()
 
-protocol CharacterListWorkerProtocol {
+protocol HomeWorkerProtocol {
     func getCharactersInfo(completion: @escaping CharactersCompletion)
 }
 
-final class CharacterListWorker: CharacterListWorkerProtocol {
+final class HomeWorker: HomeWorkerProtocol {
     
     func getURL(offset: Int) -> String {
         let baseURL = "https://gateway.marvel.com"

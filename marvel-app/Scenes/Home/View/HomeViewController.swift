@@ -7,10 +7,10 @@
 
 import UIKit
 
-final class CharacterListViewController: UIViewController {
+final class HomeViewController: UIViewController {
     
-    private var characterListView: CharacterListView = CharacterListView()
-    let worker = CharacterListWorker()
+    private var homeView: HomeView = HomeView()
+    let worker = HomeWorker()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +27,7 @@ final class CharacterListViewController: UIViewController {
     
     override func loadView() {
         super.loadView()
-        view = characterListView
+        view = homeView
     }
 
 }

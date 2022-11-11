@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class CharacterListView: UIView {
+final class HomeView: UIView {
     
     let upperCharacterList = [CharacterViewModel(name: "Deadpool", image: "deadpool-question-mark"),
                               CharacterViewModel(name: "Deadpool", image: "deadpool-question-mark"),
@@ -156,14 +156,14 @@ final class CharacterListView: UIView {
     }
 }
 
-extension CharacterListView: UICollectionViewDelegate {
+extension HomeView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("clicou para abrir na posição \(indexPath.row)")
     }
     
 }
 
-extension CharacterListView: UICollectionViewDataSource {
+extension HomeView: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == upperCollectionView {
@@ -190,7 +190,7 @@ extension CharacterListView: UICollectionViewDataSource {
     
 }
 
-extension CharacterListView: HeaderViewClickDelegateProtocol {
+extension HomeView: HeaderViewClickDelegateProtocol {
     func didTapLeftButton() {
         print("clicou pra fechar")
     }
