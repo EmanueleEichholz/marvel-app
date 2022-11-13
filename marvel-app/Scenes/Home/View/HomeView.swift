@@ -9,45 +9,6 @@ import UIKit
 
 final class HomeView: UIView {
     
-    let upperCharacterList = [CharacterViewModel(name: "Deadpool", image: "deadpool-question-mark"),
-                              CharacterViewModel(name: "Deadpool", image: "deadpool-question-mark"),
-                              CharacterViewModel(name: "Deadpool", image: "deadpool-question-mark"),
-                              CharacterViewModel(name: "Deadpool", image: "deadpool-question-mark"),
-                              CharacterViewModel(name: "Deadpool", image: "deadpool-question-mark"),
-                              CharacterViewModel(name: "Deadpool", image: "deadpool-question-mark"),
-                              CharacterViewModel(name: "Deadpool", image: "deadpool-question-mark"),
-                              CharacterViewModel(name: "Deadpool", image: "deadpool-question-mark")]
-    
-    let bottomCharacterList = [CharacterViewModel(name: "Deadpool", image: "deadpool-question-mark"),
-                               CharacterViewModel(name: "Deadpool", image: "deadpool-question-mark"),
-                               CharacterViewModel(name: "Deadpool", image: "deadpool-question-mark"),
-                               CharacterViewModel(name: "Deadpool", image: "deadpool-question-mark"),
-                               CharacterViewModel(name: "Deadpool", image: "deadpool-question-mark"),
-                               CharacterViewModel(name: "Deadpool", image: "deadpool-question-mark"),
-                               CharacterViewModel(name: "Deadpool", image: "deadpool-question-mark"),
-                               CharacterViewModel(name: "Deadpool", image: "deadpool-question-mark"),
-                               CharacterViewModel(name: "Deadpool", image: "deadpool-question-mark"),
-                               CharacterViewModel(name: "Deadpool", image: "deadpool-question-mark"),
-                               CharacterViewModel(name: "Deadpool", image: "deadpool-question-mark"),
-                               CharacterViewModel(name: "Deadpool", image: "deadpool-question-mark"),
-                               CharacterViewModel(name: "Deadpool", image: "deadpool-question-mark"),
-                               CharacterViewModel(name: "Deadpool", image: "deadpool-question-mark"),
-                               CharacterViewModel(name: "Deadpool", image: "deadpool-question-mark"),
-                               CharacterViewModel(name: "Deadpool", image: "deadpool-question-mark"),
-                               CharacterViewModel(name: "Deadpool", image: "deadpool-question-mark"),
-                               CharacterViewModel(name: "Deadpool", image: "deadpool-question-mark"),
-                               CharacterViewModel(name: "Deadpool", image: "deadpool-question-mark"),
-                               CharacterViewModel(name: "Deadpool", image: "deadpool-question-mark"),
-                               CharacterViewModel(name: "Deadpool", image: "deadpool-question-mark"),
-                               CharacterViewModel(name: "Deadpool", image: "deadpool-question-mark"),
-                               CharacterViewModel(name: "Deadpool", image: "deadpool-question-mark"),
-                               CharacterViewModel(name: "Deadpool", image: "deadpool-question-mark"),
-                               CharacterViewModel(name: "Deadpool", image: "deadpool-question-mark"),
-                               CharacterViewModel(name: "Deadpool", image: "deadpool-question-mark"),
-                               CharacterViewModel(name: "Deadpool", image: "deadpool-question-mark"),
-                               CharacterViewModel(name: "Deadpool", image: "deadpool-question-mark"),
-                               CharacterViewModel(name: "Deadpool", image: "deadpool-question-mark")]
-    
     private lazy var headerView: HeaderView = {
         let view = HeaderView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -115,6 +76,9 @@ final class HomeView: UIView {
         return collection
     }()
     
+    var upperCharacterList: [CharacterModel] = []
+    var bottomCharacterList: [CharacterModel] = []
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupLayout()
@@ -126,7 +90,14 @@ final class HomeView: UIView {
         setupLayout()
     }
     
+    func showCharacters(characterList: [CharacterModel]) {
+        upperCharacterList = characterList
+        bottomCharacterList = characterList
+    }
+    
     private func setupLayout() {
+        backgroundColor = .marvelBlack
+        
         addSubviews(headerView, titleLabel, upperCollectionView, secondTitleLabel, bottomCollectionView)
         
         NSLayoutConstraint.activate([
@@ -160,7 +131,6 @@ extension HomeView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("clicou para abrir na posição \(indexPath.row)")
     }
-    
 }
 
 extension HomeView: UICollectionViewDataSource {

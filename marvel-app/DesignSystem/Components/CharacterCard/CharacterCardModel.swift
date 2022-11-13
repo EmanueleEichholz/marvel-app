@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CharacterViewModel {
+struct CharacterModel {
     let name: String
     let image: String
 }

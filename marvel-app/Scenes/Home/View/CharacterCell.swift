@@ -25,12 +25,12 @@ final class CharacterCell: UICollectionViewCell {
         super.init(coder: coder)
     }
     
-    func setupUpperCollectionCell(with viewModel: CharacterViewModel) {
+    func setupUpperCollectionCell(with viewModel: CharacterModel) {
         characterCard.updateView(with: viewModel)
         updateLayoutUpperCollectionCell()
     }
     
-    func setupBottomCollectionCell(with viewModel: CharacterViewModel) {
+    func setupBottomCollectionCell(with viewModel: CharacterModel) {
         characterCard.updateView(with: viewModel)
         updateLayoutBottomCollectionCell()
     }

@@ -41,9 +41,9 @@ final class CharacterCard: UIView {
         setupLayout()
     }
     
-    func updateView(with viewModel: CharacterViewModel) {
-        characterNameLabel.text = viewModel.name
-        characterImage.image = UIImage(named: viewModel.image)
+    func updateView(with model: CharacterModel) {
+        characterNameLabel.text = model.name
+        characterImage.loadFrom(URLAddress: model.image)
     }
     
     private func setupLayout() {

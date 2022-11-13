@@ -9,6 +9,7 @@ import Foundation
 
 typealias CharactersCompletion = (Result<Response, Error>) -> ()
 
+
 protocol HomeWorkerProtocol {
     func getCharactersInfo(completion: @escaping CharactersCompletion)
 }
@@ -21,9 +22,9 @@ final class HomeWorker: HomeWorkerProtocol {
         
         let ts = Int(Date().timeIntervalSince1970)
         
-        let privateKey = ""
+        let privateKey = "cc00ffabd66b70ee55f8caf7964659dbe86860e1"
         
-        let publicKey = ""
+        let publicKey = "ca595a48ac4cf62e3b27f0460753803f"
         
         let content = String(ts) + privateKey + publicKey
         

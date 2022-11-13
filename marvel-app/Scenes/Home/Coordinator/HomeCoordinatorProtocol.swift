@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+protocol HomeCoordinatorProtocol {
+    func didTapBackButton()
+    func didTapCharacter()
+}

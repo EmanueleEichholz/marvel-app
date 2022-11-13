@@ -10,24 +10,26 @@ import Foundation
 struct Response: Codable {
     let code: Int?
     let status: String?
-    let data: ResponseData?
+    let data: CharacterListResponseModel?
 }
 
-struct ResponseData: Codable {
-    let results: [Character]
+struct CharacterListResponseModel: Codable {
+    let results: [CharacterResponseModel]
 }
 
-struct Character: Codable {
+struct CharacterResponseModel: Codable {
     let name: String?
     let id: Int?
     let description: String?
-//    let thumbnail: Thumbnail?
+    let thumbnail: Image?
 }
 
-//struct Thumbnail: Codable {
-//    let thumbnailExtension: String
-//    
-//    enum CodingKeys: String, CodingKey {
-//        case thumbnailExtension = "extension"
-//    }
-//}
+struct Image: Codable {
+    let path: String?
+    let thumbnailExtension: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case path
+        case thumbnailExtension = "extension"
+    }
+}
