@@ -30,12 +30,10 @@ final class HomeInteractor: HomeInteractorProtocol {
     }
     
     private func getCharacters() {
-        print("get characters")
-        worker.getCharactersInfo(completion: { result in
+        worker.getCharactersInfo(completion: { [weak self] result in
             switch result {
             case .success(let response):
-                guard let data = response.data else { return }
-                self.presenter.presentCharacters(with: data)
+                self?.presenter.presentCharacters(with: response.data)
             case .failure(let error):
                 print(error)
             }

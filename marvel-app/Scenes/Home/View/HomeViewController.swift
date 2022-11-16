@@ -28,7 +28,6 @@ final class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        HomePresenter().view = self
         interactor.viewDidLoad()
     }
     
@@ -43,11 +42,8 @@ final class HomeViewController: UIViewController {
 }
 
 extension HomeViewController: HomeViewControllerProtocol {
-    func test() {
-        print("testando outra funçao")
-    }
     
     func showCharacters(characterList: [CharacterModel]) {
-        print("entrou na view controler")
+        homeView.showCharacters(characterList: characterList)
     }
 }

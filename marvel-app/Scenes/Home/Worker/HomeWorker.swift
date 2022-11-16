@@ -22,10 +22,6 @@ final class HomeWorker: HomeWorkerProtocol {
         
         let ts = Int(Date().timeIntervalSince1970)
         
-        let privateKey = "cc00ffabd66b70ee55f8caf7964659dbe86860e1"
-        
-        let publicKey = "ca595a48ac4cf62e3b27f0460753803f"
-        
         let content = String(ts) + privateKey + publicKey
         
         let url = "\(baseURL)/\(path)?ts=\(ts)&apikey=\(publicKey)&hash=\(content.MD5)"

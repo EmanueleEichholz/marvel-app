@@ -24,7 +24,7 @@ final class HomeView: UIView {
         label.textAlignment = .left
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "DESTAQUE"
+        label.text = "SECTION ONE"
         return label
     }()
     
@@ -53,13 +53,13 @@ final class HomeView: UIView {
         label.textAlignment = .left
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "LISTA"
+        label.text = "SECTION TWO"
         return label
     }()
     
     private lazy var bottomCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        let cellSize = (UIScreen.main.bounds.width - 65)/3
+        let cellSize = (UIScreen.main.bounds.width - 49)/2
         layout.estimatedItemSize = CGSize(width: cellSize, height: cellSize)
         layout.minimumLineSpacing = 16.0
         layout.minimumInteritemSpacing = 16.0
@@ -93,6 +93,12 @@ final class HomeView: UIView {
     func showCharacters(characterList: [CharacterModel]) {
         upperCharacterList = characterList
         bottomCharacterList = characterList
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.upperCollectionView.reloadData()
+            self?.bottomCollectionView.reloadData()
+        }
+
     }
     
     private func setupLayout() {

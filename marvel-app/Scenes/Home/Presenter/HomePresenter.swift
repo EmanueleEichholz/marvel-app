@@ -8,19 +8,20 @@
 import Foundation
 
 protocol HomePresenterProtocol {
-    func presentCharacters(with model: CharacterListResponseModel)
+    func presentCharacters(with model: CharacterListResponseModel?)
 }
 
-final class HomePresenter: HomePresenterProtocol {
-    
-    weak var view: HomeViewControllerProtocol?
+class HomePresenter: HomePresenterProtocol {
 
-    func presentCharacters(with model: CharacterListResponseModel) {
+    weak var view: HomeViewControllerProtocol?
+    
+    func presentCharacters(with model: CharacterListResponseModel?) {
+        guard let model = model else { return }
         var characterList: [CharacterModel] = []
         model.results.forEach { character in
             characterList.append(
                 CharacterModel(
-                    name: character.name ?? "Nome indisponível",
+                    name: character.name ?? "Name Unavailable",
                     image: getImageURL(
                         path: character.thumbnail?.path,
                         pathExtension: character.thumbnail?.thumbnailExtension
@@ -35,6 +36,6 @@ final class HomePresenter: HomePresenterProtocol {
         if let path = path, let pathExtension = pathExtension {
             return "\(path)/standard_xlarge.\(pathExtension)"
         }
-        return "https://i.pinimg.com/564x/a0/f3/50/a0f3505663685be97b3ba48694325f0c.jpg"
+        return ""
     }
 }

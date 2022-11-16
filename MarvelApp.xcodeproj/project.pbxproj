@@ -35,6 +35,10 @@
 		4046576E29134357000F19FC /* CharacterCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4046576D29134357000F19FC /* CharacterCardModel.swift */; };
 		40465770291345A2000F19FC /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4046576F291345A2000F19FC /* UIView+Extension.swift */; };
 		4046577229134B6E000F19FC /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4046577129134B6E000F19FC /* HomeView.swift */; };
+		4049BD3029259B1D00308EC3 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4049BD2F29259B1D00308EC3 /* NetworkError.swift */; };
+		4049BD3229259B7F00308EC3 /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4049BD3129259B7F00308EC3 /* NetworkRequest.swift */; };
+		4049BD3429259C0400308EC3 /* URLSessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4049BD3329259C0400308EC3 /* URLSessionProtocol.swift */; };
+		4049BD3629259C4600308EC3 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4049BD3529259C4600308EC3 /* NetworkManager.swift */; };
 		405A59EF291DD522001757B9 /* MarvelFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405A59EE291DD522001757B9 /* MarvelFonts.swift */; };
 /* End PBXBuildFile section */
 
@@ -88,6 +92,10 @@
 		4046576D29134357000F19FC /* CharacterCardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterCardModel.swift; sourceTree = "<group>"; };
 		4046576F291345A2000F19FC /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		4046577129134B6E000F19FC /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		4049BD2F29259B1D00308EC3 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		4049BD3129259B7F00308EC3 /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
+		4049BD3329259C0400308EC3 /* URLSessionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionProtocol.swift; sourceTree = "<group>"; };
+		4049BD3529259C4600308EC3 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		405A59EE291DD522001757B9 /* MarvelFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelFonts.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -235,6 +243,7 @@
 				404657162913317D000F19FC /* SupportingFiles */,
 				4046571B2913325B000F19FC /* Utils */,
 				40465717291331FB000F19FC /* DesignSystem */,
+				4049BD2E29259AFA00308EC3 /* Network */,
 				4046571029133036000F19FC /* Scenes */,
 			);
 			path = "marvel-app";
@@ -361,6 +370,17 @@
 				4046576D29134357000F19FC /* CharacterCardModel.swift */,
 			);
 			path = CharacterCard;
+			sourceTree = "<group>";
+		};
+		4049BD2E29259AFA00308EC3 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				4049BD2F29259B1D00308EC3 /* NetworkError.swift */,
+				4049BD3129259B7F00308EC3 /* NetworkRequest.swift */,
+				4049BD3529259C4600308EC3 /* NetworkManager.swift */,
+				4049BD3329259C0400308EC3 /* URLSessionProtocol.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -493,6 +513,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4049BD3429259C0400308EC3 /* URLSessionProtocol.swift in Sources */,
+				4049BD3229259B7F00308EC3 /* NetworkRequest.swift in Sources */,
 				4046576629134270000F19FC /* HomeCoordinatorProtocol.swift in Sources */,
 				40017F022918872300D93466 /* String+Extension.swift in Sources */,
 				40017EEE2918508500D93466 /* UICollectionViewCell+Extension.swift in Sources */,
@@ -512,8 +534,10 @@
 				40017EFE2918764A00D93466 /* HeaderViewModel.swift in Sources */,
 				40017EFA2918743A00D93466 /* UIImage+Extension.swift in Sources */,
 				4045568C291FE37400233BE8 /* UIImageView+Extension.swift in Sources */,
+				4049BD3029259B1D00308EC3 /* NetworkError.swift in Sources */,
 				40017EFC2918749200D93466 /* Optional+Extension.swift in Sources */,
 				4046576029134230000F19FC /* HomeWorker.swift in Sources */,
+				4049BD3629259C4600308EC3 /* NetworkManager.swift in Sources */,
 				40465769291342D7000F19FC /* ApplicationCoordinator.swift in Sources */,
 				40017EF8291869C100D93466 /* HeaderView.swift in Sources */,
 				404556902920344800233BE8 /* SceneDelegate.swift in Sources */,

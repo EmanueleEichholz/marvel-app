@@ -16,7 +16,7 @@ final class CharacterCard: UIView {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.cornerRadius = 10.0
         imageView.clipsToBounds = true
-        imageView.setVerticalLinearGradient(startPoint: 1.0, endPoint: 0.70)
+        imageView.setVerticalLinearGradient(startPoint: 1.0, endPoint: 0.50)
         return imageView
     }()
     
@@ -43,7 +43,7 @@ final class CharacterCard: UIView {
     
     func updateView(with model: CharacterModel) {
         characterNameLabel.text = model.name
-        characterImage.loadFrom(URLAddress: model.image)
+        characterImage.imageFromURL(urlString: model.image)
     }
     
     private func setupLayout() {

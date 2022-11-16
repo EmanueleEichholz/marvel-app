@@ -54,7 +54,7 @@ final class CharacterCell: UICollectionViewCell {
     }
     
     private func updateLayoutBottomCollectionCell() {
-        let cellSize = (UIScreen.main.bounds.width - 65)/3
+        let cellSize = (UIScreen.main.bounds.width - 49)/2
         NSLayoutConstraint.activate([
             characterCard.heightAnchor.constraint(equalToConstant: cellSize),
             characterCard.widthAnchor.constraint(equalToConstant: cellSize),
