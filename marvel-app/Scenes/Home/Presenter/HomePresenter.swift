@@ -12,25 +12,27 @@ protocol HomePresenterProtocol {
 }
 
 class HomePresenter: HomePresenterProtocol {
-
+    
     weak var view: HomeViewControllerProtocol?
     
     func presentCharacters(with model: CharacterListResponseModel?) {
-        guard let model = model else { return }
-        var characterList: [CharacterModel] = []
-        model.results.forEach { character in
-            characterList.append(
-                CharacterModel(
-                    name: character.name ?? "Name Unavailable",
-                    image: getImageURL(
-                        path: character.thumbnail?.path,
-                        pathExtension: character.thumbnail?.thumbnailExtension
+        if let model = model {
+            var characterList: [ItemCardModel] = []
+            model.results.forEach { character in
+                characterList.append(
+                    ItemCardModel(
+                        name: character.name ?? "Name Unavailable",
+                        image: getImageURL(
+                            path: character.thumbnail?.path,
+                            pathExtension: character.thumbnail?.thumbnailExtension
+                        )
                     )
                 )
-            )
+            }
+            view?.updateCharactersSection(with: characterList)
         }
-        view?.showCharacters(characterList: characterList)
     }
+    
     
     private func getImageURL(path: String?, pathExtension: String?) -> String {
         if let path = path, let pathExtension = pathExtension {

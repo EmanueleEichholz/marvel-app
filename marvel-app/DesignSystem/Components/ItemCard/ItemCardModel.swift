@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CharacterModel {
+struct ItemCardModel {
     let name: String
     let image: String
 }

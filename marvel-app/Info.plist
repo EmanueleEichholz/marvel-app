@@ -7,6 +7,10 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>PrivateKey</key>
+	<string>cc00ffabd66b70ee55f8caf7964659dbe86860e1</string>
+	<key>PublicKey</key>
+	<string>ca595a48ac4cf62e3b27f0460753803f</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

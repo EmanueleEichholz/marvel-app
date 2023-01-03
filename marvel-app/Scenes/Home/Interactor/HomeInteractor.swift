@@ -30,7 +30,7 @@ final class HomeInteractor: HomeInteractorProtocol {
     }
     
     private func getCharacters() {
-        worker.getCharactersInfo(completion: { [weak self] result in
+        worker.fetchCharacters(completion: { [weak self] result in
             switch result {
             case .success(let response):
                 self?.presenter.presentCharacters(with: response.data)

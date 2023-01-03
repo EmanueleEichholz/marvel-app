@@ -12,7 +12,7 @@ final class HomeViewControllerFactory {
     static func getHomeViewController(coordinator: HomeCoordinatorProtocol) -> HomeViewController {
         
         let presenter = HomePresenter()
-        let worker = HomeWorker()
+        let worker = HomeWorker(with: NetworkRequest())
         let interactor = HomeInteractor(coordinator: coordinator,
                                         presenter: presenter,
                                         worker: worker)

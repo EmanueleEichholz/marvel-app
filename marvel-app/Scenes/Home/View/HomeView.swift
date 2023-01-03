@@ -17,67 +17,17 @@ final class HomeView: UIView {
         return view
     }()
     
-    private lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .marvelWhite
-        label.font = .systemFont(ofSize: 20.0, weight: .heavy)
-        label.textAlignment = .left
-        label.numberOfLines = 0
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "SECTION ONE"
-        return label
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView(frame: .zero, style: .grouped)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.backgroundColor = .clear
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.separatorStyle = .none
+        tableView.showsVerticalScrollIndicator = true
+        tableView.register(HorizontalCollectionView.self, forCellReuseIdentifier: HorizontalCollectionView.identifier)
+        return tableView
     }()
-    
-    private lazy var upperCollectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        let cellSize = (UIScreen.main.bounds.width - 48)/2.5
-        layout.estimatedItemSize = CGSize(width: 100.0, height: 100.0)
-        layout.minimumLineSpacing = 16.0
-        layout.minimumInteritemSpacing = 16.0
-        layout.scrollDirection = .horizontal
-        
-        let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collection.register(CharacterCell.self, forCellWithReuseIdentifier: CharacterCell.identifier)
-        collection.dataSource = self
-        collection.delegate = self
-        collection.translatesAutoresizingMaskIntoConstraints = false
-        collection.isScrollEnabled = true
-        collection.backgroundColor = .clear
-        return collection
-    }()
-    
-    private lazy var secondTitleLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .marvelWhite
-        label.font = .systemFont(ofSize: 20.0, weight: .heavy)
-        label.textAlignment = .left
-        label.numberOfLines = 0
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "SECTION TWO"
-        return label
-    }()
-    
-    private lazy var bottomCollectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        let cellSize = (UIScreen.main.bounds.width - 49)/2
-        layout.estimatedItemSize = CGSize(width: cellSize, height: cellSize)
-        layout.minimumLineSpacing = 16.0
-        layout.minimumInteritemSpacing = 16.0
-        layout.scrollDirection = .vertical
-        
-        let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collection.register(CharacterCell.self, forCellWithReuseIdentifier: CharacterCell.identifier)
-        collection.dataSource = self
-        collection.delegate = self
-        collection.translatesAutoresizingMaskIntoConstraints = false
-        collection.isScrollEnabled = true
-        collection.showsVerticalScrollIndicator = true
-        collection.backgroundColor = .clear
-        return collection
-    }()
-    
-    var upperCharacterList: [CharacterModel] = []
-    var bottomCharacterList: [CharacterModel] = []
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -90,84 +40,141 @@ final class HomeView: UIView {
         setupLayout()
     }
     
-    func showCharacters(characterList: [CharacterModel]) {
-        upperCharacterList = characterList
-        bottomCharacterList = characterList
-        
+    private var characters: [ItemCardModel] = []
+    private var comics: [ItemCardModel] = []
+    private var creators: [ItemCardModel] = []
+    private var events: [ItemCardModel] = []
+    private var stories: [ItemCardModel] = []
+    
+    func updateCharactersSection(with charactersInfo: [ItemCardModel]) {
         DispatchQueue.main.async { [weak self] in
-            self?.upperCollectionView.reloadData()
-            self?.bottomCollectionView.reloadData()
+            self?.characters = charactersInfo
+            self?.tableView.reloadSections([0], with: .none)
+            //self?.tableView.reloadData()
         }
-
+    }
+    
+    func updateComicsSection(with comicsInfo: [ItemCardModel]) {
+        DispatchQueue.main.async { [weak self] in
+            self?.comics = comicsInfo
+            self?.tableView.reloadSections([1], with: .none)
+        }
+    }
+    
+    func updateCreatorsSection(with creatorsInfo: [ItemCardModel]) {
+        DispatchQueue.main.async { [weak self] in
+            self?.creators = creatorsInfo
+            self?.tableView.reloadSections([2], with: .none)
+        }
+    }
+    
+    func updateEventsSection(with eventsInfo: [ItemCardModel]) {
+        DispatchQueue.main.async { [weak self] in
+            self?.events = eventsInfo
+            self?.tableView.reloadSections([3], with: .none)
+        }
+    }
+    
+    func updateStoriesSection(with storiesInfo: [ItemCardModel]) {
+        DispatchQueue.main.async { [weak self] in
+            self?.stories = storiesInfo
+            self?.tableView.reloadSections([4], with: .none)
+        }
     }
     
     private func setupLayout() {
         backgroundColor = .marvelBlack
-        
-        addSubviews(headerView, titleLabel, upperCollectionView, secondTitleLabel, bottomCollectionView)
+        addSubviews(headerView, tableView)
         
         NSLayoutConstraint.activate([
             headerView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             headerView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
             headerView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
             
-            titleLabel.topAnchor.constraint(equalTo: headerView.bottomAnchor),
-            titleLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16.0),
-            titleLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16.0),
-
-            upperCollectionView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8.0),
-            upperCollectionView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16.0),
-            upperCollectionView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16.0),
-            upperCollectionView.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.width - 48)/2.5),
-            
-            secondTitleLabel.topAnchor.constraint(equalTo: upperCollectionView.bottomAnchor, constant: 32.0),
-            secondTitleLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16.0),
-            secondTitleLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16.0),
-            
-            bottomCollectionView.topAnchor.constraint(equalTo: secondTitleLabel.bottomAnchor, constant: 8.0),
-            bottomCollectionView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16.0),
-            bottomCollectionView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16.0),
-            bottomCollectionView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -16.0)
-            
+            tableView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 8.0),
+            tableView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16.0),
+            tableView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16.0),
+            tableView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16.0),
         ])
     }
-}
-
-extension HomeView: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("clicou para abrir na posição \(indexPath.row)")
-    }
-}
-
-extension HomeView: UICollectionViewDataSource {
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == upperCollectionView {
-            return upperCharacterList.count
-        } else {
-            return bottomCharacterList.count
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CharacterCell.identifier, for: indexPath) as? CharacterCell else {
-            return UICollectionViewCell()
-        }
-        
-        if collectionView == upperCollectionView {
-            cell.setupUpperCollectionCell(with: upperCharacterList[indexPath.row])
-            return cell
-        } else {
-            cell.setupBottomCollectionCell(with: bottomCharacterList[indexPath.row])
-            return cell
-        }
-    }
-    
 }
 
 extension HomeView: HeaderViewClickDelegateProtocol {
     func didTapLeftButton() {
         print("clicou pra fechar")
     }
+}
+
+extension HomeView: UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return ListTypeEnum.allCases.count
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView()
+        headerView.backgroundColor = .clear
+        
+        let sectionLabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: 22))
+        sectionLabel.textColor = .marvelWhite
+        sectionLabel.font = .systemFont(ofSize: 22.0, weight: .bold)
+        sectionLabel.textAlignment = .left
+        sectionLabel.numberOfLines = 0
+        
+        let section = ListTypeEnum(rawValue: section)
+        switch section {
+        case .characters:
+            sectionLabel.text = "CHARACTERS"
+        case .comics:
+            sectionLabel.text = "COMICS"
+        case .creators:
+            sectionLabel.text = "CREATORS"
+        case .events:
+            sectionLabel.text = "EVENTS"
+        case .stories:
+            sectionLabel.text = "STORIES"
+        case .none:
+            sectionLabel.text = "none"
+        }
+        
+        headerView.addSubview(sectionLabel)
+        return headerView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 38
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let section = ListTypeEnum(rawValue: indexPath.section)
+        
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: HorizontalCollectionView.identifier,
+            for: indexPath
+        ) as? HorizontalCollectionView else {
+            return UITableViewCell()
+        }
+        
+        switch section {
+        case .characters, .none:
+            cell.updateView(with: characters)
+        case .comics:
+            cell.updateView(with: comics)
+        case .creators:
+            cell.updateView(with: creators)
+        case .events:
+            cell.updateView(with: events)
+        case .stories:
+            cell.updateView(with: stories)
+        }
+        return cell
+    }
+}
+
+extension HomeView: UITableViewDelegate {
+    
 }

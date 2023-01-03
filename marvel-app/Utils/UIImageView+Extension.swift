@@ -8,6 +8,7 @@
 import UIKit
 
 extension UIImageView {
+    
     public func imageFromURL(urlString: String) {
 
         let activityIndicator = UIActivityIndicatorView(style: .medium)
@@ -23,6 +24,7 @@ extension UIImageView {
                 print(error ?? "No Error")
                 return
             }
+            
             DispatchQueue.main.async(execute: { () -> Void in
                 let image = UIImage(data: data!)
                 activityIndicator.removeFromSuperview()
@@ -31,4 +33,5 @@ extension UIImageView {
 
         }).resume()
     }
+    
 }

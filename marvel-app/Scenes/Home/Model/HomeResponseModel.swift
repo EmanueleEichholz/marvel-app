@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Response: Codable {
+struct CharactersResult: Codable {
     let code: Int?
     let status: String?
     let data: CharacterListResponseModel?

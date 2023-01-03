@@ -8,7 +8,11 @@
 import UIKit
 
 protocol HomeViewControllerProtocol: AnyObject {
-    func showCharacters(characterList: [CharacterModel])
+    func updateCharactersSection(with charactersInfo: [ItemCardModel])
+//    func updateComicsSection(with comicsInfo: HorizontalCollectionModel)
+//    func updateCreatorsSection(with creatorsInfo: HorizontalCollectionModel)
+//    func updateEventsSection(with eventsInfo: HorizontalCollectionModel)
+//    func updateStoriesSection(with storiesInfo: HorizontalCollectionModel)
 }
 
 final class HomeViewController: UIViewController {
@@ -43,7 +47,24 @@ final class HomeViewController: UIViewController {
 
 extension HomeViewController: HomeViewControllerProtocol {
     
-    func showCharacters(characterList: [CharacterModel]) {
-        homeView.showCharacters(characterList: characterList)
+    func updateCharactersSection(with charactersInfo: [ItemCardModel]) {
+        homeView.updateCharactersSection(with: charactersInfo)
     }
+    
+//    func updateComicsSection(with comicsInfo: HorizontalCollectionModel) {
+//        homeView.updateComicsSection(with: comicsInfo)
+//    }
+//
+//    func updateCreatorsSection(with creatorsInfo: HorizontalCollectionModel) {
+//        homeView.updateCreatorsSection(with: creatorsInfo)
+//    }
+//
+//    func updateEventsSection(with eventsInfo: HorizontalCollectionModel) {
+//        homeView.updateEventsSection(with: eventsInfo)
+//    }
+//
+//    func updateStoriesSection(with storiesInfo: HorizontalCollectionModel) {
+//        homeView.updateStoriesSection(with: storiesInfo)
+//    }
+    
 }

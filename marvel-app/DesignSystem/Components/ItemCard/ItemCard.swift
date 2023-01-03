@@ -7,9 +7,9 @@
 
 import UIKit
 
-final class CharacterCard: UIView {
+final class ItemCard: UIView {
     
-    private lazy var characterImage: UIImageView = {
+    private lazy var itemImage: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "deadpool-question-mark")
         imageView.contentMode = .scaleAspectFill
@@ -20,7 +20,7 @@ final class CharacterCard: UIView {
         return imageView
     }()
     
-    private lazy var characterNameLabel: UILabel = {
+    private lazy var itemNameLabel: UILabel = {
         let label = UILabel()
         label.textColor = .marvelWhite
         label.font = .systemFont(ofSize: 14.0, weight: .bold)
@@ -41,24 +41,25 @@ final class CharacterCard: UIView {
         setupLayout()
     }
     
-    func updateView(with model: CharacterModel) {
-        characterNameLabel.text = model.name
-        characterImage.imageFromURL(urlString: model.image)
+    func updateView(with model: ItemCardModel) {
+        itemNameLabel.text = model.name
+        itemImage.imageFromURL(urlString: model.image)
     }
     
     private func setupLayout() {
-        addSubview(characterImage)
-        characterImage.addSubviews(characterNameLabel)
+        addSubview(itemImage)
+        itemImage.addSubviews(itemNameLabel)
         NSLayoutConstraint.activate([
             
-            characterImage.topAnchor.constraint(equalTo: topAnchor),
-            characterImage.leadingAnchor.constraint(equalTo: leadingAnchor),
-            characterImage.trailingAnchor.constraint(equalTo: trailingAnchor),
-            characterImage.bottomAnchor.constraint(equalTo: bottomAnchor),
+            itemImage.topAnchor.constraint(equalTo: topAnchor),
+            itemImage.leadingAnchor.constraint(equalTo: leadingAnchor),
+            itemImage.trailingAnchor.constraint(equalTo: trailingAnchor),
+            itemImage.bottomAnchor.constraint(equalTo: bottomAnchor),
 
-            characterNameLabel.leadingAnchor.constraint(equalTo: characterImage.leadingAnchor, constant: 8),
-            characterNameLabel.trailingAnchor.constraint(equalTo: characterImage.trailingAnchor, constant: -8),
-            characterNameLabel.bottomAnchor.constraint(equalTo: characterImage.bottomAnchor, constant: -8),
+            itemNameLabel.leadingAnchor.constraint(equalTo: itemImage.leadingAnchor, constant: 8),
+            itemNameLabel.trailingAnchor.constraint(equalTo: itemImage.trailingAnchor, constant: -8),
+            itemNameLabel.bottomAnchor.constraint(equalTo: itemImage.bottomAnchor, constant: -8),
+            
         ])
     }
 }

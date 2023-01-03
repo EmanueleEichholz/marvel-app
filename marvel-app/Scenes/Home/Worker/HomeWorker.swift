@@ -7,47 +7,31 @@
 
 import Foundation
 
-typealias CharactersCompletion = (Result<Response, Error>) -> ()
-
+typealias CharactersCompletion = (Result<CharactersResult, NetworkError>) -> ()
 
 protocol HomeWorkerProtocol {
-    func getCharactersInfo(completion: @escaping CharactersCompletion)
+    func fetchCharacters(completion: @escaping CharactersCompletion)
+//    func fetchComics(completion: @escaping CharactersCompletion)
+//    func fetchCreators(completion: @escaping CharactersCompletion)
+//    func fetchEvents(completion: @escaping CharactersCompletion)
+//    func fetchSeries(completion: @escaping CharactersCompletion)
+//    func fetchStories(completion: @escaping CharactersCompletion)
 }
 
 final class HomeWorker: HomeWorkerProtocol {
     
-    func getURL(offset: Int) -> String {
-        let baseURL = "https://gateway.marvel.com"
-        let path = "v1/public/characters"
-        
-        let ts = Int(Date().timeIntervalSince1970)
-        
-        let content = String(ts) + privateKey + publicKey
-        
-        let url = "\(baseURL)/\(path)?ts=\(ts)&apikey=\(publicKey)&hash=\(content.MD5)"
-        return url
+    let provider: NetworkRequestProtocol
+    
+    init(with provider: NetworkRequestProtocol) {
+        self.provider = provider
     }
     
-    func getCharactersInfo(completion: @escaping CharactersCompletion) {
-            if let url = URL(string: getURL(offset: 20)) {
-                let task = URLSession.shared.dataTask(with: url) { data, response, error in
-                    guard let data = data,
-                        let response = response as? HTTPURLResponse else {
-                        return
-                    }
-                    do {
-                        let result = try JSONDecoder().decode(Response.self, from: data)
-                        switch response.statusCode {
-                        case 200:
-                            completion(Result.success(result))
-                        default:
-                            break
-                        }
-                    } catch {
-                        
-                    }
-                }
-                task.resume()
-            }
+    func fetchCharacters(completion: @escaping CharactersCompletion) {
+        let url = MarvelURLBuilder(with: .characters)
+            .buildURL()
+        
+        provider.makeRequest(url: url) { (response: Result<CharactersResult, NetworkError>) in
+            completion(response)
         }
+    }
 }
