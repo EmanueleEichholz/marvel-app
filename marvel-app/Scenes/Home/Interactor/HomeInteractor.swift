@@ -27,6 +27,11 @@ final class HomeInteractor: HomeInteractorProtocol {
     
     func viewDidLoad() {
         getCharacters()
+        getComics()
+        getCreators()
+        getEvents()
+        getEvents()
+        getSeries()
     }
     
     private func getCharacters() {
@@ -39,4 +44,49 @@ final class HomeInteractor: HomeInteractorProtocol {
             }
         })
     }
+    
+    private func getComics() {
+        worker.fetchComics(completion: { [weak self] result in
+            switch result {
+            case .success(let response):
+                self?.presenter.presentComics(with: response.data)
+            case .failure(let error):
+                print(error)
+            }
+        })
+    }
+    
+    private func getCreators() {
+        worker.fetchCreators(completion: { [weak self] result in
+            switch result {
+            case .success(let response):
+                self?.presenter.presentCreators(with: response.data)
+            case .failure(let error):
+                print(error)
+            }
+        })
+    }
+    
+    private func getEvents() {
+        worker.fetchEvents(completion: { [weak self] result in
+            switch result {
+            case .success(let response):
+                self?.presenter.presentEvents(with: response.data)
+            case .failure(let error):
+                print(error)
+            }
+        })
+    }
+    
+    private func getSeries() {
+        worker.fetchSeries(completion: { [weak self] result in
+            switch result {
+            case .success(let response):
+                self?.presenter.presentSeries(with: response.data)
+            case .failure(let error):
+                print(error)
+            }
+        })
+    }
+    
 }

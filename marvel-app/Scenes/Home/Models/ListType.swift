@@ -12,5 +12,5 @@ enum ListTypeEnum: Int, CaseIterable {
     case comics
     case creators
     case events
-    case stories
+    case series
 }

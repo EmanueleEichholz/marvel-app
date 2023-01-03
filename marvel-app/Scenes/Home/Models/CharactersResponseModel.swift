@@ -10,10 +10,10 @@ import Foundation
 struct CharactersResult: Codable {
     let code: Int?
     let status: String?
-    let data: CharacterListResponseModel?
+    let data: CharactersData?
 }
 
-struct CharacterListResponseModel: Codable {
+struct CharactersData: Codable {
     let results: [CharacterResponseModel]
 }
 
@@ -21,15 +21,5 @@ struct CharacterResponseModel: Codable {
     let name: String?
     let id: Int?
     let description: String?
-    let thumbnail: Image?
-}
-
-struct Image: Codable {
-    let path: String?
-    let thumbnailExtension: String?
-    
-    enum CodingKeys: String, CodingKey {
-        case path
-        case thumbnailExtension = "extension"
-    }
+    let thumbnail: ImageResponseModel?
 }

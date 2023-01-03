@@ -44,13 +44,13 @@ final class HomeView: UIView {
     private var comics: [ItemCardModel] = []
     private var creators: [ItemCardModel] = []
     private var events: [ItemCardModel] = []
+    private var series: [ItemCardModel] = []
     private var stories: [ItemCardModel] = []
     
     func updateCharactersSection(with charactersInfo: [ItemCardModel]) {
         DispatchQueue.main.async { [weak self] in
             self?.characters = charactersInfo
             self?.tableView.reloadSections([0], with: .none)
-            //self?.tableView.reloadData()
         }
     }
     
@@ -75,9 +75,9 @@ final class HomeView: UIView {
         }
     }
     
-    func updateStoriesSection(with storiesInfo: [ItemCardModel]) {
+    func updateSeriesSection(with seriesInfo: [ItemCardModel]) {
         DispatchQueue.main.async { [weak self] in
-            self?.stories = storiesInfo
+            self?.series = seriesInfo
             self?.tableView.reloadSections([4], with: .none)
         }
     }
@@ -135,10 +135,10 @@ extension HomeView: UITableViewDataSource {
             sectionLabel.text = "CREATORS"
         case .events:
             sectionLabel.text = "EVENTS"
-        case .stories:
-            sectionLabel.text = "STORIES"
+        case .series:
+            sectionLabel.text = "SERIES"
         case .none:
-            sectionLabel.text = "none"
+            sectionLabel.text = "ERROR"
         }
         
         headerView.addSubview(sectionLabel)
@@ -168,8 +168,8 @@ extension HomeView: UITableViewDataSource {
             cell.updateView(with: creators)
         case .events:
             cell.updateView(with: events)
-        case .stories:
-            cell.updateView(with: stories)
+        case .series:
+            cell.updateView(with: series)
         }
         return cell
     }

@@ -9,10 +9,10 @@ import UIKit
 
 protocol HomeViewControllerProtocol: AnyObject {
     func updateCharactersSection(with charactersInfo: [ItemCardModel])
-//    func updateComicsSection(with comicsInfo: HorizontalCollectionModel)
-//    func updateCreatorsSection(with creatorsInfo: HorizontalCollectionModel)
-//    func updateEventsSection(with eventsInfo: HorizontalCollectionModel)
-//    func updateStoriesSection(with storiesInfo: HorizontalCollectionModel)
+    func updateComicsSection(with comicsInfo: [ItemCardModel])
+    func updateCreatorsSection(with creatorsInfo: [ItemCardModel])
+    func updateEventsSection(with eventsInfo: [ItemCardModel])
+    func updateSeriesSection(with seriesInfo: [ItemCardModel])
 }
 
 final class HomeViewController: UIViewController {
@@ -51,20 +51,20 @@ extension HomeViewController: HomeViewControllerProtocol {
         homeView.updateCharactersSection(with: charactersInfo)
     }
     
-//    func updateComicsSection(with comicsInfo: HorizontalCollectionModel) {
-//        homeView.updateComicsSection(with: comicsInfo)
-//    }
-//
-//    func updateCreatorsSection(with creatorsInfo: HorizontalCollectionModel) {
-//        homeView.updateCreatorsSection(with: creatorsInfo)
-//    }
-//
-//    func updateEventsSection(with eventsInfo: HorizontalCollectionModel) {
-//        homeView.updateEventsSection(with: eventsInfo)
-//    }
-//
-//    func updateStoriesSection(with storiesInfo: HorizontalCollectionModel) {
-//        homeView.updateStoriesSection(with: storiesInfo)
-//    }
+    func updateComicsSection(with comicsInfo: [ItemCardModel]) {
+        homeView.updateComicsSection(with: comicsInfo)
+    }
+
+    func updateCreatorsSection(with creatorsInfo: [ItemCardModel]) {
+        homeView.updateCreatorsSection(with: creatorsInfo)
+    }
+
+    func updateEventsSection(with eventsInfo: [ItemCardModel]) {
+        homeView.updateEventsSection(with: eventsInfo)
+    }
     
+    func updateSeriesSection(with seriesInfo: [ItemCardModel]) {
+        homeView.updateSeriesSection(with: seriesInfo)
+    }
+
 }
