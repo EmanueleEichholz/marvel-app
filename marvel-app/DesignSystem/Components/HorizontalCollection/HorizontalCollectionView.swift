@@ -1,0 +1,95 @@
+//
+//  HorizontalSection.swift
+//  Marvel
+//
+//  Created by Emanuele Eichholz on 16/12/22.
+//
+
+import UIKit
+
+final class HorizontalCollectionView: UITableViewCell {
+    
+    private lazy var horizontalCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        let cellSize = (UIScreen.main.bounds.width - 48)/2.5
+        layout.estimatedItemSize = CGSize(width: cellSize, height: cellSize)
+        layout.minimumLineSpacing = 16.0
+        layout.minimumInteritemSpacing = 16.0
+        layout.scrollDirection = .horizontal
+        
+        let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collection.register(ItemCell.self, forCellWithReuseIdentifier: ItemCell.identifier)
+        collection.register(SeeAllCell.self, forCellWithReuseIdentifier: SeeAllCell.identifier)
+        collection.dataSource = self
+        collection.delegate = self
+        collection.translatesAutoresizingMaskIntoConstraints = false
+        collection.isScrollEnabled = true
+        collection.showsHorizontalScrollIndicator = true
+        collection.backgroundColor = .clear
+        return collection
+    }()
+    
+    private var itemList: [ItemCardModel] = []
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setupLayout()
+    }
+    
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
+    func updateView(with itemList: [ItemCardModel]) {
+        self.itemList = itemList
+        DispatchQueue.main.async { [weak self] in
+            self?.horizontalCollectionView.reloadData()
+        }
+    }
+    
+    private func setupLayout() {
+        self.backgroundColor = .marvelBlack
+        self.selectionStyle = .none
+        contentView.addSubview(horizontalCollectionView)
+        NSLayoutConstraint.activate([
+            horizontalCollectionView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            horizontalCollectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            horizontalCollectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            horizontalCollectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            horizontalCollectionView.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.width - 48)/2.5)
+        ])
+    }
+}
+
+extension HorizontalCollectionView: UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return (itemList.count + 1)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if indexPath.row < itemList.count {
+            guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: ItemCell.identifier,
+                for: indexPath) as? ItemCell else {
+                return UICollectionViewCell()
+            }
+            cell.updateView(with: itemList[indexPath.row])
+            return cell
+        } else {
+            guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: SeeAllCell.identifier,
+                for: indexPath) as? SeeAllCell else {
+                return UICollectionViewCell()
+            }
+            return cell
+        }
+    }
+}
+
+extension HorizontalCollectionView: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("clicou para abrir na posição \(indexPath.row)")
+    }
+}
