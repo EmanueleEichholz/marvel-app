@@ -9,5 +9,6 @@ import Foundation
 
 protocol HomeCoordinatorProtocol {
     func didTapBackButton()
-    func didTapCharacter()
+    func goToDetailsScreen(detailsInfo: GenericResponseModel)
+    func didTapSeeAll()
 }

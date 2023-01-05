@@ -17,7 +17,7 @@ struct EventsData: Codable {
     let results: [EventsResponseModel]
 }
 
-struct EventsResponseModel: Codable {
+struct EventsResponseModel: Codable, GenericResponseModel {
     let title: String?
     let id: Int?
     let description: String?

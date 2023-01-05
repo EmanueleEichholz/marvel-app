@@ -13,8 +13,8 @@ protocol Coordinator {
     func start()
 }
 
-final class ApplicationCoordinator: Coordinator, HomeCoordinatorProtocol {
-
+final class ApplicationCoordinator: Coordinator {
+    
     var navigationController: UINavigationController
     
     init(navigationController: UINavigationController) {
@@ -27,18 +27,29 @@ final class ApplicationCoordinator: Coordinator, HomeCoordinatorProtocol {
         let viewController = HomeViewControllerFactory.getHomeViewController(coordinator: self)
         navigationController.setViewControllers([viewController], animated: false)
     }
-    
-    func presentHome() {
-        let viewController = HomeViewControllerFactory.getHomeViewController(coordinator: self)
-        navigationController.present(viewController, animated: true)
-    }
-    
+}
+
+extension ApplicationCoordinator: HomeCoordinatorProtocol {
+
     func didTapBackButton() {
-        print("oi")
+        navigationController.popViewController(animated: true)
     }
     
-    func didTapCharacter() {
-        print("oi")
+    func goToDetailsScreen(detailsInfo: GenericResponseModel) {
+        let viewController = DetailsViewControllerFactory.getDetailsViewController(coordinador: self, detailsModel: detailsInfo)
+        navigationController.pushViewController(viewController, animated: true)
+    }
+    
+    func didTapSeeAll() {
+        print("clicou para ver a lista completa")
+    }
+    
+}
+
+extension ApplicationCoordinator: DetailsCoordinatorProtocol {
+    
+    func didTapOpenExternalLink() {
+        print("clicou para abrir no site")
     }
     
 }

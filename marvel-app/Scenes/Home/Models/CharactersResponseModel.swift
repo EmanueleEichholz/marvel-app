@@ -17,7 +17,7 @@ struct CharactersData: Codable {
     let results: [CharacterResponseModel]
 }
 
-struct CharacterResponseModel: Codable {
+struct CharacterResponseModel: Codable, GenericResponseModel {
     let name: String?
     let id: Int?
     let description: String?

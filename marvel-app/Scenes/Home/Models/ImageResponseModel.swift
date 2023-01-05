@@ -7,6 +7,8 @@
 
 import Foundation
 
+protocol GenericResponseModel { }
+
 struct ImageResponseModel: Codable {
     let path: String?
     let thumbnailExtension: String?

@@ -21,6 +21,12 @@
 		40374BE7294D3395002FE3DE /* HorizontalCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40374BE6294D3395002FE3DE /* HorizontalCollectionView.swift */; };
 		40374BEE29526C30002FE3DE /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40374BED29526C30002FE3DE /* NetworkRequest.swift */; };
 		40374BF02952793E002FE3DE /* SeeAllCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40374BEF2952793E002FE3DE /* SeeAllCell.swift */; };
+		403CC3412966347600A14410 /* DetailsCoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403CC3402966347600A14410 /* DetailsCoordinatorProtocol.swift */; };
+		403CC343296634D500A14410 /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403CC342296634D500A14410 /* DetailsView.swift */; };
+		403CC345296634E300A14410 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403CC344296634E300A14410 /* DetailsViewController.swift */; };
+		403CC347296634FA00A14410 /* DetailsViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403CC346296634FA00A14410 /* DetailsViewControllerFactory.swift */; };
+		403CC3492966350400A14410 /* DetailsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403CC3482966350400A14410 /* DetailsInteractor.swift */; };
+		403CC34B2966351000A14410 /* DetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403CC34A2966351000A14410 /* DetailsPresenter.swift */; };
 		4045568C291FE37400233BE8 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4045568B291FE37400233BE8 /* UIImageView+Extension.swift */; };
 		404556902920344800233BE8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4045568F2920344800233BE8 /* SceneDelegate.swift */; };
 		404656E129132D1A000F19FC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404656E029132D1A000F19FC /* AppDelegate.swift */; };
@@ -83,6 +89,12 @@
 		40374BE6294D3395002FE3DE /* HorizontalCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalCollectionView.swift; sourceTree = "<group>"; };
 		40374BED29526C30002FE3DE /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
 		40374BEF2952793E002FE3DE /* SeeAllCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeAllCell.swift; sourceTree = "<group>"; };
+		403CC3402966347600A14410 /* DetailsCoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsCoordinatorProtocol.swift; sourceTree = "<group>"; };
+		403CC342296634D500A14410 /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
+		403CC344296634E300A14410 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
+		403CC346296634FA00A14410 /* DetailsViewControllerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewControllerFactory.swift; sourceTree = "<group>"; };
+		403CC3482966350400A14410 /* DetailsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsInteractor.swift; sourceTree = "<group>"; };
+		403CC34A2966351000A14410 /* DetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsPresenter.swift; sourceTree = "<group>"; };
 		4045568B291FE37400233BE8 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		4045568F2920344800233BE8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		404656DD29132D1A000F19FC /* Marvel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Marvel.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -240,6 +252,54 @@
 			path = HorizontalCollection;
 			sourceTree = "<group>";
 		};
+		403CC33A296632BD00A14410 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				403CC3402966347600A14410 /* DetailsCoordinatorProtocol.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		403CC33B296632C400A14410 /* Factory */ = {
+			isa = PBXGroup;
+			children = (
+				403CC346296634FA00A14410 /* DetailsViewControllerFactory.swift */,
+			);
+			path = Factory;
+			sourceTree = "<group>";
+		};
+		403CC33C296632CC00A14410 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				403CC3482966350400A14410 /* DetailsInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		403CC33D296632D300A14410 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		403CC33E296632DF00A14410 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				403CC34A2966351000A14410 /* DetailsPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		403CC33F296632EA00A14410 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				403CC342296634D500A14410 /* DetailsView.swift */,
+				403CC344296634E300A14410 /* DetailsViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		4045569129206A3300233BE8 /* AppDelegate */ = {
 			isa = PBXGroup;
 			children = (
@@ -337,6 +397,12 @@
 		4046571329133062000F19FC /* Details */ = {
 			isa = PBXGroup;
 			children = (
+				403CC33A296632BD00A14410 /* Coordinator */,
+				403CC33F296632EA00A14410 /* View */,
+				403CC33B296632C400A14410 /* Factory */,
+				403CC33C296632CC00A14410 /* Interactor */,
+				403CC33D296632D300A14410 /* Model */,
+				403CC33E296632DF00A14410 /* Presenter */,
 			);
 			path = Details;
 			sourceTree = "<group>";
@@ -573,6 +639,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				40D5795929493092002B31F6 /* MarvelURLBuilder.swift in Sources */,
+				403CC3492966350400A14410 /* DetailsInteractor.swift in Sources */,
 				4046576629134270000F19FC /* HomeCoordinatorProtocol.swift in Sources */,
 				40017F022918872300D93466 /* String+Extension.swift in Sources */,
 				401C4AFD29495BB100754528 /* ListType.swift in Sources */,
@@ -591,10 +658,12 @@
 				4046577229134B6E000F19FC /* HomeView.swift in Sources */,
 				40374BE7294D3395002FE3DE /* HorizontalCollectionView.swift in Sources */,
 				4046576B2913432B000F19FC /* ItemCard.swift in Sources */,
+				403CC345296634E300A14410 /* DetailsViewController.swift in Sources */,
 				40D14A122956582700670A55 /* UITableViewCell+Extension.swift in Sources */,
 				4059611B2964DF5B005762C2 /* ImageResponseModel.swift in Sources */,
 				4046575C291337D8000F19FC /* HomeViewController.swift in Sources */,
 				405A59EF291DD522001757B9 /* MarvelFonts.swift in Sources */,
+				403CC347296634FA00A14410 /* DetailsViewControllerFactory.swift in Sources */,
 				405961112964DCE4005762C2 /* ComicsResponseModel.swift in Sources */,
 				40374BF02952793E002FE3DE /* SeeAllCell.swift in Sources */,
 				40017EFE2918764A00D93466 /* HeaderViewModel.swift in Sources */,
@@ -604,6 +673,9 @@
 				4049BD3029259B1D00308EC3 /* NetworkError.swift in Sources */,
 				40017EFC2918749200D93466 /* Optional+Extension.swift in Sources */,
 				4046576029134230000F19FC /* HomeWorker.swift in Sources */,
+				403CC34B2966351000A14410 /* DetailsPresenter.swift in Sources */,
+				403CC343296634D500A14410 /* DetailsView.swift in Sources */,
+				403CC3412966347600A14410 /* DetailsCoordinatorProtocol.swift in Sources */,
 				40465769291342D7000F19FC /* ApplicationCoordinator.swift in Sources */,
 				405961132964DCF4005762C2 /* CreatorsResponseModel.swift in Sources */,
 				405961172964DD16005762C2 /* EventsResponseModel.swift in Sources */,

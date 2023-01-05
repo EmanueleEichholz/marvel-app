@@ -53,7 +53,7 @@ final class SeeAllCell: UICollectionViewCell {
     
     private func setupLayout() {
         addSubview(containerStackView)
-        let cellSize = (UIScreen.main.bounds.width - 48)/2.5
+        let cellSize = round((UIScreen.main.bounds.width - 48)/2.5)
         NSLayoutConstraint.activate([
             containerStackView.topAnchor.constraint(equalTo: topAnchor),
             containerStackView.leadingAnchor.constraint(equalTo: leadingAnchor),

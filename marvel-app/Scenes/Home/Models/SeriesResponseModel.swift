@@ -17,7 +17,7 @@ struct SeriesData: Codable {
     let results: [SeriesResponseModel]
 }
 
-struct SeriesResponseModel: Codable {
+struct SeriesResponseModel: Codable,GenericResponseModel {
     let title: String?
     let id: Int?
     let description: String?

@@ -17,7 +17,7 @@ struct CreatorsData: Codable {
     let results: [CreatorsResponseModel]
 }
 
-struct CreatorsResponseModel: Codable {
+struct CreatorsResponseModel: Codable, GenericResponseModel {
     let fullName: String?
     let id: Int?
     let thumbnail: ImageResponseModel?

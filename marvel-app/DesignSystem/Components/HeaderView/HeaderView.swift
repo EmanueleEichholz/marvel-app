@@ -121,8 +121,6 @@ final class HeaderView: UIView {
             rightIconImageView.heightAnchor.constraint(equalToConstant: 24.0),
             rightIconImageView.widthAnchor.constraint(equalToConstant: 24.0),
             
-            
-            
         ])
     }
     

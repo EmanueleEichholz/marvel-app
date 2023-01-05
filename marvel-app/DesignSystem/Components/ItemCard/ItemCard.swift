@@ -50,7 +50,6 @@ final class ItemCard: UIView {
         addSubview(itemImage)
         itemImage.addSubviews(itemNameLabel)
         NSLayoutConstraint.activate([
-            
             itemImage.topAnchor.constraint(equalTo: topAnchor),
             itemImage.leadingAnchor.constraint(equalTo: leadingAnchor),
             itemImage.trailingAnchor.constraint(equalTo: trailingAnchor),
@@ -59,7 +58,7 @@ final class ItemCard: UIView {
             itemNameLabel.leadingAnchor.constraint(equalTo: itemImage.leadingAnchor, constant: 8),
             itemNameLabel.trailingAnchor.constraint(equalTo: itemImage.trailingAnchor, constant: -8),
             itemNameLabel.bottomAnchor.constraint(equalTo: itemImage.bottomAnchor, constant: -8),
-            
         ])
     }
+    
 }
