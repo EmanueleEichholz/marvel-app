@@ -30,6 +30,7 @@ final class HomeView: UIView {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.backgroundColor = .clear
         tableView.dataSource = self
+        tableView.delegate = self
         tableView.separatorStyle = .none
         tableView.showsVerticalScrollIndicator = true
         tableView.register(HorizontalCollectionView.self, forCellReuseIdentifier: HorizontalCollectionView.identifier)
@@ -114,7 +115,7 @@ extension HomeView: HeaderViewClickDelegateProtocol {
     }
 }
 
-extension HomeView: UITableViewDataSource {
+extension HomeView: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return ListTypeEnum.allCases.count

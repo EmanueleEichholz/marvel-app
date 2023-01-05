@@ -8,14 +8,27 @@
 import Foundation
 
 protocol DetailsPresenterProtocol {
-    func presentDetails<T>(detailsModel: T)
+    func presentDetails(detailsModel: GenericResponseModel)
 }
 
 final class DetailsPresenter: DetailsPresenterProtocol {
     
     weak var view: DetailsViewControllerProtocol?
     
-    func presentDetails<T>(detailsModel: T) {
+    func presentDetails(detailsModel: GenericResponseModel) {
+        if detailsModel is CharacterResponseModel {
+            
+            return
+        }
+        
+        if detailsModel is ComicsResponseModel {
+            
+        }
+        
         view?.updateDetailsView(with: "oi")
+    }
+    
+    private func updateView(with characters: CharacterResponseModel) {
+        
     }
 }

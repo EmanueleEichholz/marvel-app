@@ -7,19 +7,22 @@
 
 import Foundation
 
-struct CharactersResult: Codable {
+struct CharactersResult: Decodable {
     let code: Int?
     let status: String?
     let data: CharactersData?
 }
 
-struct CharactersData: Codable {
+struct CharactersData: Decodable {
     let results: [CharacterResponseModel]
 }
 
-struct CharacterResponseModel: Codable, GenericResponseModel {
+struct CharacterResponseModel: Decodable, GenericResponseModel {
     let name: String?
-    let id: Int?
     let description: String?
+    let resourceURI: String?
     let thumbnail: ImageResponseModel?
+    let comics: ListResponseModel?
+    let series: ListResponseModel?
+    let events: ListResponseModel?
 }

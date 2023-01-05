@@ -27,6 +27,8 @@
 		403CC347296634FA00A14410 /* DetailsViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403CC346296634FA00A14410 /* DetailsViewControllerFactory.swift */; };
 		403CC3492966350400A14410 /* DetailsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403CC3482966350400A14410 /* DetailsInteractor.swift */; };
 		403CC34B2966351000A14410 /* DetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403CC34A2966351000A14410 /* DetailsPresenter.swift */; };
+		403CC34D29678C1A00A14410 /* DetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403CC34C29678C1A00A14410 /* DetailsViewModel.swift */; };
+		403CC34F296790B300A14410 /* ListResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403CC34E296790B300A14410 /* ListResponseModel.swift */; };
 		4045568C291FE37400233BE8 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4045568B291FE37400233BE8 /* UIImageView+Extension.swift */; };
 		404556902920344800233BE8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4045568F2920344800233BE8 /* SceneDelegate.swift */; };
 		404656E129132D1A000F19FC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404656E029132D1A000F19FC /* AppDelegate.swift */; };
@@ -95,6 +97,8 @@
 		403CC346296634FA00A14410 /* DetailsViewControllerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewControllerFactory.swift; sourceTree = "<group>"; };
 		403CC3482966350400A14410 /* DetailsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsInteractor.swift; sourceTree = "<group>"; };
 		403CC34A2966351000A14410 /* DetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsPresenter.swift; sourceTree = "<group>"; };
+		403CC34C29678C1A00A14410 /* DetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewModel.swift; sourceTree = "<group>"; };
+		403CC34E296790B300A14410 /* ListResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListResponseModel.swift; sourceTree = "<group>"; };
 		4045568B291FE37400233BE8 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		4045568F2920344800233BE8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		404656DD29132D1A000F19FC /* Marvel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Marvel.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -224,6 +228,7 @@
 			children = (
 				401C4AFC29495BB100754528 /* ListType.swift */,
 				4059611A2964DF5B005762C2 /* ImageResponseModel.swift */,
+				403CC34E296790B300A14410 /* ListResponseModel.swift */,
 				40017F04291887CE00D93466 /* CharactersResponseModel.swift */,
 				405961102964DCE4005762C2 /* ComicsResponseModel.swift */,
 				405961122964DCF4005762C2 /* CreatorsResponseModel.swift */,
@@ -279,6 +284,7 @@
 		403CC33D296632D300A14410 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				403CC34C29678C1A00A14410 /* DetailsViewModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -645,6 +651,7 @@
 				401C4AFD29495BB100754528 /* ListType.swift in Sources */,
 				40017EEE2918508500D93466 /* UICollectionViewCell+Extension.swift in Sources */,
 				40017F002918802D00D93466 /* MarvelColors.swift in Sources */,
+				403CC34D29678C1A00A14410 /* DetailsViewModel.swift in Sources */,
 				4046576E29134357000F19FC /* ItemCardModel.swift in Sources */,
 				4046575E29134223000F19FC /* HomePresenter.swift in Sources */,
 				40017F05291887CE00D93466 /* CharactersResponseModel.swift in Sources */,
@@ -674,6 +681,7 @@
 				40017EFC2918749200D93466 /* Optional+Extension.swift in Sources */,
 				4046576029134230000F19FC /* HomeWorker.swift in Sources */,
 				403CC34B2966351000A14410 /* DetailsPresenter.swift in Sources */,
+				403CC34F296790B300A14410 /* ListResponseModel.swift in Sources */,
 				403CC343296634D500A14410 /* DetailsView.swift in Sources */,
 				403CC3412966347600A14410 /* DetailsCoordinatorProtocol.swift in Sources */,
 				40465769291342D7000F19FC /* ApplicationCoordinator.swift in Sources */,
