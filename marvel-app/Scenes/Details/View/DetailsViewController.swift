@@ -8,7 +8,7 @@
 import UIKit
 
 protocol DetailsViewControllerProtocol: AnyObject {
-    func updateDetailsView(with detailsInfo: String)
+    func updateDetailsView(with detailsInfo: DetailsViewModel)
 }
 
 final class DetailsViewController: UIViewController {
@@ -45,8 +45,8 @@ final class DetailsViewController: UIViewController {
 
 extension DetailsViewController: DetailsViewControllerProtocol {
     
-    func updateDetailsView(with detailsInfo: String) {
-        detailsView.updateDetailsView(with: detailsInfo)
+    func updateDetailsView(with model: DetailsViewModel) {
+        detailsView.updateDetailsView(with: model)
     }
     
 }

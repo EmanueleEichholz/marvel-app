@@ -25,8 +25,8 @@ final class ItemCell: UICollectionViewCell {
         super.init(coder: coder)
     }
     
-    func updateView(with viewModel: ItemCardModel) {
-        itemCard.updateView(with: viewModel)
+    func updateView(with model: ItemCardModel) {
+        itemCard.updateView(with: model)
     }
     
     private func setupLayout() {

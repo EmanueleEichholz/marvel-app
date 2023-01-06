@@ -15,6 +15,12 @@ extension UIView {
         }
     }
     
+    func removeAllSubviews() {
+        subviews.forEach { view in
+            view.removeFromSuperview()
+        }
+    }
+    
     func setVerticalLinearGradient(startPoint: Double, endPoint: Double) {
         DispatchQueue.main.async {
             let gradient = CAGradientLayer()

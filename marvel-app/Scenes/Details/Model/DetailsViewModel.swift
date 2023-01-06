@@ -8,13 +8,8 @@
 import Foundation
 
 struct DetailsViewModel {
-    let image: String
-    let name: String
-    let description: String
-    let comics: [String]?
-    let characters: [String]?
-    let creators: [String]?
-    let events: [String]?
-    let series: [String]?
-    let url: String?
+    let image: String?
+    let name: String?
+    let description: String?
+    let lists: [ListViewModel]?
 }

@@ -29,6 +29,8 @@
 		403CC34B2966351000A14410 /* DetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403CC34A2966351000A14410 /* DetailsPresenter.swift */; };
 		403CC34D29678C1A00A14410 /* DetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403CC34C29678C1A00A14410 /* DetailsViewModel.swift */; };
 		403CC34F296790B300A14410 /* ListResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403CC34E296790B300A14410 /* ListResponseModel.swift */; };
+		403CC35229679EF400A14410 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403CC35129679EF400A14410 /* ListView.swift */; };
+		403CC35429679F0200A14410 /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403CC35329679F0200A14410 /* ListViewModel.swift */; };
 		4045568C291FE37400233BE8 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4045568B291FE37400233BE8 /* UIImageView+Extension.swift */; };
 		404556902920344800233BE8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4045568F2920344800233BE8 /* SceneDelegate.swift */; };
 		404656E129132D1A000F19FC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404656E029132D1A000F19FC /* AppDelegate.swift */; };
@@ -99,6 +101,8 @@
 		403CC34A2966351000A14410 /* DetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsPresenter.swift; sourceTree = "<group>"; };
 		403CC34C29678C1A00A14410 /* DetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewModel.swift; sourceTree = "<group>"; };
 		403CC34E296790B300A14410 /* ListResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListResponseModel.swift; sourceTree = "<group>"; };
+		403CC35129679EF400A14410 /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
+		403CC35329679F0200A14410 /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
 		4045568B291FE37400233BE8 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		4045568F2920344800233BE8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		404656DD29132D1A000F19FC /* Marvel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Marvel.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -306,6 +310,15 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		403CC35029679EDC00A14410 /* ListView */ = {
+			isa = PBXGroup;
+			children = (
+				403CC35129679EF400A14410 /* ListView.swift */,
+				403CC35329679F0200A14410 /* ListViewModel.swift */,
+			);
+			path = ListView;
+			sourceTree = "<group>";
+		};
 		4045569129206A3300233BE8 /* AppDelegate */ = {
 			isa = PBXGroup;
 			children = (
@@ -448,6 +461,7 @@
 		404657182913321D000F19FC /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				403CC35029679EDC00A14410 /* ListView */,
 				40374BE5294D333E002FE3DE /* HorizontalCollection */,
 				40D5795729492D80002B31F6 /* SkeletonCard */,
 				40D57956294925CC002B31F6 /* ErrorCard */,
@@ -644,6 +658,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				403CC35429679F0200A14410 /* ListViewModel.swift in Sources */,
 				40D5795929493092002B31F6 /* MarvelURLBuilder.swift in Sources */,
 				403CC3492966350400A14410 /* DetailsInteractor.swift in Sources */,
 				4046576629134270000F19FC /* HomeCoordinatorProtocol.swift in Sources */,
@@ -674,6 +689,7 @@
 				405961112964DCE4005762C2 /* ComicsResponseModel.swift in Sources */,
 				40374BF02952793E002FE3DE /* SeeAllCell.swift in Sources */,
 				40017EFE2918764A00D93466 /* HeaderViewModel.swift in Sources */,
+				403CC35229679EF400A14410 /* ListView.swift in Sources */,
 				40017EFA2918743A00D93466 /* UIImage+Extension.swift in Sources */,
 				401C4AFA29495B6E00754528 /* HTTPMethod.swift in Sources */,
 				4045568C291FE37400233BE8 /* UIImageView+Extension.swift in Sources */,
