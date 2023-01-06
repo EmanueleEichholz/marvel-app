@@ -25,13 +25,13 @@ final class ItemCell: UICollectionViewCell {
         super.init(coder: coder)
     }
     
-    func updateView(with viewModel: ItemCardModel) {
-        itemCard.updateView(with: viewModel)
+    func updateView(with model: ItemCardModel) {
+        itemCard.updateView(with: model)
     }
     
     private func setupLayout() {
         addSubview(itemCard)
-        let cellSize = (UIScreen.main.bounds.width - 48)/2.5
+        let cellSize = round((UIScreen.main.bounds.width - 48)/2.5)
         NSLayoutConstraint.activate([
             itemCard.topAnchor.constraint(equalTo: topAnchor),
             itemCard.leadingAnchor.constraint(equalTo: leadingAnchor),

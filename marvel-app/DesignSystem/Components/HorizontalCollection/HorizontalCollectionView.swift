@@ -7,11 +7,15 @@
 
 import UIKit
 
+protocol HorizontalCollectionViewDelegate: AnyObject {
+    func didSelectItem(sectionIndex: Int?, itemIndex: Int?)
+}
+
 final class HorizontalCollectionView: UITableViewCell {
     
     private lazy var horizontalCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        let cellSize = (UIScreen.main.bounds.width - 48)/2.5
+        let cellSize = round((UIScreen.main.bounds.width - 48)/2.5)
         layout.estimatedItemSize = CGSize(width: cellSize, height: cellSize)
         layout.minimumLineSpacing = 16.0
         layout.minimumInteritemSpacing = 16.0
@@ -30,6 +34,8 @@ final class HorizontalCollectionView: UITableViewCell {
     }()
     
     private var itemList: [ItemCardModel] = []
+    private var sectionIndex: Int?
+    weak var delegate: HorizontalCollectionViewDelegate?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -41,7 +47,8 @@ final class HorizontalCollectionView: UITableViewCell {
         super.init(coder: coder)
     }
     
-    func updateView(with itemList: [ItemCardModel]) {
+    func updateView(with itemList: [ItemCardModel], sectionIndex: Int?) {
+        self.sectionIndex = sectionIndex
         self.itemList = itemList
         DispatchQueue.main.async { [weak self] in
             self?.horizontalCollectionView.reloadData()
@@ -49,6 +56,7 @@ final class HorizontalCollectionView: UITableViewCell {
     }
     
     private func setupLayout() {
+        let collectionHeight = round((UIScreen.main.bounds.width - 48)/2.5)
         self.backgroundColor = .marvelBlack
         self.selectionStyle = .none
         contentView.addSubview(horizontalCollectionView)
@@ -57,7 +65,7 @@ final class HorizontalCollectionView: UITableViewCell {
             horizontalCollectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             horizontalCollectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             horizontalCollectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            horizontalCollectionView.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.width - 48)/2.5)
+            horizontalCollectionView.heightAnchor.constraint(equalToConstant: collectionHeight)
         ])
     }
 }
@@ -90,6 +98,6 @@ extension HorizontalCollectionView: UICollectionViewDataSource {
 
 extension HorizontalCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("clicou para abrir na posição \(indexPath.row)")
+        delegate?.didSelectItem(sectionIndex: sectionIndex, itemIndex: indexPath.row)
     }
 }

@@ -19,8 +19,6 @@ extension HeaderViewClickDelegateProtocol {
 
 final class HeaderView: UIView {
     
-    weak var delegate: HeaderViewClickDelegateProtocol?
-    
     private lazy var logoImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -58,13 +56,7 @@ final class HeaderView: UIView {
         return icon
     }()
     
-    @objc private func rightIconTapped() {
-        delegate?.didTapRightButton()
-    }
-    
-    @objc private func leftIconTapped() {
-        delegate?.didTapLeftButton()
-    }
+    weak var delegate: HeaderViewClickDelegateProtocol?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -74,6 +66,14 @@ final class HeaderView: UIView {
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+    }
+    
+    @objc private func rightIconTapped() {
+        delegate?.didTapRightButton()
+    }
+    
+    @objc private func leftIconTapped() {
+        delegate?.didTapLeftButton()
     }
     
     func updateView(with viewModel: HeaderViewModel) {
@@ -101,7 +101,6 @@ final class HeaderView: UIView {
             
             leftIconImageView.leadingAnchor.constraint(equalTo: leftTouchableView.leadingAnchor),
             leftIconImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            
             leftIconImageView.heightAnchor.constraint(equalToConstant: 24.0),
             leftIconImageView.widthAnchor.constraint(equalToConstant: 24.0),
             
@@ -109,19 +108,16 @@ final class HeaderView: UIView {
             logoImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
             logoImageView.heightAnchor.constraint(equalToConstant: 72.0),
             
-            
             rightTouchableView.topAnchor.constraint(equalTo: topAnchor, constant: 16.0),
             rightTouchableView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16.0),
-            rightTouchableView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -16.0),
+            rightTouchableView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16.0),
             rightTouchableView.heightAnchor.constraint(equalToConstant: 40.0),
             rightTouchableView.widthAnchor.constraint(equalToConstant: 40.0),
             
             rightIconImageView.trailingAnchor.constraint(equalTo: rightTouchableView.trailingAnchor),
-            rightTouchableView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            rightIconImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
             rightIconImageView.heightAnchor.constraint(equalToConstant: 24.0),
             rightIconImageView.widthAnchor.constraint(equalToConstant: 24.0),
-            
-            
             
         ])
     }

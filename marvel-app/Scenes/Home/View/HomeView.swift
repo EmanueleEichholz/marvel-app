@@ -7,6 +7,14 @@
 
 import UIKit
 
+protocol HomeViewDelegateProtocol: AnyObject {
+    func didSelectCharacter(at index: Int)
+    func didSelectComic(at index: Int)
+    func didSelectCreator(at index: Int)
+    func didSelectEvent(at index: Int)
+    func didSelectSerie(at index: Int)
+}
+
 final class HomeView: UIView {
     
     private lazy var headerView: HeaderView = {
@@ -29,6 +37,15 @@ final class HomeView: UIView {
         return tableView
     }()
     
+    private var characters: [ItemCardModel] = []
+    private var comics: [ItemCardModel] = []
+    private var creators: [ItemCardModel] = []
+    private var events: [ItemCardModel] = []
+    private var series: [ItemCardModel] = []
+    private var stories: [ItemCardModel] = []
+    
+    weak var delegate: HomeViewDelegateProtocol?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupLayout()
@@ -39,13 +56,6 @@ final class HomeView: UIView {
         super.init(coder: coder)
         setupLayout()
     }
-    
-    private var characters: [ItemCardModel] = []
-    private var comics: [ItemCardModel] = []
-    private var creators: [ItemCardModel] = []
-    private var events: [ItemCardModel] = []
-    private var series: [ItemCardModel] = []
-    private var stories: [ItemCardModel] = []
     
     func updateCharactersSection(with charactersInfo: [ItemCardModel]) {
         DispatchQueue.main.async { [weak self] in
@@ -105,7 +115,7 @@ extension HomeView: HeaderViewClickDelegateProtocol {
     }
 }
 
-extension HomeView: UITableViewDataSource {
+extension HomeView: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return ListTypeEnum.allCases.count
@@ -138,7 +148,7 @@ extension HomeView: UITableViewDataSource {
         case .series:
             sectionLabel.text = "SERIES"
         case .none:
-            sectionLabel.text = "ERROR"
+            sectionLabel.text = "UNKNOW"
         }
         
         headerView.addSubview(sectionLabel)
@@ -159,22 +169,42 @@ extension HomeView: UITableViewDataSource {
             return UITableViewCell()
         }
         
+        cell.delegate = self
+        
         switch section {
         case .characters, .none:
-            cell.updateView(with: characters)
+            cell.updateView(with: characters, sectionIndex: section?.rawValue)
         case .comics:
-            cell.updateView(with: comics)
+            cell.updateView(with: comics, sectionIndex: section?.rawValue)
         case .creators:
-            cell.updateView(with: creators)
+            cell.updateView(with: creators, sectionIndex: section?.rawValue)
         case .events:
-            cell.updateView(with: events)
+            cell.updateView(with: events, sectionIndex: section?.rawValue)
         case .series:
-            cell.updateView(with: series)
+            cell.updateView(with: series, sectionIndex: section?.rawValue)
         }
         return cell
     }
 }
 
-extension HomeView: UITableViewDelegate {
-    
+extension HomeView: HorizontalCollectionViewDelegate {
+    func didSelectItem(sectionIndex: Int?, itemIndex: Int?) {
+        guard let sectionIndex = sectionIndex,
+              let itemIndex = itemIndex else { return }
+        
+        let section = ListTypeEnum(rawValue: sectionIndex)
+
+        switch section {
+        case .characters, .none:
+            delegate?.didSelectCharacter(at: itemIndex)
+        case .comics:
+            delegate?.didSelectComic(at: itemIndex)
+        case .creators:
+            delegate?.didSelectCreator(at: itemIndex)
+        case .events:
+            delegate?.didSelectCreator(at: itemIndex)
+        case .series:
+            delegate?.didSelectSerie(at: itemIndex)
+        }
+    }
 }

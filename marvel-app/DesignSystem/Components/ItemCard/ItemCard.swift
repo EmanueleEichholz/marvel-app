@@ -16,7 +16,7 @@ final class ItemCard: UIView {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.cornerRadius = 10.0
         imageView.clipsToBounds = true
-        imageView.setVerticalLinearGradient(startPoint: 1.0, endPoint: 0.50)
+        imageView.setVerticalLinearGradient(initialColor: .marvelDarkGray, startPoint: 1.0, endPoint: 0.50)
         return imageView
     }()
     
@@ -50,7 +50,6 @@ final class ItemCard: UIView {
         addSubview(itemImage)
         itemImage.addSubviews(itemNameLabel)
         NSLayoutConstraint.activate([
-            
             itemImage.topAnchor.constraint(equalTo: topAnchor),
             itemImage.leadingAnchor.constraint(equalTo: leadingAnchor),
             itemImage.trailingAnchor.constraint(equalTo: trailingAnchor),
@@ -59,7 +58,7 @@ final class ItemCard: UIView {
             itemNameLabel.leadingAnchor.constraint(equalTo: itemImage.leadingAnchor, constant: 8),
             itemNameLabel.trailingAnchor.constraint(equalTo: itemImage.trailingAnchor, constant: -8),
             itemNameLabel.bottomAnchor.constraint(equalTo: itemImage.bottomAnchor, constant: -8),
-            
         ])
     }
+    
 }

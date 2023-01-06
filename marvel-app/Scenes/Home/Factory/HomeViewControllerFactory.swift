@@ -13,9 +13,12 @@ final class HomeViewControllerFactory {
         
         let presenter = HomePresenter()
         let worker = HomeWorker(with: NetworkRequest())
-        let interactor = HomeInteractor(coordinator: coordinator,
-                                        presenter: presenter,
-                                        worker: worker)
+        
+        let interactor = HomeInteractor(
+            coordinator: coordinator,
+            presenter: presenter,
+            worker: worker
+        )
         
         let viewController = HomeViewController(interactor: interactor)
         presenter.view = viewController

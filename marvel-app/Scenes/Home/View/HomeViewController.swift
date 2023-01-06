@@ -42,6 +42,7 @@ final class HomeViewController: UIViewController {
     override func loadView() {
         super.loadView()
         view = homeView
+        homeView.delegate = self
     }
 }
 
@@ -67,4 +68,28 @@ extension HomeViewController: HomeViewControllerProtocol {
         homeView.updateSeriesSection(with: seriesInfo)
     }
 
+}
+
+extension HomeViewController: HomeViewDelegateProtocol {
+    
+    func didSelectCharacter(at index: Int) {
+        interactor.didSelectCharacter(at: index)
+    }
+    
+    func didSelectComic(at index: Int) {
+        interactor.didSelectComic(at: index)
+    }
+    
+    func didSelectCreator(at index: Int) {
+        interactor.didSelectCreator(at: index)
+    }
+    
+    func didSelectEvent(at index: Int) {
+        interactor.didSelectCreator(at: index)
+    }
+    
+    func didSelectSerie(at index: Int) {
+        interactor.didSelectSerie(at: index)
+    }
+    
 }
