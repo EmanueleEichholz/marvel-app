@@ -52,9 +52,9 @@ extension DetailsViewController: DetailsViewControllerProtocol {
 }
 
 extension DetailsViewController: DetailsViewDelegateProtocol {
+    
     func didTapBackButton() {
         interactor.didTapBackButton()
     }
-    
 }
 

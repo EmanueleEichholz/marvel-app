@@ -19,8 +19,6 @@ extension HeaderViewClickDelegateProtocol {
 
 final class HeaderView: UIView {
     
-    weak var delegate: HeaderViewClickDelegateProtocol?
-    
     private lazy var logoImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -58,13 +56,7 @@ final class HeaderView: UIView {
         return icon
     }()
     
-    @objc private func rightIconTapped() {
-        delegate?.didTapRightButton()
-    }
-    
-    @objc private func leftIconTapped() {
-        delegate?.didTapLeftButton()
-    }
+    weak var delegate: HeaderViewClickDelegateProtocol?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -74,6 +66,14 @@ final class HeaderView: UIView {
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+    }
+    
+    @objc private func rightIconTapped() {
+        delegate?.didTapRightButton()
+    }
+    
+    @objc private func leftIconTapped() {
+        delegate?.didTapLeftButton()
     }
     
     func updateView(with viewModel: HeaderViewModel) {

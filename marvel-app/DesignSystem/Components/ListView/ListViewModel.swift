@@ -8,6 +8,12 @@
 import Foundation
 
 struct ListViewModel {
+    let type: TextType
     let title: String
     let items: [String]
+}
+
+enum TextType {
+    case plainText
+    case link
 }

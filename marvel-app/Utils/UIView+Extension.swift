@@ -21,11 +21,11 @@ extension UIView {
         }
     }
     
-    func setVerticalLinearGradient(startPoint: Double, endPoint: Double) {
+    func setVerticalLinearGradient(initialColor: UIColor, startPoint: Double, endPoint: Double) {
         DispatchQueue.main.async {
             let gradient = CAGradientLayer()
             gradient.frame = self.bounds
-            gradient.colors = [UIColor.marvelDarkGray.cgColor, UIColor.black.withAlphaComponent(0.0).cgColor]
+            gradient.colors = [initialColor.cgColor, UIColor.black.withAlphaComponent(0.0).cgColor]
             gradient.startPoint = CGPoint(x: 0.0, y: startPoint)
             gradient.endPoint = CGPoint(x: 0.0, y: endPoint)
             self.layer.insertSublayer(gradient, at: 0)

@@ -57,6 +57,9 @@
 		405961192964DD2F005762C2 /* SeriesResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405961182964DD2F005762C2 /* SeriesResponseModel.swift */; };
 		4059611B2964DF5B005762C2 /* ImageResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4059611A2964DF5B005762C2 /* ImageResponseModel.swift */; };
 		405A59EF291DD522001757B9 /* MarvelFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405A59EE291DD522001757B9 /* MarvelFonts.swift */; };
+		405D24E32968BB0C004B2057 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405D24E22968BB0C004B2057 /* UILabel+Extension.swift */; };
+		405D24E52968BDBC004B2057 /* URLResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405D24E42968BDBC004B2057 /* URLResponseModel.swift */; };
+		405D24E72968C8F7004B2057 /* ItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405D24E62968C8F7004B2057 /* ItemView.swift */; };
 		40D14A122956582700670A55 /* UITableViewCell+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D14A112956582700670A55 /* UITableViewCell+Extension.swift */; };
 		40D5795929493092002B31F6 /* MarvelURLBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D5795829493092002B31F6 /* MarvelURLBuilder.swift */; };
 /* End PBXBuildFile section */
@@ -133,6 +136,9 @@
 		405961182964DD2F005762C2 /* SeriesResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeriesResponseModel.swift; sourceTree = "<group>"; };
 		4059611A2964DF5B005762C2 /* ImageResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageResponseModel.swift; sourceTree = "<group>"; };
 		405A59EE291DD522001757B9 /* MarvelFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelFonts.swift; sourceTree = "<group>"; };
+		405D24E22968BB0C004B2057 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
+		405D24E42968BDBC004B2057 /* URLResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLResponseModel.swift; sourceTree = "<group>"; };
+		405D24E62968C8F7004B2057 /* ItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemView.swift; sourceTree = "<group>"; };
 		40D14A112956582700670A55 /* UITableViewCell+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Extension.swift"; sourceTree = "<group>"; };
 		40D5795829493092002B31F6 /* MarvelURLBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelURLBuilder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -232,6 +238,7 @@
 			children = (
 				401C4AFC29495BB100754528 /* ListType.swift */,
 				4059611A2964DF5B005762C2 /* ImageResponseModel.swift */,
+				405D24E42968BDBC004B2057 /* URLResponseModel.swift */,
 				403CC34E296790B300A14410 /* ListResponseModel.swift */,
 				40017F04291887CE00D93466 /* CharactersResponseModel.swift */,
 				405961102964DCE4005762C2 /* ComicsResponseModel.swift */,
@@ -315,6 +322,7 @@
 			children = (
 				403CC35129679EF400A14410 /* ListView.swift */,
 				403CC35329679F0200A14410 /* ListViewModel.swift */,
+				405D24E62968C8F7004B2057 /* ItemView.swift */,
 			);
 			path = ListView;
 			sourceTree = "<group>";
@@ -491,6 +499,7 @@
 				40017EFB2918749200D93466 /* Optional+Extension.swift */,
 				40017F012918872300D93466 /* String+Extension.swift */,
 				40D14A112956582700670A55 /* UITableViewCell+Extension.swift */,
+				405D24E22968BB0C004B2057 /* UILabel+Extension.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -666,6 +675,8 @@
 				401C4AFD29495BB100754528 /* ListType.swift in Sources */,
 				40017EEE2918508500D93466 /* UICollectionViewCell+Extension.swift in Sources */,
 				40017F002918802D00D93466 /* MarvelColors.swift in Sources */,
+				405D24E32968BB0C004B2057 /* UILabel+Extension.swift in Sources */,
+				405D24E52968BDBC004B2057 /* URLResponseModel.swift in Sources */,
 				403CC34D29678C1A00A14410 /* DetailsViewModel.swift in Sources */,
 				4046576E29134357000F19FC /* ItemCardModel.swift in Sources */,
 				4046575E29134223000F19FC /* HomePresenter.swift in Sources */,
@@ -689,6 +700,7 @@
 				405961112964DCE4005762C2 /* ComicsResponseModel.swift in Sources */,
 				40374BF02952793E002FE3DE /* SeeAllCell.swift in Sources */,
 				40017EFE2918764A00D93466 /* HeaderViewModel.swift in Sources */,
+				405D24E72968C8F7004B2057 /* ItemView.swift in Sources */,
 				403CC35229679EF400A14410 /* ListView.swift in Sources */,
 				40017EFA2918743A00D93466 /* UIImage+Extension.swift in Sources */,
 				401C4AFA29495B6E00754528 /* HTTPMethod.swift in Sources */,

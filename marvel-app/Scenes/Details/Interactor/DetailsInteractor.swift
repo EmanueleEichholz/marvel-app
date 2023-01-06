@@ -31,6 +31,7 @@ final class DetailsInteractor {
 }
 
 extension DetailsInteractor: DetailsInteractorProtocol {
+
     func viewDidLoad() {
         presenter.presentDetails(detailsModel: detailsModel)
     }
@@ -38,4 +39,5 @@ extension DetailsInteractor: DetailsInteractorProtocol {
     func didTapBackButton() {
         coordinator.didTapBackButton()
     }
+    
 }

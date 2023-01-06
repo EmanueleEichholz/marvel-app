@@ -21,7 +21,7 @@ struct SeriesResponseModel: Decodable,GenericResponseModel {
     let title: String?
     let description: String?
     let thumbnail: ImageResponseModel?
-    let resourceURI: String?
+    let urls: [URLResponseModel]?
     let comics: ListResponseModel?
     let events: ListResponseModel?
     let characters: ListResponseModel?

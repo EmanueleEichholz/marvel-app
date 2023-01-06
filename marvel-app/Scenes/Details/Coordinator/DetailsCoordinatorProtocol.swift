@@ -9,5 +9,4 @@ import Foundation
 
 protocol DetailsCoordinatorProtocol {
     func didTapBackButton()
-    func didTapOpenExternalLink()
 }

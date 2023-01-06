@@ -15,7 +15,7 @@ final class ListView: UIView {
         stackView.axis = .vertical
         stackView.distribution = .fill
         stackView.alignment = .fill
-        stackView.spacing = 4.0
+        stackView.spacing = 8.0
         return stackView
     }()
     
@@ -46,16 +46,11 @@ final class ListView: UIView {
         containerStackView.addArrangedSubview(titleLabel)
 
         model.items.forEach { item in
-            let itemLabel = UILabel(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width - 32, height: 14))
-            itemLabel.textColor = .marvelWhite
-            itemLabel.font = .systemFont(ofSize: 14.0, weight: .medium)
-            itemLabel.numberOfLines = 0
-            itemLabel.textAlignment = .left
-            itemLabel.text = item
-            containerStackView.addArrangedSubview(itemLabel)
+            let itemView = ItemView()
+            itemView.updateView(text: item, type: model.type)
+            containerStackView.addArrangedSubview(itemView)
         }
-        
-        containerStackView.setCustomSpacing(8.0, after: titleLabel)
+        containerStackView.setCustomSpacing(16.0, after: titleLabel)
     }
     
     private func setupLayout() {

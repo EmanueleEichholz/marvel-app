@@ -31,7 +31,7 @@ final class DetailsView: UIView {
         stackView.axis = .vertical
         stackView.distribution = .fill
         stackView.alignment = .fill
-        stackView.spacing = 16.0
+        stackView.spacing = 24.0
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -41,14 +41,13 @@ final class DetailsView: UIView {
         imageView.image = UIImage(named: "deadpool-question-mark")
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.setVerticalLinearGradient(startPoint: 1.0, endPoint: 0.50)
         return imageView
     }()
     
     private lazy var itemNameLabel: UILabel = {
         let label = UILabel()
         label.textColor = .marvelWhite
-        label.font = .systemFont(ofSize: 22.0, weight: .bold)
+        label.font = .systemFont(ofSize: 24.0, weight: .bold)
         label.textAlignment = .left
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -72,7 +71,7 @@ final class DetailsView: UIView {
     }()
     
     weak var delegate: DetailsViewDelegateProtocol?
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.setupLayout()
@@ -90,10 +89,10 @@ final class DetailsView: UIView {
         
         if let image = model.image {
             itemImageView.imageFromURL(urlString: image)
+            itemImageView.setVerticalLinearGradient(initialColor: .marvelBlack, startPoint: 1.0, endPoint: 0.50)
             containerStackView.addArrangedSubview(itemImageView)
         }
-
-
+        
         if let name = model.name {
             itemNameLabel.text = name
             containerStackView.addArrangedSubview(itemNameLabel)
@@ -103,7 +102,7 @@ final class DetailsView: UIView {
             itemDescriptionLabel.text = description
             containerStackView.addArrangedSubview(itemDescriptionLabel)
         }
-
+        
         if let lists = model.lists, !lists.isEmpty {
             lists.forEach { list in
                 let view = ListView()
@@ -124,17 +123,17 @@ final class DetailsView: UIView {
             headerView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
             headerView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
             headerView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
-
+            
             scrollView.topAnchor.constraint(equalTo: headerView.bottomAnchor),
             scrollView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
             scrollView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
-
+            
             containerStackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             containerStackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 16.0),
             containerStackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -16.0),
-            containerStackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-
+            containerStackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -16.0),
+            
             itemImageView.widthAnchor.constraint(equalToConstant: imageSize),
             itemImageView.heightAnchor.constraint(equalToConstant: imageSize),
         ])

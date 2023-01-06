@@ -52,12 +52,12 @@ final class DetailsPresenter: DetailsPresenterProtocol {
             name: characterResponseModel.name,
             description: characterResponseModel.description,
             lists: getLists(
-                url: characterResponseModel.resourceURI,
                 characters: nil,
                 comics: characterResponseModel.comics,
                 creators: nil,
                 events: characterResponseModel.events,
-                series: characterResponseModel.series
+                series: characterResponseModel.series,
+                sites: characterResponseModel.urls
             )
         )
     }
@@ -71,12 +71,12 @@ final class DetailsPresenter: DetailsPresenterProtocol {
             name: comicsResponseModel.title,
             description: comicsResponseModel.description,
             lists: getLists(
-                url: comicsResponseModel.resourceURI,
                 characters: comicsResponseModel.characters,
                 comics: nil,
                 creators: comicsResponseModel.creators,
                 events: comicsResponseModel.events,
-                series: nil
+                series: nil,
+                sites: comicsResponseModel.urls
             )
         )
     }
@@ -90,12 +90,12 @@ final class DetailsPresenter: DetailsPresenterProtocol {
             name: creatorsResponseModel.fullName,
             description: nil,
             lists: getLists(
-                url: creatorsResponseModel.resourceURI,
                 characters: nil,
                 comics: creatorsResponseModel.comics,
                 creators: nil,
                 events: creatorsResponseModel.events,
-                series: creatorsResponseModel.series
+                series: creatorsResponseModel.series,
+                sites: creatorsResponseModel.urls
             )
         )
     }
@@ -109,12 +109,12 @@ final class DetailsPresenter: DetailsPresenterProtocol {
             name: eventsResponseModel.title,
             description: eventsResponseModel.description,
             lists: getLists(
-                url: eventsResponseModel.resourceURI,
                 characters: eventsResponseModel.characters,
                 comics: eventsResponseModel.comics,
                 creators: eventsResponseModel.creators,
                 events: nil,
-                series: eventsResponseModel.series
+                series: eventsResponseModel.series,
+                sites: eventsResponseModel.urls
             )
         )
     }
@@ -128,12 +128,12 @@ final class DetailsPresenter: DetailsPresenterProtocol {
             name: seriesResponseModel.title,
             description: seriesResponseModel.description,
             lists: getLists(
-                url: seriesResponseModel.resourceURI,
                 characters: seriesResponseModel.characters,
                 comics: seriesResponseModel.comics,
                 creators: seriesResponseModel.creators,
                 events: seriesResponseModel.events,
-                series: nil
+                series: nil,
+                sites: seriesResponseModel.urls
             )
         )
     }
@@ -146,37 +146,37 @@ final class DetailsPresenter: DetailsPresenterProtocol {
     }
     
     private func getLists(
-        url: String?,
         characters: ListResponseModel?,
         comics: ListResponseModel?,
         creators: ListResponseModel?,
         events: ListResponseModel?,
-        series: ListResponseModel?) -> [ListViewModel]? {
+        series: ListResponseModel?,
+        sites: [URLResponseModel]?) -> [ListViewModel]? {
             
             var list: [ListViewModel] = []
             
-            if let url = url {
-                list.append(ListViewModel(title: "SITE", items: [url]))
-            }
-            
             if let characters = characters, !characters.items.isEmpty {
-                list.append(ListViewModel(title: "CHARACTERS", items: getItems(characters.items)))
+                list.append(ListViewModel(type: .plainText, title: "CHARACTERS", items: getItems(characters.items)))
             }
             
             if let comics = comics, !comics.items.isEmpty {
-                list.append(ListViewModel(title: "COMICS", items: getItems(comics.items)))
+                list.append(ListViewModel(type: .plainText, title: "COMICS", items: getItems(comics.items)))
             }
             
             if let creators = creators, !creators.items.isEmpty {
-                list.append(ListViewModel(title: "CREATORS", items: getItems(creators.items)))
+                list.append(ListViewModel(type: .plainText, title: "CREATORS", items: getItems(creators.items)))
             }
             
             if let events = events, !events.items.isEmpty {
-                list.append(ListViewModel(title: "EVENTS", items: getItems(events.items)))
+                list.append(ListViewModel(type: .plainText, title: "EVENTS", items: getItems(events.items)))
             }
             
             if let series = series, !series.items.isEmpty {
-                list.append(ListViewModel(title: "SERIES", items: getItems(series.items)))
+                list.append(ListViewModel(type: .plainText, title: "SERIES", items: getItems(series.items)))
+            }
+            
+            if let sites = sites, !sites.isEmpty {
+                list.append(ListViewModel(type: .link, title: "SITES", items: getSites(sites)))
             }
             
             return list
@@ -189,5 +189,15 @@ final class DetailsPresenter: DetailsPresenterProtocol {
             itemsInString.append(item.name)
         }
         return itemsInString
+    }
+    
+    private func getSites(_ sites: [URLResponseModel]) -> [String] {
+        var sitesList: [String] = []
+        sites.forEach { site in
+            if let url = site.url {
+                sitesList.append(url)
+            }
+        }
+        return sitesList
     }
 }

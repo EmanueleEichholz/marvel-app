@@ -20,7 +20,7 @@ struct CharactersData: Decodable {
 struct CharacterResponseModel: Decodable, GenericResponseModel {
     let name: String?
     let description: String?
-    let resourceURI: String?
+    let urls: [URLResponseModel]?
     let thumbnail: ImageResponseModel?
     let comics: ListResponseModel?
     let series: ListResponseModel?

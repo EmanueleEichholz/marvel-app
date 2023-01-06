@@ -47,9 +47,7 @@ extension ApplicationCoordinator: HomeCoordinatorProtocol {
 }
 
 extension ApplicationCoordinator: DetailsCoordinatorProtocol {
-    
-    func didTapOpenExternalLink() {
-        print("clicou para abrir no site")
+    func didTapToOpenSite(url: String) {
+
     }
-    
 }

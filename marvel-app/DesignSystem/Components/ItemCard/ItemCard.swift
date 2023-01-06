@@ -16,7 +16,7 @@ final class ItemCard: UIView {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.cornerRadius = 10.0
         imageView.clipsToBounds = true
-        imageView.setVerticalLinearGradient(startPoint: 1.0, endPoint: 0.50)
+        imageView.setVerticalLinearGradient(initialColor: .marvelDarkGray, startPoint: 1.0, endPoint: 0.50)
         return imageView
     }()
     
