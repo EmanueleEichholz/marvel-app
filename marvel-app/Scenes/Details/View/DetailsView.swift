@@ -17,30 +17,19 @@ final class DetailsView: UIView {
         let view = HeaderView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.delegate = self
-        view.updateView(
-            with: HeaderViewModel(
-                leftIcon: UIImage(
-                    systemName: "chevron.left"
-                ),
-                logo: .marvelLogo,
-                rightIcon: nil,
-                iconColor: .marvelWhite
-            )
-        )
         return view
     }()
     
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.clipsToBounds = true
         return scrollView
     }()
     
     private lazy var containerStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.distribution = .fillProportionally
+        stackView.distribution = .fill
         stackView.alignment = .fill
         stackView.spacing = 16.0
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -52,7 +41,6 @@ final class DetailsView: UIView {
         imageView.image = UIImage(named: "deadpool-question-mark")
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.clipsToBounds = true
         imageView.setVerticalLinearGradient(startPoint: 1.0, endPoint: 0.50)
         return imageView
     }()
@@ -98,6 +86,8 @@ final class DetailsView: UIView {
     func updateDetailsView(with model: DetailsViewModel) {
         containerStackView.removeAllSubviews()
         
+        headerView.updateView(with: HeaderViewModel(leftIcon: UIImage(systemName: "chevron.left"), logo: .marvelLogo, rightIcon: nil, iconColor: .marvelWhite))
+        
         if let image = model.image {
             itemImageView.imageFromURL(urlString: image)
             containerStackView.addArrangedSubview(itemImageView)
@@ -109,35 +99,32 @@ final class DetailsView: UIView {
             containerStackView.addArrangedSubview(itemNameLabel)
         }
         
-        if let description = model.description {
+        if let description = model.description, !description.isEmpty {
             itemDescriptionLabel.text = description
             containerStackView.addArrangedSubview(itemDescriptionLabel)
         }
 
-        if let lists = model.lists {
+        if let lists = model.lists, !lists.isEmpty {
             lists.forEach { list in
                 let view = ListView()
                 view.updateView(with: list)
                 containerStackView.addArrangedSubview(view)
             }
         }
-        
-        self.layoutIfNeeded()
     }
     
     private func setupLayout() {
         backgroundColor = .marvelBlack
-        addSubview(headerView)
-        addSubview(scrollView)
+        self.addSubviews(headerView, scrollView)
         scrollView.addSubview(containerStackView)
         
         let imageSize = (UIScreen.main.bounds.width - 32)
         
         NSLayoutConstraint.activate([
-            headerView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            headerView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
-            headerView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
-            
+            headerView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
+            headerView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
+            headerView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
+
             scrollView.topAnchor.constraint(equalTo: headerView.bottomAnchor),
             scrollView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
@@ -147,7 +134,6 @@ final class DetailsView: UIView {
             containerStackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 16.0),
             containerStackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -16.0),
             containerStackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-            containerStackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
 
             itemImageView.widthAnchor.constraint(equalToConstant: imageSize),
             itemImageView.heightAnchor.constraint(equalToConstant: imageSize),

@@ -13,11 +13,9 @@ final class ListView: UIView {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
-        stackView.distribution = .fillEqually
+        stackView.distribution = .fill
         stackView.alignment = .fill
         stackView.spacing = 4.0
-        stackView.setCustomSpacing(16.0, after: titleLabel)
-        stackView.backgroundColor = .blue
         return stackView
     }()
     
@@ -28,7 +26,6 @@ final class ListView: UIView {
         label.font = .systemFont(ofSize: 18.0, weight: .bold)
         label.textAlignment = .left
         label.numberOfLines = 0
-        label.backgroundColor = .brown
         return label
     }()
     
@@ -55,10 +52,10 @@ final class ListView: UIView {
             itemLabel.numberOfLines = 0
             itemLabel.textAlignment = .left
             itemLabel.text = item
-            itemLabel.backgroundColor = .systemPink
             containerStackView.addArrangedSubview(itemLabel)
         }
-        self.layoutIfNeeded()
+        
+        containerStackView.setCustomSpacing(8.0, after: titleLabel)
     }
     
     private func setupLayout() {
