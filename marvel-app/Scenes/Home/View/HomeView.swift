@@ -20,7 +20,6 @@ final class HomeView: UIView {
     private lazy var headerView: HeaderView = {
         let view = HeaderView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.delegate = self
         view.updateView(with: HeaderViewModel(leftIcon: nil, logo: .marvelLogo, rightIcon: nil, iconColor: .white))
         return view
     }()
@@ -106,12 +105,6 @@ final class HomeView: UIView {
             tableView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16.0),
             tableView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16.0),
         ])
-    }
-}
-
-extension HomeView: HeaderViewClickDelegateProtocol {
-    func didTapLeftButton() {
-        print("clicou pra fechar")
     }
 }
 

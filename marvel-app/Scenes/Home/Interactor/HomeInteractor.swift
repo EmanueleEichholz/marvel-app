@@ -68,7 +68,10 @@ extension HomeInteractor: HomeInteractorProtocol {
             switch result {
             case .success(let response):
                 self?.comicsList = response.data
-                self?.presenter.presentComics(with: self?.comicsList)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+                    self?.presenter.presentComics(with: self?.comicsList)
+                }
+                
             case .failure(let error):
                 print(error)
             }
