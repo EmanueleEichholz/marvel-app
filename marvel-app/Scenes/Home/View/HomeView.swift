@@ -33,6 +33,7 @@ final class HomeView: UIView {
         tableView.separatorStyle = .none
         tableView.showsVerticalScrollIndicator = true
         tableView.register(HorizontalCollectionView.self, forCellReuseIdentifier: HorizontalCollectionView.identifier)
+        tableView.register(ErrorCell.self, forCellReuseIdentifier: ErrorCell.identifier)
         return tableView
     }()
     
@@ -44,6 +45,7 @@ final class HomeView: UIView {
     private var stories: [ItemCardModel] = []
     
     weak var delegate: HomeViewDelegateProtocol?
+    private let error: String = ""
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -154,6 +156,18 @@ extension HomeView: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let section = ListTypeEnum(rawValue: indexPath.section)
+        
+        if !error.isEmpty {
+            guard let cell = tableView.dequeueReusableCell(
+                withIdentifier: ErrorCell.identifier,
+                for: indexPath
+            ) as? ErrorCell else {
+                return UITableViewCell()
+            }
+            cell.updateView(text: "errrooooo maluco")
+            return cell
+        }
+        
         
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: HorizontalCollectionView.identifier,
