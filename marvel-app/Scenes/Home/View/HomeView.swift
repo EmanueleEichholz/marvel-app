@@ -20,7 +20,6 @@ final class HomeView: UIView {
     private lazy var headerView: HeaderView = {
         let view = HeaderView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.delegate = self
         view.updateView(with: HeaderViewModel(leftIcon: nil, logo: .marvelLogo, rightIcon: nil, iconColor: .white))
         return view
     }()
@@ -37,6 +36,12 @@ final class HomeView: UIView {
         return tableView
     }()
     
+    private lazy var errorView: ErrorCard = {
+       let view = ErrorCard()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     private var characters: [ItemCardModel] = []
     private var comics: [ItemCardModel] = []
     private var creators: [ItemCardModel] = []
@@ -48,13 +53,39 @@ final class HomeView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupLayout()
+        setupInitialLayout()
     }
     
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        setupLayout()
+    }
+    
+    private func setupInitialLayout() {
+        addSubviews()
+        setupConstraints()
+        setupAdditinalLayoutSettings()
+    }
+    
+    private func addSubviews() {
+        addSubviews(headerView, tableView)
+    }
+    
+    private func setupConstraints() {
+        NSLayoutConstraint.activate([
+            headerView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            headerView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
+            headerView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
+            
+            tableView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 8.0),
+            tableView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16.0),
+            tableView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16.0),
+            tableView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16.0),
+        ])
+    }
+    
+    private func setupAdditinalLayoutSettings() {
+        backgroundColor = .marvelBlack
     }
     
     func updateCharactersSection(with charactersInfo: [ItemCardModel]) {
@@ -92,27 +123,6 @@ final class HomeView: UIView {
         }
     }
     
-    private func setupLayout() {
-        backgroundColor = .marvelBlack
-        addSubviews(headerView, tableView)
-        
-        NSLayoutConstraint.activate([
-            headerView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            headerView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
-            headerView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
-            
-            tableView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 8.0),
-            tableView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16.0),
-            tableView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16.0),
-            tableView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16.0),
-        ])
-    }
-}
-
-extension HomeView: HeaderViewClickDelegateProtocol {
-    func didTapLeftButton() {
-        print("clicou pra fechar")
-    }
 }
 
 extension HomeView: UITableViewDataSource, UITableViewDelegate {

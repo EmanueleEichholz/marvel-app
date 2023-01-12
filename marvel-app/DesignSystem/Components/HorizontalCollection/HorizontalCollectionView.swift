@@ -24,6 +24,7 @@ final class HorizontalCollectionView: UITableViewCell {
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collection.register(ItemCell.self, forCellWithReuseIdentifier: ItemCell.identifier)
         collection.register(SeeAllCell.self, forCellWithReuseIdentifier: SeeAllCell.identifier)
+        collection.register(LoadingCell.self, forCellWithReuseIdentifier: LoadingCell.identifier)
         collection.dataSource = self
         collection.delegate = self
         collection.translatesAutoresizingMaskIntoConstraints = false
@@ -73,10 +74,20 @@ final class HorizontalCollectionView: UITableViewCell {
 extension HorizontalCollectionView: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return (itemList.count + 1)
+        return itemList.isEmpty ? 3 : (itemList.count + 1)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        if itemList.isEmpty {
+            guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: LoadingCell.identifier,
+                for: indexPath) as? LoadingCell else {
+                return UICollectionViewCell()
+            }
+            return cell
+        }
+        
         if indexPath.row < itemList.count {
             guard let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: ItemCell.identifier,
