@@ -13,9 +13,21 @@ protocol HomePresenterProtocol {
     func presentCreators(with model: CreatorsData?)
     func presentEvents(with model: EventsData?)
     func presentSeries(with model: SeriesData?)
+    func presentError()
 }
 
-class HomePresenter: HomePresenterProtocol {
+final class HomePresenter: HomePresenterProtocol {
+    func presentError() {
+        let alertModel = AlertModel(
+            title: "Ocorreu um erro e não foi possível trazer todos os dados.",
+            message: "Tente novamente ou retorne mais tarde.",
+            firstButtonTitle: "Tentar novamente",
+            secondButtonTitle: "Cancelar"
+        )
+
+        view?.updateView(with: alertModel)
+    }
+    
     
     weak var view: HomeViewControllerProtocol?
     

@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ErrorCell: UITableViewCell {
+final class ErrorCard: UIView {
     
     private lazy var containerStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [errorTextLabel, arrowClockwiseImageView])
@@ -39,8 +39,8 @@ final class ErrorCell: UITableViewCell {
         return imageView
     }()
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         setupLayout()
     }
     
@@ -56,7 +56,6 @@ final class ErrorCell: UITableViewCell {
     private func setupLayout() {
         addSubview(containerStackView)
         self.backgroundColor = .clear
-        
         
         NSLayoutConstraint.activate([
             containerStackView.topAnchor.constraint(equalTo: topAnchor),

@@ -33,8 +33,13 @@ final class HomeView: UIView {
         tableView.separatorStyle = .none
         tableView.showsVerticalScrollIndicator = true
         tableView.register(HorizontalCollectionView.self, forCellReuseIdentifier: HorizontalCollectionView.identifier)
-        tableView.register(ErrorCell.self, forCellReuseIdentifier: ErrorCell.identifier)
         return tableView
+    }()
+    
+    private lazy var errorView: ErrorCard = {
+       let view = ErrorCard()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     
     private var characters: [ItemCardModel] = []
@@ -45,17 +50,42 @@ final class HomeView: UIView {
     private var stories: [ItemCardModel] = []
     
     weak var delegate: HomeViewDelegateProtocol?
-    private let error: String = ""
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupLayout()
+        setupInitialLayout()
     }
     
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        setupLayout()
+    }
+    
+    private func setupInitialLayout() {
+        addSubviews()
+        setupConstraints()
+        setupAdditinalLayoutSettings()
+    }
+    
+    private func addSubviews() {
+        addSubviews(headerView, tableView)
+    }
+    
+    private func setupConstraints() {
+        NSLayoutConstraint.activate([
+            headerView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            headerView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
+            headerView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
+            
+            tableView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 8.0),
+            tableView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16.0),
+            tableView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16.0),
+            tableView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16.0),
+        ])
+    }
+    
+    private func setupAdditinalLayoutSettings() {
+        backgroundColor = .marvelBlack
     }
     
     func updateCharactersSection(with charactersInfo: [ItemCardModel]) {
@@ -93,21 +123,6 @@ final class HomeView: UIView {
         }
     }
     
-    private func setupLayout() {
-        backgroundColor = .marvelBlack
-        addSubviews(headerView, tableView)
-        
-        NSLayoutConstraint.activate([
-            headerView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            headerView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
-            headerView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
-            
-            tableView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 8.0),
-            tableView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16.0),
-            tableView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16.0),
-            tableView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16.0),
-        ])
-    }
 }
 
 extension HomeView: UITableViewDataSource, UITableViewDelegate {
@@ -156,18 +171,6 @@ extension HomeView: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let section = ListTypeEnum(rawValue: indexPath.section)
-        
-        if !error.isEmpty {
-            guard let cell = tableView.dequeueReusableCell(
-                withIdentifier: ErrorCell.identifier,
-                for: indexPath
-            ) as? ErrorCell else {
-                return UITableViewCell()
-            }
-            cell.updateView(text: "errrooooo maluco")
-            return cell
-        }
-        
         
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: HorizontalCollectionView.identifier,

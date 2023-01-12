@@ -17,9 +17,11 @@
 		40017F022918872300D93466 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40017F012918872300D93466 /* String+Extension.swift */; };
 		40017F05291887CE00D93466 /* CharactersResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40017F04291887CE00D93466 /* CharactersResponseModel.swift */; };
 		4009C96E2968EAB20053A50F /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4009C96D2968EAB20053A50F /* LoadingCell.swift */; };
-		4009C9702968F7FF0053A50F /* ErrorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4009C96F2968F7FF0053A50F /* ErrorCell.swift */; };
+		4009C9702968F7FF0053A50F /* ErrorCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4009C96F2968F7FF0053A50F /* ErrorCard.swift */; };
 		401C4AFA29495B6E00754528 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401C4AF929495B6E00754528 /* HTTPMethod.swift */; };
 		401C4AFD29495BB100754528 /* ListType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401C4AFC29495BB100754528 /* ListType.swift */; };
+		402947B9296F9E8E00B508B8 /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402947B8296F9E8E00B508B8 /* AlertViewController.swift */; };
+		402947BB2970B6A200B508B8 /* AlertModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402947BA2970B6A200B508B8 /* AlertModel.swift */; };
 		40374BE7294D3395002FE3DE /* HorizontalCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40374BE6294D3395002FE3DE /* HorizontalCollectionView.swift */; };
 		40374BEE29526C30002FE3DE /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40374BED29526C30002FE3DE /* NetworkRequest.swift */; };
 		40374BF02952793E002FE3DE /* SeeAllCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40374BEF2952793E002FE3DE /* SeeAllCell.swift */; };
@@ -94,9 +96,11 @@
 		40017F012918872300D93466 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		40017F04291887CE00D93466 /* CharactersResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersResponseModel.swift; sourceTree = "<group>"; };
 		4009C96D2968EAB20053A50F /* LoadingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingCell.swift; sourceTree = "<group>"; };
-		4009C96F2968F7FF0053A50F /* ErrorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorCell.swift; sourceTree = "<group>"; };
+		4009C96F2968F7FF0053A50F /* ErrorCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorCard.swift; sourceTree = "<group>"; };
 		401C4AF929495B6E00754528 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		401C4AFC29495BB100754528 /* ListType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListType.swift; sourceTree = "<group>"; };
+		402947B8296F9E8E00B508B8 /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
+		402947BA2970B6A200B508B8 /* AlertModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertModel.swift; sourceTree = "<group>"; };
 		40374BE6294D3395002FE3DE /* HorizontalCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalCollectionView.swift; sourceTree = "<group>"; };
 		40374BED29526C30002FE3DE /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
 		40374BEF2952793E002FE3DE /* SeeAllCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeAllCell.swift; sourceTree = "<group>"; };
@@ -268,6 +272,15 @@
 				4049BD2F29259B1D00308EC3 /* NetworkError.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		402947B7296F9E7800B508B8 /* AlertViewController */ = {
+			isa = PBXGroup;
+			children = (
+				402947B8296F9E8E00B508B8 /* AlertViewController.swift */,
+				402947BA2970B6A200B508B8 /* AlertModel.swift */,
+			);
+			path = AlertViewController;
 			sourceTree = "<group>";
 		};
 		40374BE5294D333E002FE3DE /* HorizontalCollection */ = {
@@ -481,7 +494,8 @@
 		404657182913321D000F19FC /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				40D57956294925CC002B31F6 /* ErrorCell */,
+				402947B7296F9E7800B508B8 /* AlertViewController */,
+				40D57956294925CC002B31F6 /* ErrorCard */,
 				4046576C2913433C000F19FC /* ItemCard */,
 				40017EF62918695900D93466 /* HeaderView */,
 				40374BE5294D333E002FE3DE /* HorizontalCollection */,
@@ -535,12 +549,12 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
-		40D57956294925CC002B31F6 /* ErrorCell */ = {
+		40D57956294925CC002B31F6 /* ErrorCard */ = {
 			isa = PBXGroup;
 			children = (
-				4009C96F2968F7FF0053A50F /* ErrorCell.swift */,
+				4009C96F2968F7FF0053A50F /* ErrorCard.swift */,
 			);
-			path = ErrorCell;
+			path = ErrorCard;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -682,14 +696,16 @@
 				40017EEE2918508500D93466 /* UICollectionViewCell+Extension.swift in Sources */,
 				40017F002918802D00D93466 /* MarvelColors.swift in Sources */,
 				405D24E32968BB0C004B2057 /* UILabel+Extension.swift in Sources */,
+				402947B9296F9E8E00B508B8 /* AlertViewController.swift in Sources */,
 				405D24E52968BDBC004B2057 /* URLResponseModel.swift in Sources */,
 				403CC34D29678C1A00A14410 /* DetailsViewModel.swift in Sources */,
 				4046576E29134357000F19FC /* ItemCardModel.swift in Sources */,
 				4046575E29134223000F19FC /* HomePresenter.swift in Sources */,
 				40017F05291887CE00D93466 /* CharactersResponseModel.swift in Sources */,
 				405961192964DD2F005762C2 /* SeriesResponseModel.swift in Sources */,
+				402947BB2970B6A200B508B8 /* AlertModel.swift in Sources */,
 				40017EEC29184EB400D93466 /* ItemCell.swift in Sources */,
-				4009C9702968F7FF0053A50F /* ErrorCell.swift in Sources */,
+				4009C9702968F7FF0053A50F /* ErrorCard.swift in Sources */,
 				404656E129132D1A000F19FC /* AppDelegate.swift in Sources */,
 				4046576229134245000F19FC /* HomeInteractor.swift in Sources */,
 				40374BEE29526C30002FE3DE /* NetworkRequest.swift in Sources */,

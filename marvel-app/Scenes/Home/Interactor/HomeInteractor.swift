@@ -57,8 +57,8 @@ extension HomeInteractor: HomeInteractorProtocol {
             case .success(let response):
                 self?.charactersList = response.data
                 self?.presenter.presentCharacters(with: self?.charactersList)
-            case .failure(let error):
-                print(error)
+            case .failure:
+                self?.presenter.presentError()
             }
         })
     }
@@ -69,8 +69,8 @@ extension HomeInteractor: HomeInteractorProtocol {
             case .success(let response):
                 self?.comicsList = response.data
                 self?.presenter.presentComics(with: self?.comicsList)
-            case .failure(let error):
-                print(error)
+            case .failure:
+                self?.presenter.presentError()
             }
         })
     }
@@ -81,8 +81,8 @@ extension HomeInteractor: HomeInteractorProtocol {
             case .success(let response):
                 self?.creatorsList = response.data
                 self?.presenter.presentCreators(with: self?.creatorsList)
-            case .failure(let error):
-                print(error)
+            case .failure:
+                self?.presenter.presentError()
             }
         })
     }
@@ -93,8 +93,8 @@ extension HomeInteractor: HomeInteractorProtocol {
             case .success(let response):
                 self?.eventsList = response.data
                 self?.presenter.presentEvents(with: self?.eventsList)
-            case .failure(let error):
-                print(error)
+            case .failure:
+                self?.presenter.presentError()
             }
         })
     }
@@ -105,8 +105,8 @@ extension HomeInteractor: HomeInteractorProtocol {
             case .success(let response):
                 self?.seriesList = response.data
                 self?.presenter.presentSeries(with: self?.seriesList)
-            case .failure(let error):
-                print(error)
+            case .failure:
+                self?.presenter.presentError()
             }
         })
     }

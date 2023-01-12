@@ -13,6 +13,7 @@ protocol HomeViewControllerProtocol: AnyObject {
     func updateCreatorsSection(with creatorsInfo: [ItemCardModel])
     func updateEventsSection(with eventsInfo: [ItemCardModel])
     func updateSeriesSection(with seriesInfo: [ItemCardModel])
+    func updateView(with alert: AlertModel)
 }
 
 final class HomeViewController: UIViewController {
@@ -67,7 +68,12 @@ extension HomeViewController: HomeViewControllerProtocol {
     func updateSeriesSection(with seriesInfo: [ItemCardModel]) {
         homeView.updateSeriesSection(with: seriesInfo)
     }
-
+    
+    func updateView(with alert: AlertModel) {
+        self.showAlert(model: alert) {
+                self.interactor.viewDidLoad()
+            } secondButtonAction: {  }
+    }
 }
 
 extension HomeViewController: HomeViewDelegateProtocol {
