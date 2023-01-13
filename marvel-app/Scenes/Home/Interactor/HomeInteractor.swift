@@ -116,6 +116,8 @@ extension HomeInteractor: HomeInteractorProtocol {
         if let unwrappedCharactersList = charactersList?.results {
             if unwrappedCharactersList.indices.contains(index) {
                 coordinator.goToDetailsScreen(detailsInfo: unwrappedCharactersList[index])
+            } else {
+                coordinator.didTapSeeAll(listType: .characters)
             }
         }
     }
@@ -124,6 +126,8 @@ extension HomeInteractor: HomeInteractorProtocol {
         if let unwrappedComicsList = comicsList?.results {
             if unwrappedComicsList.indices.contains(index) {
                 coordinator.goToDetailsScreen(detailsInfo: unwrappedComicsList[index])
+            } else {
+                coordinator.didTapSeeAll(listType: .comics)
             }
         }
     }
@@ -132,6 +136,8 @@ extension HomeInteractor: HomeInteractorProtocol {
         if let unwrappedCreatorList = creatorsList?.results {
             if unwrappedCreatorList.indices.contains(index) {
                 coordinator.goToDetailsScreen(detailsInfo: unwrappedCreatorList[index])
+            } else {
+                coordinator.didTapSeeAll(listType: .creators)
             }
         }
     }
@@ -140,6 +146,8 @@ extension HomeInteractor: HomeInteractorProtocol {
         if let unwrappedEventList = eventsList?.results {
             if unwrappedEventList.indices.contains(index) {
                 coordinator.goToDetailsScreen(detailsInfo: unwrappedEventList[index])
+            } else {
+                coordinator.didTapSeeAll(listType: .events)
             }
         }
     }
@@ -148,6 +156,8 @@ extension HomeInteractor: HomeInteractorProtocol {
         if let unwrappedSeriesList = seriesList?.results {
             if unwrappedSeriesList.indices.contains(index) {
                 coordinator.goToDetailsScreen(detailsInfo: unwrappedSeriesList[index])
+            } else {
+                coordinator.didTapSeeAll(listType: .series)
             }
         }
     }

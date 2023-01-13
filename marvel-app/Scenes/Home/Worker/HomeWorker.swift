@@ -21,14 +21,18 @@ protocol HomeWorkerProtocol {
     func fetchSeries(completion: @escaping SeriesCompletion)
 }
 
-final class HomeWorker: HomeWorkerProtocol {
-
+final class HomeWorker {
+    
     let provider: NetworkRequestProtocol
     
     init(with provider: NetworkRequestProtocol) {
         self.provider = provider
     }
     
+}
+
+extension HomeWorker: HomeWorkerProtocol {
+
     func fetchCharacters(completion: @escaping CharactersCompletion) {
         let url = MarvelURLBuilder(with: .characters)
             .buildURL()
@@ -68,5 +72,5 @@ final class HomeWorker: HomeWorkerProtocol {
             completion(response)
         }
     }
-    
+
 }

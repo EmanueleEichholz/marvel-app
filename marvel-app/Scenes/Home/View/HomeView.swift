@@ -36,12 +36,6 @@ final class HomeView: UIView {
         return tableView
     }()
     
-    private lazy var errorView: ErrorCard = {
-       let view = ErrorCard()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
     private var characters: [ItemCardModel] = []
     private var comics: [ItemCardModel] = []
     private var creators: [ItemCardModel] = []
@@ -53,18 +47,14 @@ final class HomeView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupInitialLayout()
+        addSubviews()
+        setupConstraints()
+        setupAdditinalLayoutSettings()
     }
     
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-    }
-    
-    private func setupInitialLayout() {
-        addSubviews()
-        setupConstraints()
-        setupAdditinalLayoutSettings()
     }
     
     private func addSubviews() {
