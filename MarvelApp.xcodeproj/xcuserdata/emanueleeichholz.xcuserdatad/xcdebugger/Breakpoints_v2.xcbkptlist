@@ -20,5 +20,53 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E21B22D6-11EB-410E-99B8-5577FD2C4581"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "marvel-app/DesignSystem/Components/LoadingCell/LoadingCell.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
+            landmarkName = "updateView(with:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "E21B22D6-11EB-410E-99B8-5577FD2C4581 - 6e83a81835534607"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Marvel.LoadingCell.updateView(with: Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; ()"
+                  moduleName = "Marvel"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/emanueleeichholz/Documents/MarvelApp/marvel-app/DesignSystem/Components/LoadingCell/LoadingCell.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "37"
+                  endingLineNumber = "37"
+                  offsetFromSymbolStart = "1136">
+               </Location>
+               <Location
+                  uuid = "E21B22D6-11EB-410E-99B8-5577FD2C4581 - 33de94588e09a50c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Swift.MainActor () -&gt; () in Marvel.LoadingCell.updateView(with: Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; ()"
+                  moduleName = "Marvel"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/emanueleeichholz/Documents/MarvelApp/marvel-app/DesignSystem/Components/LoadingCell/LoadingCell.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "38"
+                  endingLineNumber = "38"
+                  offsetFromSymbolStart = "32">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

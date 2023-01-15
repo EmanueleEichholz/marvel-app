@@ -8,18 +8,17 @@
 import UIKit
 
 protocol FullListViewControllerProtocol: AnyObject {
-    
+    func updateView(with model: FullListViewModel)
+    func updateView(with alert: AlertModel)
 }
 
 final class FullListViewController: UIViewController {
     
     private var fullListView: FullListView = FullListView()
     private let interactor: FullListInteractorProtocol
-    private let listType: ListTypeEnum
     
-    init(interactor: FullListInteractorProtocol, with listType: ListTypeEnum) {
+    init(interactor: FullListInteractorProtocol) {
         self.interactor = interactor
-        self.listType = listType
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -30,7 +29,7 @@ final class FullListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        interactor.viewDidLoad()
+        interactor.fetchData(nameStartsWith: nil, offset: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -47,6 +46,16 @@ final class FullListViewController: UIViewController {
 
 extension FullListViewController: FullListViewControllerProtocol {
     
+    func updateView(with model: FullListViewModel) {
+        fullListView.updateView(with: model)
+    }
+    
+    func updateView(with alert: AlertModel) {
+        self.showAlert(model: alert) {
+                self.interactor.fetchData(nameStartsWith: nil, offset: nil)
+            } secondButtonAction: {  }
+    }
+
 }
 
 extension FullListViewController: FullListViewDelegateProtocol {

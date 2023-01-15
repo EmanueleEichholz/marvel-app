@@ -17,10 +17,11 @@ final class FullListViewControllerFactory {
         let interactor = FullListInteractor(
             coordinator: coordinator,
             presenter: presenter,
-            worker: worker
+            worker: worker,
+            listType: listType
         )
         
-        let viewController = FullListViewController(interactor: interactor, with: listType)
+        let viewController = FullListViewController(interactor: interactor)
         presenter.view = viewController
         return viewController
     }

@@ -1,13 +1,13 @@
 //
-//  ItemTableViewCell.swift
+//  ItemHorizontalCollectionViewCell.swift
 //  Marvel
 //
-//  Created by Emanuele Eichholz on 12/01/23.
+//  Created by Emanuele Eichholz on 06/11/22.
 //
 
 import UIKit
 
-final class ItemTableViewCell: UITableViewCell {
+final class ItemHorizontalCollectionViewCell: UICollectionViewCell {
     
     private lazy var itemCard: ItemCard = {
         let view = ItemCard()
@@ -15,8 +15,8 @@ final class ItemTableViewCell: UITableViewCell {
         return view
     }()
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         setupLayout()
     }
     
@@ -31,7 +31,7 @@ final class ItemTableViewCell: UITableViewCell {
     
     private func setupLayout() {
         addSubview(itemCard)
-        let cellSize = round((UIScreen.main.bounds.width - 64)/3)
+        let cellSize = round((UIScreen.main.bounds.width - 48)/2.5)
         NSLayoutConstraint.activate([
             itemCard.topAnchor.constraint(equalTo: topAnchor),
             itemCard.leadingAnchor.constraint(equalTo: leadingAnchor),

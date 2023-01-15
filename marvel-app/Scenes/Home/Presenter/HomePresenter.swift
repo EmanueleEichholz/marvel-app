@@ -17,18 +17,7 @@ protocol HomePresenterProtocol {
 }
 
 final class HomePresenter: HomePresenterProtocol {
-    func presentError() {
-        let alertModel = AlertModel(
-            title: "Ocorreu um erro e não foi possível trazer todos os dados.",
-            message: "Tente novamente ou retorne mais tarde.",
-            firstButtonTitle: "Tentar novamente",
-            secondButtonTitle: "Cancelar"
-        )
 
-        view?.updateView(with: alertModel)
-    }
-    
-    
     weak var view: HomeViewControllerProtocol?
     
     func presentCharacters(with model: CharactersData?) {
@@ -126,6 +115,18 @@ final class HomePresenter: HomePresenterProtocol {
             return "\(path)/standard_xlarge.\(pathExtension)"
         }
         return ""
+    }
+    
+    
+    func presentError() {
+        let alertModel = AlertModel(
+            title: "Ocorreu um erro e não foi possível trazer os dados.",
+            message: "Tente novamente ou retorne mais tarde.",
+            firstButtonTitle: "Tentar novamente",
+            secondButtonTitle: "Cancelar"
+        )
+
+        view?.updateView(with: alertModel)
     }
 
 }

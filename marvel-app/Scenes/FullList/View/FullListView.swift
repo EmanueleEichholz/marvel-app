@@ -12,25 +12,49 @@ protocol FullListViewDelegateProtocol: AnyObject {
 }
 
 final class FullListView: UIView {
-    
+
     private lazy var headerView: HeaderView = {
         let view = HeaderView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.updateView(with: HeaderViewModel(leftIcon: nil, logo: .marvelLogo, rightIcon: nil, iconColor: .white))
         view.delegate = self
+        view.updateView(with: HeaderViewModel(
+                leftIcon: UIImage(systemName: "chevron.left"),
+                logo: .marvelLogo,
+                rightIcon: nil,
+                iconColor: .marvelWhite)
+        )
         return view
     }()
     
-    private lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .grouped)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.backgroundColor = .clear
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.separatorStyle = .none
-        tableView.showsVerticalScrollIndicator = true
-        tableView.register(ItemTableViewCell.self, forCellReuseIdentifier: ItemTableViewCell.identifier)
-        return tableView
+    private lazy var titleLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .marvelWhite
+        label.font = .systemFont(ofSize: 22.0, weight: .bold)
+        label.textAlignment = .left
+        label.numberOfLines = 0
+        label.text = "LOADING..."
+        return label
+    }()
+    
+    private lazy var verticalCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        let cellSize = (UIScreen.main.bounds.width - 50)/2
+        layout.estimatedItemSize = CGSize(width: cellSize, height: cellSize)
+        layout.minimumLineSpacing = 16.0
+        layout.minimumInteritemSpacing = 16.0
+        layout.scrollDirection = .vertical
+
+        let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collection.register(ItemVerticalCollectionViewCell.self, forCellWithReuseIdentifier: ItemVerticalCollectionViewCell.identifier)
+        collection.register(LoadingCell.self, forCellWithReuseIdentifier: LoadingCell.identifier)
+        collection.dataSource = self
+        collection.delegate = self
+        collection.translatesAutoresizingMaskIntoConstraints = false
+        collection.isScrollEnabled = true
+        collection.showsHorizontalScrollIndicator = true
+        collection.backgroundColor = .clear
+        return collection
     }()
     
     weak var delegate: FullListViewDelegateProtocol?
@@ -41,16 +65,6 @@ final class FullListView: UIView {
         addSubviews()
         setupConstraints()
         setupAdditinalLayoutSettings()
-        
-        headerView.updateView(
-            with: HeaderViewModel(
-                leftIcon: UIImage(
-                    systemName: "chevron.left"),
-                logo: .marvelLogo,
-                rightIcon: nil,
-                iconColor: .marvelWhite
-            )
-        )
     }
     
     @available(*, unavailable)
@@ -59,7 +73,7 @@ final class FullListView: UIView {
     }
     
     private func addSubviews() {
-        addSubviews(headerView, tableView)
+        addSubviews(headerView, titleLabel, verticalCollectionView)
     }
     
     private func setupConstraints() {
@@ -68,36 +82,59 @@ final class FullListView: UIView {
             headerView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
             headerView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
             
-            tableView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 8.0),
-            tableView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16.0),
-            tableView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16.0),
-            tableView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16.0),
+            titleLabel.topAnchor.constraint(equalTo: headerView.bottomAnchor),
+            titleLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16.0),
+            titleLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16.0),
+            
+            verticalCollectionView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16.0),
+            verticalCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16.0),
+            verticalCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16.0),
+            verticalCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16.0),
         ])
     }
     
     private func setupAdditinalLayoutSettings() {
         backgroundColor = .marvelBlack
     }
-}
-
-extension FullListView: UITableViewDataSource, UITableViewDelegate {
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return itemList.count
+    func updateView(with model: FullListViewModel) {
+        DispatchQueue.main.async { [weak self] in
+            self?.titleLabel.text = model.title
+            self?.itemList = model.itemList
+            self?.verticalCollectionView.reloadData()
+        }
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+}
+
+extension FullListView: UICollectionViewDataSource, UICollectionViewDelegate {
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return itemList.isEmpty ? 9 : itemList.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: ItemTableViewCell.identifier,
+        if itemList.isEmpty {
+            guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: LoadingCell.identifier,
+                for: indexPath) as? LoadingCell else {
+                return UICollectionViewCell()
+            }
+            
+            cell.updateView(with: round((UIScreen.main.bounds.width - 50)/2))
+            return cell
+        }
+        
+        guard let cell = verticalCollectionView.dequeueReusableCell(
+            withReuseIdentifier: ItemVerticalCollectionViewCell.identifier,
             for: indexPath
-        ) as? ItemTableViewCell else {
-            return UITableViewCell()
+        ) as? ItemVerticalCollectionViewCell else {
+            return UICollectionViewCell()
         }
         
         cell.updateView(with: itemList[indexPath.row])
         return cell
-        
     }
     
 }

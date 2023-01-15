@@ -19,10 +19,6 @@ final class LoadingCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupLayout()
-        DispatchQueue.main.async {
-            self.loadingView.startShimmering()
-        }
     }
     
     @available(*, unavailable)
@@ -30,9 +26,22 @@ final class LoadingCell: UICollectionViewCell {
         super.init(coder: coder)
     }
     
-    private func setupLayout() {
+    func updateView(with cellSize: CGFloat? = nil) {
+        if let cellSize = cellSize {
+            setupLayout(with: cellSize)
+        } else {
+            let cellSize = round((UIScreen.main.bounds.width - 48)/2.5)
+            setupLayout(with: cellSize)
+        }
+        
+        DispatchQueue.main.async {
+            self.loadingView.startShimmering()
+        }
+    }
+    
+    private func setupLayout(with cellSize: CGFloat) {
         addSubview(loadingView)
-        let cellSize = round((UIScreen.main.bounds.width - 48)/2.5)
+        
         NSLayoutConstraint.activate([
             loadingView.topAnchor.constraint(equalTo: topAnchor),
             loadingView.leadingAnchor.constraint(equalTo: leadingAnchor),

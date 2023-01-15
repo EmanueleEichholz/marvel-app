@@ -1,13 +1,13 @@
 //
-//  CharacterCell.swift
+//  ItemVerticalCollectionViewCell.swift
 //  Marvel
 //
-//  Created by Emanuele Eichholz on 06/11/22.
+//  Created by Emanuele Eichholz on 12/01/23.
 //
 
 import UIKit
 
-final class ItemCollectionViewCell: UICollectionViewCell {
+final class ItemVerticalCollectionViewCell: UICollectionViewCell {
     
     private lazy var itemCard: ItemCard = {
         let view = ItemCard()
@@ -31,7 +31,7 @@ final class ItemCollectionViewCell: UICollectionViewCell {
     
     private func setupLayout() {
         addSubview(itemCard)
-        let cellSize = round((UIScreen.main.bounds.width - 48)/2.5)
+        let cellSize = round((UIScreen.main.bounds.width - 50)/2)
         NSLayoutConstraint.activate([
             itemCard.topAnchor.constraint(equalTo: topAnchor),
             itemCard.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -41,4 +41,5 @@ final class ItemCollectionViewCell: UICollectionViewCell {
             itemCard.widthAnchor.constraint(equalToConstant: cellSize)
         ])
     }
+    
 }
