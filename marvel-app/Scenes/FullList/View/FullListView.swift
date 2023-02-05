@@ -51,7 +51,7 @@ final class FullListView: UIView {
     
     private lazy var verticalCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        let cellSize = (UIScreen.main.bounds.width - 50)/2
+        let cellSize = round((UIScreen.main.bounds.width - 50)/2)
         layout.estimatedItemSize = CGSize(width: cellSize, height: cellSize)
         layout.minimumLineSpacing = 16.0
         layout.minimumInteritemSpacing = 16.0
