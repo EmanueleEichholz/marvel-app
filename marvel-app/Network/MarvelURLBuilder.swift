@@ -15,6 +15,7 @@ class MarvelURLBuilder {
     let publicKey = Bundle.main.object(forInfoDictionaryKey: "PublicKey") as? String
     let listType: ListTypeEnum
     var offset: Int?
+    var limit: Int?
     var nameStartsWith: String?
     
     init(with listType: ListTypeEnum) {
@@ -31,6 +32,11 @@ class MarvelURLBuilder {
         return self
     }
     
+    func withLimit(_ limit: Int?) -> Self {
+        self.limit = limit
+        return self
+    }
+    
     func buildURL() -> String? {
         guard let privateKey = privateKey, let publicKey = publicKey else { return nil }
         let contentHash = (String(timeStamp) + privateKey + publicKey).MD5
@@ -42,6 +48,10 @@ class MarvelURLBuilder {
         
         if let nameStartsWith = nameStartsWith {
             url.append("&nameStartsWith=\(nameStartsWith)")
+        }
+        
+        if let limit = limit {
+            url.append("&limit=\(limit)")
         }
         
         return url
