@@ -165,6 +165,17 @@ extension FullListView: HeaderViewClickDelegateProtocol {
 extension FullListView: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         delegate?.fetchData(nameStartsWith: searchBar.text)
+        self.endEditing(true)
+    }
+}
+
+extension FullListView: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let positionY = verticalCollectionView.contentOffset.y
+        let contentHeight = verticalCollectionView.contentSize.height
+        if positionY > contentHeight - verticalCollectionView.frame.size.height {
+            delegate?.fetchData(nameStartsWith: fullListSearchBar.text)
+        }
     }
 }
 
