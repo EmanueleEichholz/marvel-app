@@ -15,6 +15,7 @@ struct CreatorsResult: Decodable {
 
 struct CreatorsData: Decodable {
     let results: [CreatorsResponseModel]
+    let total: Int?
 }
 
 struct CreatorsResponseModel: Decodable, GenericResponseModel {

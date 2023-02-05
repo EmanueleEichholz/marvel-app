@@ -15,6 +15,7 @@ struct SeriesResult: Decodable {
 
 struct SeriesData: Decodable {
     let results: [SeriesResponseModel]
+    let total: Int?
 }
 
 struct SeriesResponseModel: Decodable,GenericResponseModel {
