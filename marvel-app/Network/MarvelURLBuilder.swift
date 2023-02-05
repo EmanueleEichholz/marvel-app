@@ -46,7 +46,7 @@ class MarvelURLBuilder {
             url.append("&offset=\(offset)")
         }
         
-        if let nameStartsWith = nameStartsWith {
+        if let nameStartsWith = nameStartsWith, !nameStartsWith.isEmpty {
             url.append("&nameStartsWith=\(nameStartsWith)")
         }
         
