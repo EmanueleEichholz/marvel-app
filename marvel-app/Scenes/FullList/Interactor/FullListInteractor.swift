@@ -8,7 +8,7 @@
 import Foundation
 
 protocol FullListInteractorProtocol {
-    func fetchData(nameStartsWith: String?, offset: Int?)
+    func fetchData(nameStartsWith: String?)
     func didTapBackButton()
 }
 
@@ -35,7 +35,9 @@ final class FullListInteractor {
 
 extension FullListInteractor: FullListInteractorProtocol {
     
-    func fetchData(nameStartsWith: String?, offset: Int?) {
+    func fetchData(nameStartsWith: String?) {
+        let offset = 0
+        
         switch listType {
         case .characters:
             getCharacters(nameStartsWith: nameStartsWith, offset: offset)

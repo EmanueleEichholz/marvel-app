@@ -243,13 +243,6 @@
 			path = Worker;
 			sourceTree = "<group>";
 		};
-		40017EF52918681300D93466 /* SearchBar */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = SearchBar;
-			sourceTree = "<group>";
-		};
 		40017EF62918695900D93466 /* HeaderView */ = {
 			isa = PBXGroup;
 			children = (
@@ -590,7 +583,6 @@
 				40374BE5294D333E002FE3DE /* HorizontalCollection */,
 				403CC35029679EDC00A14410 /* ListView */,
 				4009C9712968F8190053A50F /* LoadingCell */,
-				40017EF52918681300D93466 /* SearchBar */,
 			);
 			path = Components;
 			sourceTree = "<group>";

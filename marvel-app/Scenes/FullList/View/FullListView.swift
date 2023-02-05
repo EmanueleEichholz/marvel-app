@@ -8,6 +8,7 @@
 import UIKit
 
 protocol FullListViewDelegateProtocol: AnyObject {
+    func fetchData(nameStartsWith: String?)
     func didTapBackButton()
 }
 
@@ -35,6 +36,17 @@ final class FullListView: UIView {
         label.numberOfLines = 0
         label.text = "LOADING..."
         return label
+    }()
+    
+    private lazy var fullListSearchBar: UISearchBar = {
+        let searchBar = UISearchBar()
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
+        searchBar.barStyle = .black
+        searchBar.searchBarStyle = .minimal
+        searchBar.tintColor = .marvelWhite
+        searchBar.searchTextField.textColor = .marvelWhite
+        searchBar.delegate = self
+        return searchBar
     }()
     
     private lazy var verticalCollectionView: UICollectionView = {
@@ -73,7 +85,7 @@ final class FullListView: UIView {
     }
     
     private func addSubviews() {
-        addSubviews(headerView, titleLabel, verticalCollectionView)
+        addSubviews(headerView, titleLabel, fullListSearchBar, verticalCollectionView)
     }
     
     private func setupConstraints() {
@@ -86,7 +98,11 @@ final class FullListView: UIView {
             titleLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16.0),
             titleLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16.0),
             
-            verticalCollectionView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16.0),
+            fullListSearchBar.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8.0),
+            fullListSearchBar.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 8.0),
+            fullListSearchBar.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -8.0),
+            
+            verticalCollectionView.topAnchor.constraint(equalTo: fullListSearchBar.bottomAnchor, constant: 8.0),
             verticalCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16.0),
             verticalCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16.0),
             verticalCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16.0),
@@ -100,6 +116,7 @@ final class FullListView: UIView {
     func updateView(with model: FullListViewModel) {
         DispatchQueue.main.async { [weak self] in
             self?.titleLabel.text = model.title
+            self?.fullListSearchBar.placeholder = model.searchBarPlaceholder
             self?.itemList = model.itemList
             self?.verticalCollectionView.reloadData()
         }
@@ -144,4 +161,12 @@ extension FullListView: HeaderViewClickDelegateProtocol {
         delegate?.didTapBackButton()
     }
 }
+
+extension FullListView: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        delegate?.fetchData(nameStartsWith: searchBar.text)
+    }
+}
+
+
 
