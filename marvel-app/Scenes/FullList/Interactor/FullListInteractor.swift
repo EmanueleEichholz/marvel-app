@@ -19,6 +19,14 @@ final class FullListInteractor {
     private let worker: FullListWorkerProtocol
     private let listType: ListTypeEnum
     
+    private var updatedOffset: Int = 0
+    private var isRequesting: Bool = false
+    private var charactersList: [CharacterResponseModel] = []
+    private var comicsList: ComicsData?
+    private var creatorsList: CreatorsData?
+    private var eventsList: EventsData?
+    private var seriesList: SeriesData?
+    
     init(
         coordinator: FullListCoordinatorProtocol,
         presenter: FullListPresenterProtocol,
@@ -36,35 +44,39 @@ final class FullListInteractor {
 extension FullListInteractor: FullListInteractorProtocol {
     
     func fetchData(nameStartsWith: String?) {
-        let offset = 0
-        
-        switch listType {
-        case .characters:
-            getCharacters(nameStartsWith: nameStartsWith, offset: offset)
-        case .comics:
-            getComics(nameStartsWith: nameStartsWith, offset: offset)
-        case .creators:
-            getCreators(nameStartsWith: nameStartsWith, offset: offset)
-        case .events:
-            getEvents(nameStartsWith: nameStartsWith, offset: offset)
-        case .series:
-            getSeries(nameStartsWith: nameStartsWith, offset: offset)
+        if !isRequesting {
+            isRequesting = true
+            switch listType {
+            case .characters:
+                getCharacters(nameStartsWith: nameStartsWith)
+            case .comics:
+                getComics(nameStartsWith: nameStartsWith)
+            case .creators:
+                getCreators(nameStartsWith: nameStartsWith)
+            case .events:
+                getEvents(nameStartsWith: nameStartsWith)
+            case .series:
+                getSeries(nameStartsWith: nameStartsWith)
+            }
         }
     }
     
-    private func getCharacters(nameStartsWith: String?, offset: Int?) {
-        worker.fetchCharacters(namesStartsWith: nameStartsWith, offset: offset) { [weak self] result in
+    private func getCharacters(nameStartsWith: String?) {
+        worker.fetchCharacters(namesStartsWith: nameStartsWith, offset: updatedOffset) { [weak self] result in
             switch result {
             case .success(let response):
-                self?.presenter.presentCharacters(with: response.data)
+                self?.charactersList.append(contentsOf: response.data?.results ?? [])
+                self?.presenter.presentCharacters(with: self?.charactersList)
+                self?.updatedOffset += 20
+                self?.isRequesting = false
             case .failure:
                 self?.presenter.presentError()
             }
         }
     }
     
-    private func getComics(nameStartsWith: String?, offset: Int?) {
-        worker.fetchComics(namesStartsWith: nameStartsWith, offset: offset) { [weak self] result in
+    private func getComics(nameStartsWith: String?) {
+        worker.fetchComics(namesStartsWith: nameStartsWith, offset: updatedOffset) { [weak self] result in
             switch result {
             case .success(let response):
                 self?.presenter.presentComics(with: response.data)
@@ -74,8 +86,8 @@ extension FullListInteractor: FullListInteractorProtocol {
         }
     }
     
-    private func getCreators(nameStartsWith: String?, offset: Int?) {
-        worker.fetchCreators(namesStartsWith: nameStartsWith, offset: offset) { [weak self] result in
+    private func getCreators(nameStartsWith: String?) {
+        worker.fetchCreators(namesStartsWith: nameStartsWith, offset: updatedOffset) { [weak self] result in
             switch result {
             case .success(let response):
                 self?.presenter.presentCreators(with: response.data)
@@ -85,8 +97,8 @@ extension FullListInteractor: FullListInteractorProtocol {
         }
     }
     
-    private func getEvents(nameStartsWith: String?, offset: Int?) {
-        worker.fetchEvents(namesStartsWith: nameStartsWith, offset: offset) { [weak self] result in
+    private func getEvents(nameStartsWith: String?) {
+        worker.fetchEvents(namesStartsWith: nameStartsWith, offset: updatedOffset) { [weak self] result in
             switch result {
             case .success(let response):
                 self?.presenter.presentEvents(with: response.data)
@@ -96,8 +108,8 @@ extension FullListInteractor: FullListInteractorProtocol {
         }
     }
     
-    private func getSeries(nameStartsWith: String?, offset: Int?) {
-        worker.fetchSeries(namesStartsWith: nameStartsWith, offset: offset) { [weak self] result in
+    private func getSeries(nameStartsWith: String?) {
+        worker.fetchSeries(namesStartsWith: nameStartsWith, offset: updatedOffset) { [weak self] result in
             switch result {
             case .success(let response):
                 self?.presenter.presentSeries(with: response.data)

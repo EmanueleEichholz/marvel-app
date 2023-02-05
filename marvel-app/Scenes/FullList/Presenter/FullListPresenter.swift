@@ -8,7 +8,7 @@
 import Foundation
 
 protocol FullListPresenterProtocol {
-    func presentCharacters(with model: CharactersData?)
+    func presentCharacters(with model:  [CharacterResponseModel]?)
     func presentComics(with model: ComicsData?)
     func presentCreators(with model: CreatorsData?)
     func presentEvents(with model: EventsData?)
@@ -24,10 +24,10 @@ final class FullListPresenter {
 
 extension FullListPresenter: FullListPresenterProtocol {
     
-    func presentCharacters(with model: CharactersData?) {
+    func presentCharacters(with model: [CharacterResponseModel]?) {
         if let model = model {
             var characterList: [ItemCardModel] = []
-            model.results.forEach { character in
+            model.forEach { character in
                 characterList.append(
                     ItemCardModel(
                         name: character.name ?? "Name Unavailable",
