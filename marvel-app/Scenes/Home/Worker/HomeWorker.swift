@@ -35,6 +35,7 @@ extension HomeWorker: HomeWorkerProtocol {
 
     func fetchCharacters(completion: @escaping CharactersCompletion) {
         let url = MarvelURLBuilder(with: .characters)
+            .withLimit(2)
             .buildURL()
         provider.makeRequest(url: url) { (response: Result<CharactersResult, NetworkError>) in
             completion(response)
@@ -43,6 +44,7 @@ extension HomeWorker: HomeWorkerProtocol {
     
     func fetchComics(completion: @escaping ComicsCompletion) {
         let url = MarvelURLBuilder(with: .comics)
+            .withLimit(4)
             .buildURL()
         provider.makeRequest(url: url) { (response: Result<ComicsResult, NetworkError>) in
             completion(response)
@@ -51,6 +53,7 @@ extension HomeWorker: HomeWorkerProtocol {
     
     func fetchCreators(completion: @escaping CreatorsCompletion) {
         let url = MarvelURLBuilder(with: .creators)
+            .withLimit(4)
             .buildURL()
         provider.makeRequest(url: url) { (response: Result<CreatorsResult, NetworkError>) in
             completion(response)
@@ -59,6 +62,7 @@ extension HomeWorker: HomeWorkerProtocol {
     
     func fetchEvents(completion: @escaping EventsCompletion) {
         let url = MarvelURLBuilder(with: .events)
+            .withLimit(4)
             .buildURL()
         provider.makeRequest(url: url) { (response: Result<EventsResult, NetworkError>) in
             completion(response)
@@ -67,6 +71,7 @@ extension HomeWorker: HomeWorkerProtocol {
     
     func fetchSeries(completion: @escaping SeriesCompletion) {
         let url = MarvelURLBuilder(with: .series)
+            .withLimit(4)
             .buildURL()
         provider.makeRequest(url: url) { (response: Result<SeriesResult, NetworkError>) in
             completion(response)
