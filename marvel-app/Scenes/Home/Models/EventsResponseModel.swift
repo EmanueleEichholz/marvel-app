@@ -15,6 +15,7 @@ struct EventsResult: Decodable {
 
 struct EventsData: Decodable {
     let results: [EventsResponseModel]
+    let total: Int?
 }
 
 struct EventsResponseModel: Decodable, GenericResponseModel {

@@ -15,7 +15,9 @@ class MarvelURLBuilder {
     let publicKey = Bundle.main.object(forInfoDictionaryKey: "PublicKey") as? String
     let listType: ListTypeEnum
     var offset: Int?
+    var limit: Int?
     var nameStartsWith: String?
+    var titleStartsWith: String?
     
     init(with listType: ListTypeEnum) {
         self.listType = listType
@@ -26,8 +28,18 @@ class MarvelURLBuilder {
         return self
     }
     
+    func withFilterByTitle(_ titleStartsWith: String?) -> Self {
+        self.titleStartsWith = titleStartsWith
+        return self
+    }
+    
     func withOffset(_ offset: Int?) -> Self {
         self.offset = offset
+        return self
+    }
+    
+    func withLimit(_ limit: Int?) -> Self {
+        self.limit = limit
         return self
     }
     
@@ -40,8 +52,16 @@ class MarvelURLBuilder {
             url.append("&offset=\(offset)")
         }
         
-        if let nameStartsWith = nameStartsWith {
+        if let nameStartsWith = nameStartsWith, !nameStartsWith.isEmpty {
             url.append("&nameStartsWith=\(nameStartsWith)")
+        }
+        
+        if let titleStartsWith = titleStartsWith, !titleStartsWith.isEmpty {
+            url.append("&titleStartsWith=\(titleStartsWith)")
+        }
+        
+        if let limit = limit {
+            url.append("&limit=\(limit)")
         }
         
         return url

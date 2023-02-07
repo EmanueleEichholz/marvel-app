@@ -30,7 +30,7 @@ final class ApplicationCoordinator: Coordinator {
 }
 
 extension ApplicationCoordinator: HomeCoordinatorProtocol {
-
+    
     func didTapBackButton() {
         navigationController.popViewController(animated: true)
     }
@@ -40,8 +40,9 @@ extension ApplicationCoordinator: HomeCoordinatorProtocol {
         navigationController.pushViewController(viewController, animated: true)
     }
     
-    func didTapSeeAll() {
-        print("clicou para ver a lista completa")
+    func didTapSeeAll(listType: ListTypeEnum) {
+        let viewController = FullListViewControllerFactory.getFullListViewController(coordinator: self, with: listType)
+        navigationController.pushViewController(viewController, animated: true)
     }
     
 }
@@ -50,4 +51,8 @@ extension ApplicationCoordinator: DetailsCoordinatorProtocol {
     func didTapToOpenSite(url: String) {
 
     }
+}
+
+extension ApplicationCoordinator: FullListCoordinatorProtocol {
+    
 }

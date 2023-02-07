@@ -1,5 +1,5 @@
 //
-//  CharacterCell.swift
+//  ItemHorizontalCollectionViewCell.swift
 //  Marvel
 //
 //  Created by Emanuele Eichholz on 06/11/22.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ItemCell: UICollectionViewCell {
+final class ItemHorizontalCollectionViewCell: UICollectionViewCell {
     
     private lazy var itemCard: ItemCard = {
         let view = ItemCard()

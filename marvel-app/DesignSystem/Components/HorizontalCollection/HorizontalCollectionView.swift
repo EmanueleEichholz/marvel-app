@@ -22,7 +22,7 @@ final class HorizontalCollectionView: UITableViewCell {
         layout.scrollDirection = .horizontal
         
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collection.register(ItemCell.self, forCellWithReuseIdentifier: ItemCell.identifier)
+        collection.register(ItemHorizontalCollectionViewCell.self, forCellWithReuseIdentifier: ItemHorizontalCollectionViewCell.identifier)
         collection.register(SeeAllCell.self, forCellWithReuseIdentifier: SeeAllCell.identifier)
         collection.register(LoadingCell.self, forCellWithReuseIdentifier: LoadingCell.identifier)
         collection.dataSource = self
@@ -85,13 +85,14 @@ extension HorizontalCollectionView: UICollectionViewDataSource {
                 for: indexPath) as? LoadingCell else {
                 return UICollectionViewCell()
             }
+            cell.updateView()
             return cell
         }
         
         if indexPath.row < itemList.count {
             guard let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: ItemCell.identifier,
-                for: indexPath) as? ItemCell else {
+                withReuseIdentifier: ItemHorizontalCollectionViewCell.identifier,
+                for: indexPath) as? ItemHorizontalCollectionViewCell else {
                 return UICollectionViewCell()
             }
             cell.updateView(with: itemList[indexPath.row])
