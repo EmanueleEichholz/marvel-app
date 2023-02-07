@@ -12,6 +12,7 @@ protocol FullListInteractorProtocol {
     func scrolledForMoreItems(searchBarContent: String?)
     func searchButtonClicked(searchBarContent: String?)
     func backButtonTapped()
+    func selectedItem(at index: Int)
 }
 
 final class FullListInteractor {
@@ -57,7 +58,7 @@ extension FullListInteractor: FullListInteractorProtocol {
         cleanVariables()
         fetchData(searchBarContent: searchBarContent)
     }
-
+    
     func fetchData(searchBarContent: String?) {
         if !isRequesting {
             isRequesting = true
@@ -143,6 +144,21 @@ extension FullListInteractor: FullListInteractorProtocol {
             case .failure:
                 self?.presenter.presentError()
             }
+        }
+    }
+    
+    func selectedItem(at index: Int) {
+        switch listType {
+        case .characters:
+            coordinator.goToDetailsScreen(detailsInfo: charactersList[index])
+        case .comics:
+            coordinator.goToDetailsScreen(detailsInfo: comicsList[index])
+        case .creators:
+            coordinator.goToDetailsScreen(detailsInfo: creatorsList[index])
+        case .events:
+            coordinator.goToDetailsScreen(detailsInfo: eventsList[index])
+        case .series:
+            coordinator.goToDetailsScreen(detailsInfo: seriesList[index])
         }
     }
     

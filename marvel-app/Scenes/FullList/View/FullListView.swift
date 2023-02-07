@@ -12,6 +12,7 @@ protocol FullListViewDelegateProtocol: AnyObject {
     func scrolledForMoreItems(searchBarContent: String?)
     func searchButtonClicked(searchBarContent: String?)
     func backButtonTapped()
+    func selectedItem(at index: Int)
 }
 
 final class FullListView: UIView {
@@ -141,7 +142,7 @@ final class FullListView: UIView {
     
 }
 
-extension FullListView: UICollectionViewDataSource, UICollectionViewDelegate {
+extension FullListView: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return numberOfCells
@@ -175,6 +176,13 @@ extension FullListView: UICollectionViewDataSource, UICollectionViewDelegate {
         
     }
     
+}
+
+extension FullListView: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        delegate?.selectedItem(at: indexPath.row)
+    }
 }
 
 extension FullListView: HeaderViewClickDelegateProtocol {
