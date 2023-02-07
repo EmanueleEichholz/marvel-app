@@ -8,21 +8,23 @@
 import UIKit
 
 protocol FullListViewDelegateProtocol: AnyObject {
-    func fetchData(nameStartsWith: String?)
-    func didTapBackButton()
+    func viewDidLoad()
+    func scrolledForMoreItems(searchBarContent: String?)
+    func searchButtonClicked(searchBarContent: String?)
+    func backButtonTapped()
 }
 
 final class FullListView: UIView {
-
+    
     private lazy var headerView: HeaderView = {
         let view = HeaderView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.delegate = self
         view.updateView(with: HeaderViewModel(
-                leftIcon: UIImage(systemName: "chevron.left"),
-                logo: .marvelLogo,
-                rightIcon: nil,
-                iconColor: .marvelWhite)
+            leftIcon: UIImage(systemName: "chevron.left"),
+            logo: .marvelLogo,
+            rightIcon: nil,
+            iconColor: .marvelWhite)
         )
         return view
     }()
@@ -56,7 +58,7 @@ final class FullListView: UIView {
         layout.minimumLineSpacing = 16.0
         layout.minimumInteritemSpacing = 16.0
         layout.scrollDirection = .vertical
-
+        
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collection.register(ItemVerticalCollectionViewCell.self, forCellWithReuseIdentifier: ItemVerticalCollectionViewCell.identifier)
         collection.register(LoadingCell.self, forCellWithReuseIdentifier: LoadingCell.identifier)
@@ -71,6 +73,7 @@ final class FullListView: UIView {
     
     weak var delegate: FullListViewDelegateProtocol?
     private var itemList: [ItemCardModel] = []
+    private var numberOfCells: Int = 9
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -117,6 +120,7 @@ final class FullListView: UIView {
         DispatchQueue.main.async { [weak self] in
             self?.titleLabel.text = model.title
             self?.fullListSearchBar.placeholder = model.searchBarPlaceholder
+            self?.numberOfCells = model.numberOfCells
             self?.itemList = model.itemList
             self?.verticalCollectionView.reloadData()
         }
@@ -125,14 +129,26 @@ final class FullListView: UIView {
 }
 
 extension FullListView: UICollectionViewDataSource, UICollectionViewDelegate {
-
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return itemList.isEmpty ? 9 : itemList.count
+        return numberOfCells
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        if itemList.isEmpty {
+        if indexPath.row < itemList.count {
+            guard let cell = verticalCollectionView.dequeueReusableCell(
+                withReuseIdentifier: ItemVerticalCollectionViewCell.identifier,
+                for: indexPath
+            ) as? ItemVerticalCollectionViewCell else {
+                return UICollectionViewCell()
+            }
+            
+            cell.updateView(with: itemList[indexPath.row])
+            return cell
+            
+        } else {
+            
             guard let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: LoadingCell.identifier,
                 for: indexPath) as? LoadingCell else {
@@ -141,31 +157,25 @@ extension FullListView: UICollectionViewDataSource, UICollectionViewDelegate {
             
             cell.updateView(with: round((UIScreen.main.bounds.width - 50)/2))
             return cell
+            
         }
         
-        guard let cell = verticalCollectionView.dequeueReusableCell(
-            withReuseIdentifier: ItemVerticalCollectionViewCell.identifier,
-            for: indexPath
-        ) as? ItemVerticalCollectionViewCell else {
-            return UICollectionViewCell()
-        }
-        
-        cell.updateView(with: itemList[indexPath.row])
-        return cell
     }
     
 }
 
 extension FullListView: HeaderViewClickDelegateProtocol {
     func didTapLeftButton() {
-        delegate?.didTapBackButton()
+        delegate?.backButtonTapped()
     }
 }
 
 extension FullListView: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        delegate?.fetchData(nameStartsWith: searchBar.text)
         self.endEditing(true)
+        itemList = []
+        verticalCollectionView.reloadData()
+        delegate?.searchButtonClicked(searchBarContent: searchBar.text)
     }
 }
 
@@ -174,7 +184,7 @@ extension FullListView: UIScrollViewDelegate {
         let positionY = verticalCollectionView.contentOffset.y
         let contentHeight = verticalCollectionView.contentSize.height
         if positionY > contentHeight - verticalCollectionView.frame.size.height {
-            delegate?.fetchData(nameStartsWith: fullListSearchBar.text)
+            delegate?.scrolledForMoreItems(searchBarContent: fullListSearchBar.text)
         }
     }
 }

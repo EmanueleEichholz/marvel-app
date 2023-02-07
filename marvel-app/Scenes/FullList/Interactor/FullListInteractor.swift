@@ -8,8 +8,10 @@
 import Foundation
 
 protocol FullListInteractorProtocol {
-    func fetchData(nameStartsWith: String?)
-    func didTapBackButton()
+    func viewDidLoad()
+    func scrolledForMoreItems(searchBarContent: String?)
+    func searchButtonClicked(searchBarContent: String?)
+    func backButtonTapped()
 }
 
 final class FullListInteractor {
@@ -22,10 +24,10 @@ final class FullListInteractor {
     private var updatedOffset: Int = 0
     private var isRequesting: Bool = false
     private var charactersList: [CharacterResponseModel] = []
-    private var comicsList: ComicsData?
-    private var creatorsList: CreatorsData?
-    private var eventsList: EventsData?
-    private var seriesList: SeriesData?
+    private var comicsList: [ComicsResponseModel] = []
+    private var creatorsList: [CreatorsResponseModel] = []
+    private var eventsList: [EventsResponseModel] = []
+    private var seriesList: [SeriesResponseModel] = []
     
     init(
         coordinator: FullListCoordinatorProtocol,
@@ -43,6 +45,19 @@ final class FullListInteractor {
 
 extension FullListInteractor: FullListInteractorProtocol {
     
+    func viewDidLoad() {
+        fetchData(nameStartsWith: nil)
+    }
+    
+    func scrolledForMoreItems(searchBarContent: String?) {
+        fetchData(nameStartsWith: searchBarContent)
+    }
+    
+    func searchButtonClicked(searchBarContent: String?) {
+        cleanVariables()
+        fetchData(nameStartsWith: searchBarContent)
+    }
+
     func fetchData(nameStartsWith: String?) {
         if !isRequesting {
             isRequesting = true
@@ -66,7 +81,7 @@ extension FullListInteractor: FullListInteractorProtocol {
             switch result {
             case .success(let response):
                 self?.charactersList.append(contentsOf: response.data?.results ?? [])
-                self?.presenter.presentCharacters(with: self?.charactersList)
+                self?.presenter.presentCharacters(model: self?.charactersList, total: response.data?.total)
                 self?.updatedOffset += 20
                 self?.isRequesting = false
             case .failure:
@@ -75,11 +90,14 @@ extension FullListInteractor: FullListInteractorProtocol {
         }
     }
     
-    private func getComics(nameStartsWith: String?) {
+    private func getComics(nameStartsWith: String?) { // FIXME: titleStartsWith
         worker.fetchComics(namesStartsWith: nameStartsWith, offset: updatedOffset) { [weak self] result in
             switch result {
             case .success(let response):
-                self?.presenter.presentComics(with: response.data)
+                self?.comicsList.append(contentsOf: response.data?.results ?? [])
+                self?.presenter.presentComics(model: self?.comicsList, total: response.data?.total)
+                self?.updatedOffset += 20
+                self?.isRequesting = false
             case .failure:
                 self?.presenter.presentError()
             }
@@ -90,7 +108,10 @@ extension FullListInteractor: FullListInteractorProtocol {
         worker.fetchCreators(namesStartsWith: nameStartsWith, offset: updatedOffset) { [weak self] result in
             switch result {
             case .success(let response):
-                self?.presenter.presentCreators(with: response.data)
+                self?.creatorsList.append(contentsOf: response.data?.results ?? [])
+                self?.presenter.presentCreators(model: self?.creatorsList, total: response.data?.total)
+                self?.updatedOffset += 20
+                self?.isRequesting = false
             case .failure:
                 self?.presenter.presentError()
             }
@@ -101,25 +122,40 @@ extension FullListInteractor: FullListInteractorProtocol {
         worker.fetchEvents(namesStartsWith: nameStartsWith, offset: updatedOffset) { [weak self] result in
             switch result {
             case .success(let response):
-                self?.presenter.presentEvents(with: response.data)
+                self?.eventsList.append(contentsOf: response.data?.results ?? [])
+                self?.presenter.presentEvents(model: self?.eventsList, total: response.data?.total)
+                self?.updatedOffset += 20
+                self?.isRequesting = false
             case .failure:
                 self?.presenter.presentError()
             }
         }
     }
     
-    private func getSeries(nameStartsWith: String?) {
+    private func getSeries(nameStartsWith: String?) { //FIXME: titleStartsWith
         worker.fetchSeries(namesStartsWith: nameStartsWith, offset: updatedOffset) { [weak self] result in
             switch result {
             case .success(let response):
-                self?.presenter.presentSeries(with: response.data)
+                self?.seriesList.append(contentsOf: response.data?.results ?? [])
+                self?.presenter.presentSeries(model: self?.seriesList, total: response.data?.total)
+                self?.updatedOffset += 20
+                self?.isRequesting = false
             case .failure:
                 self?.presenter.presentError()
             }
         }
     }
     
-    func didTapBackButton() {
+    private func cleanVariables() {
+        updatedOffset = 0
+        charactersList = []
+        comicsList = []
+        creatorsList = []
+        eventsList = []
+        seriesList = []
+    }
+    
+    func backButtonTapped() {
         coordinator.didTapBackButton()
     }
     

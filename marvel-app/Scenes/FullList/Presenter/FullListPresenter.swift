@@ -8,11 +8,11 @@
 import Foundation
 
 protocol FullListPresenterProtocol {
-    func presentCharacters(with model:  [CharacterResponseModel]?)
-    func presentComics(with model: ComicsData?)
-    func presentCreators(with model: CreatorsData?)
-    func presentEvents(with model: EventsData?)
-    func presentSeries(with model: SeriesData?)
+    func presentCharacters(model: [CharacterResponseModel]?, total: Int?)
+    func presentComics(model: [ComicsResponseModel]?, total: Int?)
+    func presentCreators(model: [CreatorsResponseModel]?, total: Int?)
+    func presentEvents(model: [EventsResponseModel]?, total: Int?)
+    func presentSeries(model: [SeriesResponseModel]?, total: Int?)
     func presentError()
 }
 
@@ -24,11 +24,11 @@ final class FullListPresenter {
 
 extension FullListPresenter: FullListPresenterProtocol {
     
-    func presentCharacters(with model: [CharacterResponseModel]?) {
+    func presentCharacters(model: [CharacterResponseModel]?, total: Int?) {
         if let model = model {
-            var characterList: [ItemCardModel] = []
+            var list: [ItemCardModel] = []
             model.forEach { character in
-                characterList.append(
+                list.append(
                     ItemCardModel(
                         name: character.name ?? "Name Unavailable",
                         image: getImageURL(
@@ -42,7 +42,11 @@ extension FullListPresenter: FullListPresenterProtocol {
             let fullListViewModel = FullListViewModel(
                 title: "CHARACTERS",
                 searchBarPlaceholder: "SEARCH CHARACTERS BY NAME",
-                itemList: characterList
+                itemList: list,
+                numberOfCells: getNumberOfCells(
+                    totalLoaded: list.count,
+                    totalAvailable: total
+                )
             )
 
             view?.updateView(with: fullListViewModel)
@@ -50,11 +54,11 @@ extension FullListPresenter: FullListPresenterProtocol {
         }
     }
     
-    func presentComics(with model: ComicsData?) {
+    func presentComics(model: [ComicsResponseModel]?, total: Int?) {
         if let model = model {
-            var comicsList: [ItemCardModel] = []
-            model.results.forEach { comic in
-                comicsList.append(
+            var list: [ItemCardModel] = []
+            model.forEach { comic in
+                list.append(
                     ItemCardModel(
                         name: comic.title ?? "Title Unavailable",
                         image: getImageURL(
@@ -68,18 +72,22 @@ extension FullListPresenter: FullListPresenterProtocol {
             let fullListViewModel = FullListViewModel(
                 title: "COMICS",
                 searchBarPlaceholder: "SEARCH COMICS BY NAME",
-                itemList: comicsList
+                itemList: list,
+                numberOfCells: getNumberOfCells(
+                    totalLoaded: list.count,
+                    totalAvailable: total
+                )
             )
             
             view?.updateView(with: fullListViewModel)
         }
     }
     
-    func presentCreators(with model: CreatorsData?) {
+    func presentCreators(model: [CreatorsResponseModel]?, total: Int?) {
         if let model = model {
-            var creatorsList: [ItemCardModel] = []
-            model.results.forEach { creator in
-                creatorsList.append(
+            var list: [ItemCardModel] = []
+            model.forEach { creator in
+                list.append(
                     ItemCardModel(
                         name: creator.fullName ?? "Name Unavailable",
                         image: getImageURL(
@@ -93,18 +101,22 @@ extension FullListPresenter: FullListPresenterProtocol {
             let fullListViewModel = FullListViewModel(
                 title: "CREATORS",
                 searchBarPlaceholder: "SEARCH CREATORS BY NAME",
-                itemList: creatorsList
+                itemList: list,
+                numberOfCells: getNumberOfCells(
+                    totalLoaded: list.count,
+                    totalAvailable: total
+                )
             )
             
             view?.updateView(with: fullListViewModel)
         }
     }
     
-    func presentEvents(with model: EventsData?) {
+    func presentEvents(model: [EventsResponseModel]?, total: Int?) {
         if let model = model {
-            var eventsList: [ItemCardModel] = []
-            model.results.forEach { event in
-                eventsList.append(
+            var list: [ItemCardModel] = []
+            model.forEach { event in
+                list.append(
                     ItemCardModel(
                         name: event.title ?? "Title Unavailable",
                         image: getImageURL(
@@ -118,18 +130,22 @@ extension FullListPresenter: FullListPresenterProtocol {
             let fullListViewModel = FullListViewModel(
                 title: "EVENTS",
                 searchBarPlaceholder: "SEARCH EVENTS BY NAME",
-                itemList: eventsList
+                itemList: list,
+                numberOfCells: getNumberOfCells(
+                    totalLoaded: list.count,
+                    totalAvailable: total
+                )
             )
             
             view?.updateView(with: fullListViewModel)
         }
     }
     
-    func presentSeries(with model: SeriesData?) {
+    func presentSeries(model: [SeriesResponseModel]?, total: Int?) {
         if let model = model {
-            var seriesList: [ItemCardModel] = []
-            model.results.forEach { serie in
-                seriesList.append(
+            var list: [ItemCardModel] = []
+            model.forEach { serie in
+                list.append(
                     ItemCardModel(
                         name: serie.title ?? "Title Unavailable",
                         image: getImageURL(
@@ -143,7 +159,11 @@ extension FullListPresenter: FullListPresenterProtocol {
             let fullListViewModel = FullListViewModel(
                 title: "SERIES",
                 searchBarPlaceholder: "SEARCH SERIES BY NAME",
-                itemList: seriesList
+                itemList: list,
+                numberOfCells: getNumberOfCells(
+                    totalLoaded: list.count,
+                    totalAvailable: total
+                )
             )
             
             view?.updateView(with: fullListViewModel)
@@ -166,6 +186,24 @@ extension FullListPresenter: FullListPresenterProtocol {
             return "\(path)/standard_xlarge.\(pathExtension)"
         }
         return ""
+    }
+    
+    private func getNumberOfCells(totalLoaded: Int, totalAvailable: Int?) -> Int {
+        
+        guard let totalAvailable = totalAvailable else {
+            return totalLoaded
+        }
+        
+        if totalLoaded == 0 && totalAvailable > 0 {
+            return 9
+        }
+        
+        if totalLoaded < totalAvailable {
+            return totalLoaded + 3
+        }
+        
+        return totalLoaded
+        
     }
     
 }

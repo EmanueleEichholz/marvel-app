@@ -11,4 +11,5 @@ struct FullListViewModel {
     let title: String
     let searchBarPlaceholder: String
     let itemList: [ItemCardModel]
+    let numberOfCells: Int
 }

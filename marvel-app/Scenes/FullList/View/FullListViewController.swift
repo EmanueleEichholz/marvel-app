@@ -29,7 +29,7 @@ final class FullListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        interactor.fetchData(nameStartsWith: nil)
+        interactor.viewDidLoad()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -52,7 +52,7 @@ extension FullListViewController: FullListViewControllerProtocol {
     
     func updateView(with alert: AlertModel) {
         self.showAlert(model: alert) {
-                self.interactor.fetchData(nameStartsWith: nil)
+                self.interactor.viewDidLoad()
             } secondButtonAction: {  }
     }
 
@@ -60,12 +60,16 @@ extension FullListViewController: FullListViewControllerProtocol {
 
 extension FullListViewController: FullListViewDelegateProtocol {
     
-    func didTapBackButton() {
-        interactor.didTapBackButton()
+    func scrolledForMoreItems(searchBarContent: String?) {
+        interactor.scrolledForMoreItems(searchBarContent: searchBarContent)
     }
     
-    func fetchData(nameStartsWith: String?) {
-        interactor.fetchData(nameStartsWith: nameStartsWith)
+    func searchButtonClicked(searchBarContent: String?) {
+        interactor.searchButtonClicked(searchBarContent: searchBarContent)
+    }
+    
+    func backButtonTapped() {
+        interactor.backButtonTapped()
     }
     
 }
