@@ -75,6 +75,10 @@ extension FullListViewController: FullListViewDelegateProtocol {
         interactor.backButtonTapped()
     }
     
+    func selectedItem(at index: Int) {
+        interactor.selectedItem(at: index)
+    }
+    
 }
 
 
