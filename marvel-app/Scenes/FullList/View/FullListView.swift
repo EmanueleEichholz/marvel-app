@@ -127,6 +127,11 @@ final class FullListView: UIView {
         }
     }
     
+    func updateSearchBar() {
+        self.endEditing(true)
+        fullListSearchBar.text = ""
+    }
+    
     private func updateFilteredItems(searchBarContent: String?) {
         self.endEditing(true)
         itemList = []

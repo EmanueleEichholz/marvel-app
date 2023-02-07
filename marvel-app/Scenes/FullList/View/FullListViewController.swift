@@ -51,11 +51,12 @@ extension FullListViewController: FullListViewControllerProtocol {
     }
     
     func updateAlert(with alert: AlertModel) {
-        self.showAlert(model: alert) {
-                self.interactor.searchButtonClicked(searchBarContent: nil)
-            } secondButtonAction: {
-                self.interactor.backButtonTapped()
-            }
+        showAlert(model: alert) { [weak self] in
+            self?.fullListView.updateSearchBar()
+            self?.interactor.searchButtonClicked(searchBarContent: nil)
+        } secondButtonAction: { [weak self] in
+            self?.interactor.backButtonTapped()
+        }
     }
 
 }
