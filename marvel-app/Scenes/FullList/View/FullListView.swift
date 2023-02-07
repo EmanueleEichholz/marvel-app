@@ -48,6 +48,7 @@ final class FullListView: UIView {
         searchBar.tintColor = .marvelWhite
         searchBar.searchTextField.textColor = .marvelWhite
         searchBar.delegate = self
+        searchBar.returnKeyType = .done
         return searchBar
     }()
     
@@ -126,6 +127,13 @@ final class FullListView: UIView {
         }
     }
     
+    private func updateFilteredItems(searchBarContent: String?) {
+        self.endEditing(true)
+        itemList = []
+        verticalCollectionView.reloadData()
+        delegate?.searchButtonClicked(searchBarContent: searchBarContent)
+    }
+    
 }
 
 extension FullListView: UICollectionViewDataSource, UICollectionViewDelegate {
@@ -172,10 +180,13 @@ extension FullListView: HeaderViewClickDelegateProtocol {
 
 extension FullListView: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        self.endEditing(true)
-        itemList = []
-        verticalCollectionView.reloadData()
-        delegate?.searchButtonClicked(searchBarContent: searchBar.text)
+        updateFilteredItems(searchBarContent: searchBar.text)
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty {
+            updateFilteredItems(searchBarContent: searchText)
+        }
     }
 }
 
