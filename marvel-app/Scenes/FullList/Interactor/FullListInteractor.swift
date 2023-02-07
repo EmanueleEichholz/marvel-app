@@ -46,32 +46,32 @@ final class FullListInteractor {
 extension FullListInteractor: FullListInteractorProtocol {
     
     func viewDidLoad() {
-        fetchData(nameStartsWith: nil)
+        fetchData(searchBarContent: nil)
     }
     
     func scrolledForMoreItems(searchBarContent: String?) {
-        fetchData(nameStartsWith: searchBarContent)
+        fetchData(searchBarContent: searchBarContent)
     }
     
     func searchButtonClicked(searchBarContent: String?) {
         cleanVariables()
-        fetchData(nameStartsWith: searchBarContent)
+        fetchData(searchBarContent: searchBarContent)
     }
 
-    func fetchData(nameStartsWith: String?) {
+    func fetchData(searchBarContent: String?) {
         if !isRequesting {
             isRequesting = true
             switch listType {
             case .characters:
-                getCharacters(nameStartsWith: nameStartsWith)
+                getCharacters(nameStartsWith: searchBarContent)
             case .comics:
-                getComics(nameStartsWith: nameStartsWith)
+                getComics(titleStartsWith: searchBarContent)
             case .creators:
-                getCreators(nameStartsWith: nameStartsWith)
+                getCreators(nameStartsWith: searchBarContent)
             case .events:
-                getEvents(nameStartsWith: nameStartsWith)
+                getEvents(nameStartsWith: searchBarContent)
             case .series:
-                getSeries(nameStartsWith: nameStartsWith)
+                getSeries(titleStartsWith: searchBarContent)
             }
         }
     }
@@ -90,8 +90,8 @@ extension FullListInteractor: FullListInteractorProtocol {
         }
     }
     
-    private func getComics(nameStartsWith: String?) { // FIXME: titleStartsWith
-        worker.fetchComics(namesStartsWith: nameStartsWith, offset: updatedOffset) { [weak self] result in
+    private func getComics(titleStartsWith: String?) {
+        worker.fetchComics(titleStartsWith: titleStartsWith, offset: updatedOffset) { [weak self] result in
             switch result {
             case .success(let response):
                 self?.comicsList.append(contentsOf: response.data?.results ?? [])
@@ -132,8 +132,8 @@ extension FullListInteractor: FullListInteractorProtocol {
         }
     }
     
-    private func getSeries(nameStartsWith: String?) { //FIXME: titleStartsWith
-        worker.fetchSeries(namesStartsWith: nameStartsWith, offset: updatedOffset) { [weak self] result in
+    private func getSeries(titleStartsWith: String?) {
+        worker.fetchSeries(titleStartsWith: titleStartsWith, offset: updatedOffset) { [weak self] result in
             switch result {
             case .success(let response):
                 self?.seriesList.append(contentsOf: response.data?.results ?? [])

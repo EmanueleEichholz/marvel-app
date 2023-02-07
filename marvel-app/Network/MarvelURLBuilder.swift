@@ -17,6 +17,7 @@ class MarvelURLBuilder {
     var offset: Int?
     var limit: Int?
     var nameStartsWith: String?
+    var titleStartsWith: String?
     
     init(with listType: ListTypeEnum) {
         self.listType = listType
@@ -24,6 +25,11 @@ class MarvelURLBuilder {
     
     func withFilterByName(_ nameStartsWith: String?) -> Self {
         self.nameStartsWith = nameStartsWith
+        return self
+    }
+    
+    func withFilterByTitle(_ titleStartsWith: String?) -> Self {
+        self.titleStartsWith = titleStartsWith
         return self
     }
     
@@ -48,6 +54,10 @@ class MarvelURLBuilder {
         
         if let nameStartsWith = nameStartsWith, !nameStartsWith.isEmpty {
             url.append("&nameStartsWith=\(nameStartsWith)")
+        }
+        
+        if let titleStartsWith = titleStartsWith, !titleStartsWith.isEmpty {
+            url.append("&titleStartsWith=\(titleStartsWith)")
         }
         
         if let limit = limit {

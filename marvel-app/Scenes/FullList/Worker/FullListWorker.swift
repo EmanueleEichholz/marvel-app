@@ -9,10 +9,10 @@ import Foundation
 
 protocol FullListWorkerProtocol {
     func fetchCharacters(namesStartsWith: String?, offset: Int?, completion: @escaping CharactersCompletion)
-    func fetchComics(namesStartsWith: String?, offset: Int?, completion: @escaping ComicsCompletion)
+    func fetchComics(titleStartsWith: String?, offset: Int?, completion: @escaping ComicsCompletion)
     func fetchCreators(namesStartsWith: String?, offset: Int?, completion: @escaping CreatorsCompletion)
     func fetchEvents(namesStartsWith: String?, offset: Int?, completion: @escaping EventsCompletion)
-    func fetchSeries(namesStartsWith: String?, offset: Int?, completion: @escaping SeriesCompletion)
+    func fetchSeries(titleStartsWith: String?, offset: Int?, completion: @escaping SeriesCompletion)
 }
 
 final class FullListWorker {
@@ -37,9 +37,9 @@ extension FullListWorker: FullListWorkerProtocol {
         }
     }
     
-    func fetchComics(namesStartsWith: String?, offset: Int?, completion: @escaping ComicsCompletion) {
+    func fetchComics(titleStartsWith: String?, offset: Int?, completion: @escaping ComicsCompletion) {
         let url = MarvelURLBuilder(with: .comics)
-            .withFilterByName(namesStartsWith)
+            .withFilterByTitle(titleStartsWith)
             .withOffset(offset)
             .buildURL()
         provider.makeRequest(url: url) { (response: Result<ComicsResult, NetworkError>) in
@@ -67,9 +67,9 @@ extension FullListWorker: FullListWorkerProtocol {
         }
     }
     
-    func fetchSeries(namesStartsWith: String?, offset: Int?, completion: @escaping SeriesCompletion) {
+    func fetchSeries(titleStartsWith: String?, offset: Int?, completion: @escaping SeriesCompletion) {
         let url = MarvelURLBuilder(with: .series)
-            .withFilterByName(namesStartsWith)
+            .withFilterByTitle(titleStartsWith)
             .withOffset(offset)
             .buildURL()
         provider.makeRequest(url: url) { (response: Result<SeriesResult, NetworkError>) in
