@@ -91,7 +91,7 @@ extension HomeViewController: HomeViewDelegateProtocol {
     }
     
     func didSelectEvent(at index: Int) {
-        interactor.didSelectCreator(at: index)
+        interactor.didSelectEvent(at: index)
     }
     
     func didSelectSerie(at index: Int) {

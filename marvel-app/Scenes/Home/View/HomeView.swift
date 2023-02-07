@@ -202,7 +202,7 @@ extension HomeView: HorizontalCollectionViewDelegate {
         case .creators:
             delegate?.didSelectCreator(at: itemIndex)
         case .events:
-            delegate?.didSelectCreator(at: itemIndex)
+            delegate?.didSelectEvent(at: itemIndex)
         case .series:
             delegate?.didSelectSerie(at: itemIndex)
         }
