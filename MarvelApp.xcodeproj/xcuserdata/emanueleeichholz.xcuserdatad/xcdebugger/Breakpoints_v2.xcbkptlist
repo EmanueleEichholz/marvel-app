@@ -7,22 +7,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "6DE30839-02E1-4028-8A12-7860C37A2EA6"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "marvel-app/DesignSystem/Components/AlertViewController/AlertViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "39"
-            endingLineNumber = "39"
-            landmarkName = "showAlert(model:firstButtonAction:secondButtonAction:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "E21B22D6-11EB-410E-99B8-5577FD2C4581"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -64,54 +48,6 @@
                   startingLineNumber = "38"
                   endingLineNumber = "38"
                   offsetFromSymbolStart = "32">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "06A485C1-032C-457A-82FC-3CB5183D15E6"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "marvel-app/Scenes/FullList/Presenter/FullListPresenter.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
-            landmarkName = "presentComics(model:total:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "06A485C1-032C-457A-82FC-3CB5183D15E6 - e8c7c05cf35f44e3"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Marvel.FullListPresenter.presentComics(model: Swift.Optional&lt;Swift.Array&lt;Marvel.ComicsResponseModel&gt;&gt;, total: Swift.Optional&lt;Swift.Int&gt;) -&gt; ()"
-                  moduleName = "Marvel"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/emanueleeichholz/Documents/MarvelApp/marvel-app/Scenes/FullList/Presenter/FullListPresenter.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "58"
-                  endingLineNumber = "58"
-                  offsetFromSymbolStart = "92">
-               </Location>
-               <Location
-                  uuid = "06A485C1-032C-457A-82FC-3CB5183D15E6 - e8c7c05cf35f44e3"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Marvel.FullListPresenter.presentComics(model: Swift.Optional&lt;Swift.Array&lt;Marvel.ComicsResponseModel&gt;&gt;, total: Swift.Optional&lt;Swift.Int&gt;) -&gt; ()"
-                  moduleName = "Marvel"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/emanueleeichholz/Documents/MarvelApp/marvel-app/Scenes/FullList/Presenter/FullListPresenter.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "58"
-                  endingLineNumber = "58"
-                  offsetFromSymbolStart = "120">
                </Location>
             </Locations>
          </BreakpointContent>

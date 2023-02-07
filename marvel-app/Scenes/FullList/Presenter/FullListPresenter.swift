@@ -41,16 +41,15 @@ extension FullListPresenter: FullListPresenterProtocol {
              
             let fullListViewModel = FullListViewModel(
                 title: "CHARACTERS",
-                searchBarPlaceholder: "SEARCH CHARACTERS BY NAME",
+                searchBarPlaceholder: "Search characters by name",
                 itemList: list,
                 numberOfCells: getNumberOfCells(
                     totalLoaded: list.count,
                     totalAvailable: total
                 )
             )
-
-            view?.updateView(with: fullListViewModel)
-
+            
+            updateView(with: fullListViewModel)
         }
     }
     
@@ -71,7 +70,7 @@ extension FullListPresenter: FullListPresenterProtocol {
             
             let fullListViewModel = FullListViewModel(
                 title: "COMICS",
-                searchBarPlaceholder: "SEARCH COMICS BY NAME",
+                searchBarPlaceholder: "Search comics by title",
                 itemList: list,
                 numberOfCells: getNumberOfCells(
                     totalLoaded: list.count,
@@ -79,7 +78,7 @@ extension FullListPresenter: FullListPresenterProtocol {
                 )
             )
             
-            view?.updateView(with: fullListViewModel)
+            updateView(with: fullListViewModel)
         }
     }
     
@@ -100,7 +99,7 @@ extension FullListPresenter: FullListPresenterProtocol {
             
             let fullListViewModel = FullListViewModel(
                 title: "CREATORS",
-                searchBarPlaceholder: "SEARCH CREATORS BY NAME",
+                searchBarPlaceholder: "Search creators by name",
                 itemList: list,
                 numberOfCells: getNumberOfCells(
                     totalLoaded: list.count,
@@ -108,7 +107,7 @@ extension FullListPresenter: FullListPresenterProtocol {
                 )
             )
             
-            view?.updateView(with: fullListViewModel)
+            updateView(with: fullListViewModel)
         }
     }
     
@@ -129,7 +128,7 @@ extension FullListPresenter: FullListPresenterProtocol {
             
             let fullListViewModel = FullListViewModel(
                 title: "EVENTS",
-                searchBarPlaceholder: "SEARCH EVENTS BY NAME",
+                searchBarPlaceholder: "Search events by name",
                 itemList: list,
                 numberOfCells: getNumberOfCells(
                     totalLoaded: list.count,
@@ -137,7 +136,7 @@ extension FullListPresenter: FullListPresenterProtocol {
                 )
             )
             
-            view?.updateView(with: fullListViewModel)
+            updateView(with: fullListViewModel)
         }
     }
     
@@ -158,7 +157,7 @@ extension FullListPresenter: FullListPresenterProtocol {
             
             let fullListViewModel = FullListViewModel(
                 title: "SERIES",
-                searchBarPlaceholder: "SEARCH SERIES BY NAME",
+                searchBarPlaceholder: "Search series by title",
                 itemList: list,
                 numberOfCells: getNumberOfCells(
                     totalLoaded: list.count,
@@ -166,19 +165,38 @@ extension FullListPresenter: FullListPresenterProtocol {
                 )
             )
             
-            view?.updateView(with: fullListViewModel)
+            updateView(with: fullListViewModel)
         }
+    }
+    
+    private func updateView(with viewModel: FullListViewModel) {
+        if viewModel.itemList.isEmpty {
+            presentEmptyState()
+        } else {
+            view?.updateView(with: viewModel)
+        }
+    }
+    
+    private func presentEmptyState() {
+        let alertModel = AlertModel(
+            title: "No results for this search",
+            message: "Try again or try a different search",
+            firstButtonTitle: "Try again",
+            secondButtonTitle: "Back"
+        )
+
+        view?.updateAlert(with: alertModel)
     }
     
     func presentError() {
         let alertModel = AlertModel(
-            title: "Ocorreu um erro e não foi possível trazer os dados.",
-            message: "Tente novamente ou retorne mais tarde.",
-            firstButtonTitle: "Tentar novamente",
-            secondButtonTitle: "Cancelar"
+            title: "An error occurred and the data could not be retrieved",
+            message: "Try again or come back later",
+            firstButtonTitle: "Try again",
+            secondButtonTitle: "Back"
         )
 
-        view?.updateView(with: alertModel)
+        view?.updateAlert(with: alertModel)
     }
     
     private func getImageURL(path: String?, pathExtension: String?) -> String {

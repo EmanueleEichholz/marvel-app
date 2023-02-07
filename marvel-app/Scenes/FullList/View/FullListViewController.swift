@@ -9,7 +9,7 @@ import UIKit
 
 protocol FullListViewControllerProtocol: AnyObject {
     func updateView(with model: FullListViewModel)
-    func updateView(with alert: AlertModel)
+    func updateAlert(with alert: AlertModel)
 }
 
 final class FullListViewController: UIViewController {
@@ -45,15 +45,17 @@ final class FullListViewController: UIViewController {
 }
 
 extension FullListViewController: FullListViewControllerProtocol {
-    
+
     func updateView(with model: FullListViewModel) {
         fullListView.updateView(with: model)
     }
     
-    func updateView(with alert: AlertModel) {
+    func updateAlert(with alert: AlertModel) {
         self.showAlert(model: alert) {
-                self.interactor.viewDidLoad()
-            } secondButtonAction: {  }
+                self.interactor.searchButtonClicked(searchBarContent: nil)
+            } secondButtonAction: {
+                self.interactor.backButtonTapped()
+            }
     }
 
 }
