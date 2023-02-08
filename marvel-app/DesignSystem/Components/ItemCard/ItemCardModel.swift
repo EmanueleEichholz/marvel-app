@@ -9,5 +9,5 @@ import Foundation
 
 struct ItemCardModel {
     let name: String
-    let image: String
+    let image: String?
 }

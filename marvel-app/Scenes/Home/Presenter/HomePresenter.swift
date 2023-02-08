@@ -22,7 +22,7 @@ final class HomePresenter: HomePresenterProtocol {
     
     func presentCharacters(with model: CharactersData?) {
         if let model = model {
-            var characterList: [ItemCardModel] = model.results.map { character in
+            let characterList: [ItemCardModel] = model.results.map { character in
                 return ItemCardModel(
                     name: character.name ?? "Name Unavailable",
                     image: getImageURL(
@@ -37,7 +37,7 @@ final class HomePresenter: HomePresenterProtocol {
     
     func presentComics(with model: ComicsData?) {
         if let model = model {
-            var comicsList: [ItemCardModel] = model.results.map { comic in
+            let comicsList: [ItemCardModel] = model.results.map { comic in
                 return ItemCardModel(
                     name: comic.title ?? "Title Unavailable",
                     image: getImageURL(
@@ -67,7 +67,7 @@ final class HomePresenter: HomePresenterProtocol {
     
     func presentEvents(with model: EventsData?) {
         if let model = model {
-            var eventsList: [ItemCardModel] = model.results.map { event in
+            let eventsList: [ItemCardModel] = model.results.map { event in
                 return ItemCardModel(
                     name: event.title ?? "Title Unavailable",
                     image: getImageURL(
@@ -82,7 +82,7 @@ final class HomePresenter: HomePresenterProtocol {
     
     func presentSeries(with model: SeriesData?) {
         if let model = model {
-            var seriesList: [ItemCardModel] = model.results.map { serie in
+            let seriesList: [ItemCardModel] = model.results.map { serie in
                 return ItemCardModel(
                     name: serie.title ?? "Title Unavailable",
                     image: getImageURL(
@@ -95,11 +95,12 @@ final class HomePresenter: HomePresenterProtocol {
         }
     }
     
-    private func getImageURL(path: String?, pathExtension: String?) -> String {
-        if let path = path, let pathExtension = pathExtension {
+    private func getImageURL(path: String?, pathExtension: String?) -> String? {
+        if let path = path, let pathExtension = pathExtension, path != "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available" {
             return "\(path)/standard_xlarge.\(pathExtension)"
         }
-        return ""
+        
+        return nil
     }
     
     
