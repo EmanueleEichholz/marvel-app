@@ -43,97 +43,97 @@ final class DetailsPresenter: DetailsPresenterProtocol {
         
     }
     
-    private func getCharactersDetailsViewModel(with characterResponseModel: CharacterResponseModel) -> DetailsViewModel {
+    private func getCharactersDetailsViewModel(with responseModel: CharacterResponseModel) -> DetailsViewModel {
         return DetailsViewModel(
             image: getImageURL(
-                path: characterResponseModel.thumbnail?.path,
-                pathExtension: characterResponseModel.thumbnail?.thumbnailExtension
+                path: responseModel.thumbnail?.path,
+                pathExtension: responseModel.thumbnail?.thumbnailExtension
             ),
-            name: characterResponseModel.name,
-            description: characterResponseModel.description,
+            name: responseModel.name,
+            description: responseModel.description,
             lists: getLists(
                 characters: nil,
-                comics: characterResponseModel.comics,
+                comics: responseModel.comics,
                 creators: nil,
-                events: characterResponseModel.events,
-                series: characterResponseModel.series,
-                sites: characterResponseModel.urls
+                events: responseModel.events,
+                series: responseModel.series,
+                sites: responseModel.urls
             )
         )
     }
     
-    private func getComicsDetailsViewModel(with comicsResponseModel: ComicsResponseModel) -> DetailsViewModel {
+    private func getComicsDetailsViewModel(with responseModel: ComicsResponseModel) -> DetailsViewModel {
         return DetailsViewModel(
             image: getImageURL(
-                path: comicsResponseModel.thumbnail?.path,
-                pathExtension: comicsResponseModel.thumbnail?.thumbnailExtension
+                path: responseModel.thumbnail?.path,
+                pathExtension: responseModel.thumbnail?.thumbnailExtension
             ),
-            name: comicsResponseModel.title,
-            description: comicsResponseModel.description,
+            name: responseModel.title,
+            description: responseModel.description,
             lists: getLists(
-                characters: comicsResponseModel.characters,
+                characters: responseModel.characters,
                 comics: nil,
-                creators: comicsResponseModel.creators,
-                events: comicsResponseModel.events,
+                creators: responseModel.creators,
+                events: responseModel.events,
                 series: nil,
-                sites: comicsResponseModel.urls
+                sites: responseModel.urls
             )
         )
     }
     
-    private func getCreatorsDetailsViewModel(with creatorsResponseModel: CreatorsResponseModel) -> DetailsViewModel {
+    private func getCreatorsDetailsViewModel(with responseModel: CreatorsResponseModel) -> DetailsViewModel {
         return DetailsViewModel(
             image: getImageURL(
-                path: creatorsResponseModel.thumbnail?.path,
-                pathExtension: creatorsResponseModel.thumbnail?.thumbnailExtension
+                path: responseModel.thumbnail?.path,
+                pathExtension: responseModel.thumbnail?.thumbnailExtension
             ),
-            name: creatorsResponseModel.fullName,
+            name: responseModel.fullName,
             description: nil,
             lists: getLists(
                 characters: nil,
-                comics: creatorsResponseModel.comics,
+                comics: responseModel.comics,
                 creators: nil,
-                events: creatorsResponseModel.events,
-                series: creatorsResponseModel.series,
-                sites: creatorsResponseModel.urls
+                events: responseModel.events,
+                series: responseModel.series,
+                sites: responseModel.urls
             )
         )
     }
     
-    private func getEventsDetailsViewModel(with eventsResponseModel: EventsResponseModel) -> DetailsViewModel {
+    private func getEventsDetailsViewModel(with responseModel: EventsResponseModel) -> DetailsViewModel {
         return DetailsViewModel(
             image: getImageURL(
-                path: eventsResponseModel.thumbnail?.path,
-                pathExtension: eventsResponseModel.thumbnail?.thumbnailExtension
+                path: responseModel.thumbnail?.path,
+                pathExtension: responseModel.thumbnail?.thumbnailExtension
             ),
-            name: eventsResponseModel.title,
-            description: eventsResponseModel.description,
+            name: responseModel.title,
+            description: responseModel.description,
             lists: getLists(
-                characters: eventsResponseModel.characters,
-                comics: eventsResponseModel.comics,
-                creators: eventsResponseModel.creators,
+                characters: responseModel.characters,
+                comics: responseModel.comics,
+                creators: nil,
                 events: nil,
-                series: eventsResponseModel.series,
-                sites: eventsResponseModel.urls
+                series: responseModel.series,
+                sites: responseModel.urls
             )
         )
     }
     
-    private func getSeriesDetailsViewModel(with seriesResponseModel: SeriesResponseModel) -> DetailsViewModel {
+    private func getSeriesDetailsViewModel(with responseModel: SeriesResponseModel) -> DetailsViewModel {
         return DetailsViewModel(
             image: getImageURL(
-                path: seriesResponseModel.thumbnail?.path,
-                pathExtension: seriesResponseModel.thumbnail?.thumbnailExtension
+                path: responseModel.thumbnail?.path,
+                pathExtension: responseModel.thumbnail?.thumbnailExtension
             ),
-            name: seriesResponseModel.title,
-            description: seriesResponseModel.description,
+            name: responseModel.title,
+            description: responseModel.description,
             lists: getLists(
-                characters: seriesResponseModel.characters,
-                comics: seriesResponseModel.comics,
-                creators: seriesResponseModel.creators,
-                events: seriesResponseModel.events,
+                characters: responseModel.characters,
+                comics: responseModel.comics,
+                creators: responseModel.creators,
+                events: responseModel.events,
                 series: nil,
-                sites: seriesResponseModel.urls
+                sites: responseModel.urls
             )
         )
     }
@@ -151,53 +151,53 @@ final class DetailsPresenter: DetailsPresenterProtocol {
         creators: ListResponseModel?,
         events: ListResponseModel?,
         series: ListResponseModel?,
-        sites: [URLResponseModel]?) -> [ListViewModel]? {
-            
-            var list: [ListViewModel] = []
-            
-            if let characters = characters, !characters.items.isEmpty {
-                list.append(ListViewModel(type: .plainText, title: "CHARACTERS", items: getItems(characters.items)))
-            }
-            
-            if let comics = comics, !comics.items.isEmpty {
-                list.append(ListViewModel(type: .plainText, title: "COMICS", items: getItems(comics.items)))
-            }
-            
-            if let creators = creators, !creators.items.isEmpty {
-                list.append(ListViewModel(type: .plainText, title: "CREATORS", items: getItems(creators.items)))
-            }
-            
-            if let events = events, !events.items.isEmpty {
-                list.append(ListViewModel(type: .plainText, title: "EVENTS", items: getItems(events.items)))
-            }
-            
-            if let series = series, !series.items.isEmpty {
-                list.append(ListViewModel(type: .plainText, title: "SERIES", items: getItems(series.items)))
-            }
-            
-            if let sites = sites, !sites.isEmpty {
-                list.append(ListViewModel(type: .link, title: "SITES", items: getSites(sites)))
-            }
-            
-            return list
-            
+        sites: [URLResponseModel]?) -> ListsViewModel {
+        
+        var itemsList: [ItemsListViewModel] = []
+        var sitesList: [SitesListViewModel] = []
+        
+        if let characters = characters, !characters.items.isEmpty {
+            itemsList.append(ItemsListViewModel(title: "CHARACTERS", items: getItems(characters.items)))
         }
-    
-    private func getItems(_ items: [Items]) -> [String] {
-        var itemsInString: [String] = []
-        items.forEach { item in
-            itemsInString.append(item.name)
+        
+        if let comics = comics, !comics.items.isEmpty {
+            itemsList.append(ItemsListViewModel(title: "COMICS", items: getItems(comics.items)))
         }
-        return itemsInString
+        
+        if let creators = creators, !creators.items.isEmpty {
+            itemsList.append(ItemsListViewModel(title: "CREATORS", items: getItems(creators.items)))
+        }
+        
+        if let events = events, !events.items.isEmpty {
+            itemsList.append(ItemsListViewModel(title: "EVENTS", items: getItems(events.items)))
+        }
+        
+        if let series = series, !series.items.isEmpty {
+            itemsList.append(ItemsListViewModel(title: "SERIES", items: getItems(series.items)))
+        }
+        
+        if let sites = sites, !sites.isEmpty {
+            sitesList.append(SitesListViewModel(title: "SITES", sitesList: getSites(sites)))
+        }
+        
+        return ListsViewModel(
+            itemsList: itemsList,
+            sitesList: sitesList
+        )
     }
     
-    private func getSites(_ sites: [URLResponseModel]) -> [String] {
-        var sitesList: [String] = []
-        sites.forEach { site in
-            if let url = site.url {
-                sitesList.append(url)
-            }
+    private func getItems(_ items: [Items]) -> [String] {
+        return items.map { item in
+            return item.name
         }
-        return sitesList
+    }
+    
+    private func getSites(_ sites: [URLResponseModel]) -> [SiteViewModel] {
+        return sites.map { site in
+            return SiteViewModel(
+                siteTitle: site.type,
+                siteUrl: site.url
+            )
+        }
     }
 }

@@ -11,5 +11,5 @@ struct DetailsViewModel {
     let image: String?
     let name: String?
     let description: String?
-    let lists: [ListViewModel]?
+    let lists: ListsViewModel?
 }

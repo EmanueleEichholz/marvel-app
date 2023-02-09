@@ -43,7 +43,13 @@ final class ItemCard: UIView {
     
     func updateView(with model: ItemCardModel) {
         itemNameLabel.text = model.name
-        itemImage.imageFromURL(urlString: model.image)
+        
+        if let image = model.image {
+            itemImage.imageFromURL(urlString: image)
+        } else {
+            itemImage.image = UIImage(named: "deadpool-question-mark")
+        }
+        
     }
     
     private func setupLayout() {

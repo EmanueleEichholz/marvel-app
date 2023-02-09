@@ -54,15 +54,17 @@ final class ItemView: UIView {
         }
     }
     
-    func updateView(text: String, type: TextType) {
-        if type == .plainText {
-            setupPlainTextLayout()
-            plainTextLabel.text = "● \(text)"
-        } else {
-            self.siteLink = text
+    func updateView(text: String?, url: String? = nil) {
+        guard let text else { return }
+        
+        if let url = url {
+            self.siteLink = url
             setupSiteLinkLayout()
-            siteLinkLabel.text = text
+            siteLinkLabel.text = text.capitalized
             siteLinkLabel.underline()
+        } else {
+            setupPlainTextLayout()
+            plainTextLabel.text = "- \(text)"
         }
     }
     

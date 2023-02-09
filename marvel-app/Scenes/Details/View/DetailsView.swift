@@ -103,12 +103,23 @@ final class DetailsView: UIView {
             containerStackView.addArrangedSubview(itemDescriptionLabel)
         }
         
-        if let lists = model.lists, !lists.isEmpty {
-            lists.forEach { list in
-                let view = ListView()
-                view.updateView(with: list)
-                containerStackView.addArrangedSubview(view)
+        if let lists = model.lists {
+            if let itemsList = lists.itemsList {
+                itemsList.forEach { list in
+                    let view = ListView()
+                    view.updateView(itemsList: list)
+                    containerStackView.addArrangedSubview(view)
+                }
             }
+            
+            if let sitesList = lists.sitesList {
+                sitesList.forEach { sites in
+                    let view = ListView()
+                    view.updateView(sitesList: sites)
+                    containerStackView.addArrangedSubview(view)
+                }
+            }
+            
         }
     }
     

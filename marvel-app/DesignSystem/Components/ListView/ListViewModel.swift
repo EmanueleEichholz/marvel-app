@@ -7,13 +7,24 @@
 
 import Foundation
 
-struct ListViewModel {
-    let type: TextType
+struct ListsViewModel {
+    let itemsList: [ItemsListViewModel]?
+    let sitesList: [SitesListViewModel]?
+}
+
+struct  ItemsListViewModel {
     let title: String
     let items: [String]
 }
 
-enum TextType {
-    case plainText
-    case link
+struct SitesListViewModel {
+    let title: String
+    let sitesList: [SiteViewModel]
 }
+
+struct SiteViewModel {
+    let siteTitle: String?
+    let siteUrl: String?
+}
+
+

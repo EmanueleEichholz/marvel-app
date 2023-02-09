@@ -39,18 +39,32 @@ final class ListView: UIView {
         super.init(coder: coder)
     }
     
-    func updateView(with model: ListViewModel) {
+    func updateView(itemsList: ItemsListViewModel? = nil, sitesList: SitesListViewModel? = nil) {
         containerStackView.removeAllSubviews()
         
-        titleLabel.text = model.title
-        containerStackView.addArrangedSubview(titleLabel)
-
-        model.items.forEach { item in
-            let itemView = ItemView()
-            itemView.updateView(text: item, type: model.type)
-            containerStackView.addArrangedSubview(itemView)
+        if let itemsList = itemsList {
+            titleLabel.text = itemsList.title
+            containerStackView.addArrangedSubview(titleLabel)
+            
+            itemsList.items.forEach { item in
+                let itemView = ItemView()
+                itemView.updateView(text: item)
+                containerStackView.addArrangedSubview(itemView)
+            }
+            containerStackView.setCustomSpacing(16.0, after: titleLabel)
         }
-        containerStackView.setCustomSpacing(16.0, after: titleLabel)
+        
+        if let sitesList = sitesList {
+            titleLabel.text = sitesList.title
+            containerStackView.addArrangedSubview(titleLabel)
+            
+            sitesList.sitesList.forEach { site in
+                let itemView = ItemView()
+                itemView.updateView(text: site.siteTitle, url: site.siteUrl)
+                containerStackView.addArrangedSubview(itemView)
+            }
+            containerStackView.setCustomSpacing(16.0, after: titleLabel)
+        }
     }
     
     private func setupLayout() {
