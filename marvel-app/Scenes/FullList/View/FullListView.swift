@@ -180,7 +180,6 @@ extension FullListView: UICollectionViewDataSource {
 
 extension FullListView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
         delegate?.selectedItem(at: indexPath.row)
     }
 }
